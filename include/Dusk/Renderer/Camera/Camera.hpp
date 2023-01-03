@@ -25,7 +25,7 @@ namespace __detail {
     constexpr float CAMERA_NEAR_PLANE{0.1f};
     constexpr float CAMERA_FAR_PLANE{100.0f};
     constexpr float CAMERA_APECT_RATIO{16.0f / 9.0f};
-    constexpr float CAMERA_FIELD_OF_VIEW{30.0f};
+    constexpr float CAMERA_FIELD_OF_VIEW{60.0f};
     constexpr float CAMERA_WIDTH{3.2f};
 } // namespace __detail
 

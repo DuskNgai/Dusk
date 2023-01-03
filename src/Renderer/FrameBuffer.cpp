@@ -5,7 +5,7 @@
 DUSK_NAMESPACE_BEGIN
 
 // clang-format off
-//! VertexBuffer
+//! FrameBuffer
 std::shared_ptr<FrameBuffer> FrameBuffer::Create(FrameBufferProps const& props) {
     switch (RendererAPI::GetAPI()) {
         case RendererAPI::API::None:      DUSK_CORE_ASSERT(false, "RendererAPI::API::None is currently not supported!"); return nullptr;

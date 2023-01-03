@@ -22,9 +22,9 @@ void Renderer::EndScene() {}
 
 // Temporal and free to change~
 void Renderer::Submit(Shader const* shader, VertexArray const* vertex_array, glm::mat4 const& model) {
-    auto vp = Renderer::s_render_data->camera->GetProjectionMatrix() * Renderer::s_render_data->camera->GetViewMatrix();
     shader->Bind();
-    shader->SetMat4("u_ViewProjection", vp);
+    shader->SetMat4("u_Projection", Renderer::s_render_data->camera->GetProjectionMatrix());
+    shader->SetMat4("u_View", Renderer::s_render_data->camera->GetViewMatrix());
     shader->SetMat4("u_Model", model);
 
     vertex_array->Bind();
