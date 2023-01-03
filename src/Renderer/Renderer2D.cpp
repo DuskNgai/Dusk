@@ -148,26 +148,26 @@ void Renderer2D::DrawQuad(glm::vec3 const& position, glm::vec2 const& size, std:
     Renderer2D::DrawQuad(model, texture, tiling_scale, tint_color);
 }
 
-void Renderer2D::DrawRotatedQuad(glm::vec2 const& position, glm::vec2 const& size, float rotation, glm::vec4 const& color) {
+void Renderer2D::DrawRotatedQuad(glm::vec2 const& position, glm::vec2 const& size, float radians, glm::vec4 const& color) {
     // Dispatch to the 3D version of the function.
-    Renderer2D::DrawRotatedQuad(glm::vec3(position, 0.0f), size, rotation, color);
+    Renderer2D::DrawRotatedQuad(glm::vec3(position, 0.0f), size, radians, color);
 }
 
-void Renderer2D::DrawRotatedQuad(glm::vec3 const& position, glm::vec2 const& size, float rotation, glm::vec4 const& color) {
+void Renderer2D::DrawRotatedQuad(glm::vec3 const& position, glm::vec2 const& size, float radians, glm::vec4 const& color) {
     // First scaling, then rotation, then translation.
-    glm::mat4 model = glm::translate(glm::mat4{1.0f}, position) * glm::rotate(glm::mat4{1.0f}, rotation, {0.0f, 0.0f, 1.0f}) * glm::scale(glm::mat4(1.0f), {size, 1.0f});
+    glm::mat4 model = glm::translate(glm::mat4{1.0f}, position) * glm::rotate(glm::mat4{1.0f}, radians, {0.0f, 0.0f, 1.0f}) * glm::scale(glm::mat4(1.0f), {size, 1.0f});
     // Dispatch to the matrix version of the function.
     Renderer2D::DrawQuad(model, color);
 }
 
-void Renderer2D::DrawRotatedQuad(glm::vec2 const& position, glm::vec2 const& size, float rotation, std::shared_ptr<Texture> const& texture, float tiling_scale, glm::vec4 const& tint_color) {
+void Renderer2D::DrawRotatedQuad(glm::vec2 const& position, glm::vec2 const& size, float radians, std::shared_ptr<Texture> const& texture, float tiling_scale, glm::vec4 const& tint_color) {
     // Dispatch to the 3D version of the function.
-    Renderer2D::DrawRotatedQuad(glm::vec3(position, 0.0f), size, rotation, texture, tiling_scale, tint_color);
+    Renderer2D::DrawRotatedQuad(glm::vec3(position, 0.0f), size, radians, texture, tiling_scale, tint_color);
 }
 
-void Renderer2D::DrawRotatedQuad(glm::vec3 const& position, glm::vec2 const& size, float rotation, std::shared_ptr<Texture> const& texture, float tiling_scale, glm::vec4 const& tint_color) {
+void Renderer2D::DrawRotatedQuad(glm::vec3 const& position, glm::vec2 const& size, float radians, std::shared_ptr<Texture> const& texture, float tiling_scale, glm::vec4 const& tint_color) {
     // First scaling, then rotation, then translation.
-    glm::mat4 model = glm::translate(glm::mat4{1.0f}, position) * glm::rotate(glm::mat4{1.0f}, rotation, {0.0f, 0.0f, 1.0f}) * glm::scale(glm::mat4(1.0f), {size, 1.0f});
+    glm::mat4 model = glm::translate(glm::mat4{1.0f}, position) * glm::rotate(glm::mat4{1.0f}, radians, {0.0f, 0.0f, 1.0f}) * glm::scale(glm::mat4(1.0f), {size, 1.0f});
     // Dispatch to the matrix version of the function.
     Renderer2D::DrawQuad(model, texture, tiling_scale, tint_color);
 }

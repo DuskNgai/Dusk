@@ -11,16 +11,21 @@ DUSK_NAMESPACE_BEGIN
 /// @see `EventBase`
 class MouseMovedEvent : public EventBase {
 private:
-    float m_mouse_x, m_mouse_y;
+    float m_mouse_x, m_mouse_y, m_window_width, m_window_height;
 
 public:
-    MouseMovedEvent(float x, float y);
+    MouseMovedEvent(float x, float y, float window_width, float window_height);
 
 public:
     // Get the current mouse position x.
     float GetX() const;
     // Get the current mouse position y.
     float GetY() const;
+
+    // Get the current mouse position x in NDC.
+    float GetNDCX() const;
+    // Get the current mouse position y in NDC.
+    float GetNDCY() const;
 
     DUSK_EVENT_CATEGORY(EventCategory::EventCategoryMouse | EventCategory::EventCategoryInput);
     DUSK_EVENT_TYPE(EventType::MouseMoved);

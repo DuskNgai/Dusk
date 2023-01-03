@@ -1,3 +1,5 @@
+#include <Dusk/Renderer/Camera/CameraUtils.hpp>
+#include <Dusk/Renderer/Camera/OrthographicCamera.hpp>
 #include <Dusk/Renderer/Camera/PerspectiveCamera.hpp>
 
 DUSK_NAMESPACE_BEGIN
@@ -10,18 +12,35 @@ PerspectiveCamera::PerspectiveCamera(
     : Camera(look_from, look_to, look_up, near_plane, far_plane, aspect_ratio)
     , m_field_of_view(field_of_view) {}
 
-PerspectiveCamera* PerspectiveCamera::clone() const {
+PerspectiveCamera* PerspectiveCamera::Clone() const {
     return new PerspectiveCamera(*this);
 }
 
-void PerspectiveCamera::SetFieldOfView(float val) {
-    if (this->m_field_of_view != val) {
-        this->m_field_of_view = val;
+void PerspectiveCamera::UpdateFrom(Camera const* other) {
+    Camera::UpdateFrom(other);
+    if (auto pc = dynamic_cast<PerspectiveCamera const*>(other)) {
+        this->SetFieldOfView(pc->GetFieldOfView());
+    }
+    else if (auto oc = dynamic_cast<OrthographicCamera const*>(other)) {
+        this->SetFieldOfView(WidthToYFoV(oc->GetWidth(), glm::distance(this->GetLookFrom(), this->GetLookTo()), this->GetAspectRatio()));
+    }
+}
+
+void PerspectiveCamera::Zoom(float delta) {
+    float fov = std::max(0.1f, std::min(this->GetFieldOfView() + delta, 100.0f));
+    this->SetFieldOfView(fov);
+}
+
+void PerspectiveCamera::SetFieldOfView(float degrees) {
+    if (this->m_field_of_view != degrees) {
+        this->m_field_of_view = degrees;
         this->InvalidateProjectionMatrix();
     }
 }
 
 float PerspectiveCamera::GetFieldOfView() const { return this->m_field_of_view; }
+
+CameraType PerspectiveCamera::GetCameraType() const { return CameraType::Perspective; }
 
 glm::mat4 PerspectiveCamera::CalculateProjectionMatrix() const {
     return glm::perspective(

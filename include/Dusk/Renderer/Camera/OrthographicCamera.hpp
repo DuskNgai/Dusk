@@ -22,10 +22,15 @@ public:
         float width = __detail::CAMERA_WIDTH
     );
     virtual ~OrthographicCamera() = default;
-    virtual OrthographicCamera* clone() const override;
+    virtual OrthographicCamera* Clone() const override;
+
+    virtual void UpdateFrom(Camera const* other) override;
+    virtual void Zoom(float delta) override;
 
     void SetWidth(float val);
     float GetWidth() const;
+
+    virtual CameraType GetCameraType() const override;
 
     virtual glm::vec4 GetClipPositionFromNDC(glm::vec3 const& ndc_coords) const override;
 

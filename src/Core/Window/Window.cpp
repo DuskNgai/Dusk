@@ -149,7 +149,10 @@ void Window::Initialize(WindowProps const& props) {
     glfwSetCursorPosCallback(this->m_window, [](GLFWwindow* window, double xpos, double ypos) {
         WindowData* data = (WindowData*)glfwGetWindowUserPointer(window);
 
-        MouseMovedEvent e(static_cast<float>(xpos), static_cast<float>(ypos));
+        MouseMovedEvent e(
+            static_cast<float>(xpos), static_cast<float>(ypos),
+            static_cast<float>(data->m_props.m_width), static_cast<float>(data->m_props.m_height)
+        );
         data->m_callback(e);
     });
 }

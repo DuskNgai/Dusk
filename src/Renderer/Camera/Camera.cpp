@@ -1,4 +1,6 @@
 #include <Dusk/Renderer/Camera/Camera.hpp>
+#include <Dusk/Renderer/Camera/OrthographicCamera.hpp>
+#include <Dusk/Renderer/Camera/PerspectiveCamera.hpp>
 
 DUSK_NAMESPACE_BEGIN
 
@@ -12,6 +14,15 @@ Camera::Camera(
     , m_near_plane(near_plane)
     , m_far_plane(far_plane)
     , m_aspect_ratio(aspect_ratio) {}
+
+std::unique_ptr<Camera> Camera::Create(CameraType type) {
+    switch (type) {
+        case CameraType::Perspective:
+            return std::make_unique<PerspectiveCamera>();
+        case CameraType::Orthographic:
+            return std::make_unique<OrthographicCamera>();
+    }
+}
 
 void Camera::UpdateFrom(Camera const* other) {
     if (this != other) {

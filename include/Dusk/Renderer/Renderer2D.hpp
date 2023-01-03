@@ -118,13 +118,13 @@ public:
     /// @brief Draw a rotated quad/square with rotation axis z.
     /// @param position The center of the quad.
     /// @param size The size of the quad for each axis.
-    /// @param rotation The rotation of the quad, must be in radians.
+    /// @param radians The rotation of the quad, must be in radians.
     /// @param color The color of the quad.
     /// @param texture The texture of the quad, 0 for pure white texture.
-    static void DrawRotatedQuad(glm::vec2 const& position, glm::vec2 const& size, float rotation, glm::vec4 const& color);
-    static void DrawRotatedQuad(glm::vec3 const& position, glm::vec2 const& size, float rotation, glm::vec4 const& color);
-    static void DrawRotatedQuad(glm::vec2 const& position, glm::vec2 const& size, float rotation, std::shared_ptr<Texture> const& texture, float tiling_scale = 1.0f, glm::vec4 const& tint_color = glm::vec4{1.0f});
-    static void DrawRotatedQuad(glm::vec3 const& position, glm::vec2 const& size, float rotation, std::shared_ptr<Texture> const& texture, float tiling_scale = 1.0f, glm::vec4 const& tint_color = glm::vec4{1.0f});
+    static void DrawRotatedQuad(glm::vec2 const& position, glm::vec2 const& size, float radians, glm::vec4 const& color);
+    static void DrawRotatedQuad(glm::vec3 const& position, glm::vec2 const& size, float radians, glm::vec4 const& color);
+    static void DrawRotatedQuad(glm::vec2 const& position, glm::vec2 const& size, float radians, std::shared_ptr<Texture> const& texture, float tiling_scale = 1.0f, glm::vec4 const& tint_color = glm::vec4{1.0f});
+    static void DrawRotatedQuad(glm::vec3 const& position, glm::vec2 const& size, float radians, std::shared_ptr<Texture> const& texture, float tiling_scale = 1.0f, glm::vec4 const& tint_color = glm::vec4{1.0f});
 
 private:
     /// @brief Clear the CPU buffer.

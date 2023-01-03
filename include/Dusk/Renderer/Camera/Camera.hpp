@@ -1,6 +1,8 @@
 #ifndef _DUSK_RENDERER_CAMERA_CAMERA_HPP_
 #define _DUSK_RENDERER_CAMERA_CAMERA_HPP_
 
+#include <memory>
+
 #include <glm/ext.hpp>
 #include <glm/glm.hpp>
 
@@ -27,8 +29,14 @@ namespace __detail {
     constexpr float CAMERA_WIDTH{3.2f};
 } // namespace __detail
 
-/// @class The base class for cameras which defines uniform operations of the camera.
-/// @see PerspectiveCamera, OrthographicCamera
+/// @see OrthographicCamera, PerspectiveCamera
+enum class CameraType {
+    Orthographic,
+    Perspective,
+};
+
+/// @class The base class for FPS-like cameras.
+/// @see OrthographicCamera, PerspectiveCamera
 class Camera {
 protected:
     glm::vec3 m_look_from;
@@ -53,10 +61,13 @@ public:
         float near_plane, float far_plane, float aspect_ratio
     );
     virtual ~Camera() = default;
-    virtual Camera* clone() const = 0;
-    void UpdateFrom(Camera const* other);
+    virtual Camera* Clone() const = 0;
+    static std::unique_ptr<Camera> Create(CameraType type);
 
 public:
+    virtual void UpdateFrom(Camera const* other);
+    virtual void Zoom(float delta) = 0;
+
     void SetLookFrom(glm::vec3 val);
     void SetLookTo(glm::vec3 val);
     void SetLookUp(glm::vec3 val);
@@ -70,6 +81,8 @@ public:
     float GetNearPlane() const;
     float GetFarPlane() const;
     float GetAspectRatio() const;
+
+    virtual CameraType GetCameraType() const = 0;
 
     glm::mat4 const& GetViewMatrix() const;
     glm::mat4 const& GetProjectionMatrix() const;

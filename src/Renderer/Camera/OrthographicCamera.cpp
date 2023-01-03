@@ -1,4 +1,6 @@
+#include <Dusk/Renderer/Camera/CameraUtils.hpp>
 #include <Dusk/Renderer/Camera/OrthographicCamera.hpp>
+#include <Dusk/Renderer/Camera/PerspectiveCamera.hpp>
 
 DUSK_NAMESPACE_BEGIN
 
@@ -10,8 +12,23 @@ OrthographicCamera::OrthographicCamera(
     : Camera(look_from, look_to, look_up, near_plane, far_plane, aspect_ratio)
     , m_width(width) {}
 
-OrthographicCamera* OrthographicCamera::clone() const {
+OrthographicCamera* OrthographicCamera::Clone() const {
     return new OrthographicCamera(*this);
+}
+
+void OrthographicCamera::UpdateFrom(Camera const* other) {
+    Camera::UpdateFrom(other);
+    if (auto oc = dynamic_cast<OrthographicCamera const*>(other)) {
+        this->SetWidth(oc->GetWidth());
+    }
+    else if (auto pc = dynamic_cast<PerspectiveCamera const*>(other)) {
+        this->SetWidth(YFoVToWidth(pc->GetFieldOfView(), glm::distance(this->GetLookFrom(), this->GetLookTo()), this->GetAspectRatio()));
+    }
+}
+
+void OrthographicCamera::Zoom(float delta) {
+    float width = std::max(0.1f, std::min(this->GetWidth() + delta, 100.0f));
+    this->SetWidth(width);
 }
 
 void OrthographicCamera::SetWidth(float val) {
@@ -22,6 +39,8 @@ void OrthographicCamera::SetWidth(float val) {
 }
 
 float OrthographicCamera::GetWidth() const { return this->m_width; }
+
+CameraType OrthographicCamera::GetCameraType() const { return CameraType::Orthographic; }
 
 glm::vec4 OrthographicCamera::GetClipPositionFromNDC(glm::vec3 const& ndc_coords) const {
     return glm::vec4{ndc_coords, 1.0f};

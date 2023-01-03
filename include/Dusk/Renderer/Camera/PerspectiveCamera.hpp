@@ -9,6 +9,7 @@ DUSK_NAMESPACE_BEGIN
 /// @see Camera
 class PerspectiveCamera final : public Camera {
 private:
+    // Fov in y direction, in degrees.
     float m_field_of_view;
 
 public:
@@ -22,10 +23,15 @@ public:
         float field_of_view = __detail::CAMERA_FIELD_OF_VIEW
     );
     virtual ~PerspectiveCamera() = default;
-    virtual PerspectiveCamera* clone() const override;
+    virtual PerspectiveCamera* Clone() const override;
 
-    void SetFieldOfView(float val);
+    virtual void UpdateFrom(Camera const* other) override;
+    virtual void Zoom(float delta) override;
+
+    void SetFieldOfView(float degrees);
     float GetFieldOfView() const;
+
+    virtual CameraType GetCameraType() const override;
 
 private:
     virtual glm::mat4 CalculateProjectionMatrix() const override;

@@ -3,13 +3,19 @@
 DUSK_NAMESPACE_BEGIN
 
 //! MouseMovedEvent
-MouseMovedEvent::MouseMovedEvent(float x, float y)
+MouseMovedEvent::MouseMovedEvent(float x, float y, float window_width, float window_height)
     : m_mouse_x{x}
-    , m_mouse_y{y} {}
+    , m_mouse_y{y}
+    , m_window_width{window_width}
+    , m_window_height{window_height} {}
 
 float MouseMovedEvent::GetX() const { return this->m_mouse_x; }
 
 float MouseMovedEvent::GetY() const { return this->m_mouse_y; }
+
+float MouseMovedEvent::GetNDCX() const { return (this->GetX() / this->m_window_width) * 2.0f - 1.0f; }
+
+float MouseMovedEvent::GetNDCY() const { return (this->GetY() / this->m_window_height) * 2.0f - 1.0f; }
 
 std::string MouseMovedEvent::ToString() const {
     std::stringstream ss;

@@ -23,7 +23,7 @@
 
 ### Window
 
-`Window` 类是图形界面交互的核心，用于接收用户输入，展示用户所需的输出。`Window` 类会使用系统提供的 `API`，因此需要考虑兼容不同的系统。对于不同的系统，我们会实现不同的窗口，这里我们只实现了 `Linux` 系统和 `Windows` 系统的 `Window` 类。通过编译器提供的宏，我们可以在 `CMake` 和在源文件中编译使用不同的 `Window`。（虽然个人觉得窗口好像没什么区别。）
+`Window` 类是图形界面交互的核心，用于接收用户输入，展示用户所需的输出。
 
 #### Input System
 
@@ -39,6 +39,10 @@
 
 引擎所想要达到的效果是跨平台的渲染，但图形 API（OpenGL, Vulkan, DirectX ...）则是跟平台有关的。图形 API 提供了具体的操作，而我们需要用这些具体的操作实现一些图形学中的一些更大的概念。因此引擎会对于图形 API 进行一层抽象封装。这里我们使用的是最简单容易学的 `OpenGL` 的 `glad` + `glfw`。简单来说，`glad` 是比较新的加载函数库，由于 `OpenGL` 驱动版本众多，它大多数函数的位置都无法在编译时确定下来，需要在运行时查询；`glfw` 是窗口工具库，它提供了一些渲染物体所需的最低限度的接口。
 
+### Renderer
+
+Renderer 由负责场景搭建的 `Renderer` 和负责具体渲染的 `RendererAPI` + `RenderCommand` 组成。`Renderer` 主要功能是创建场景的元素，包括相机，材质，集合体等。`RendererAPI` 内部的 `s_API` 定义了渲染器使用的图形 API。同时，`RendererAPI` 也封装了渲染的基本操作，如 `ClearColor` ，`DrawArrays`，`DrawElements`。`RenderCommand` 是对 `RendererAPI` 的再一次封装，把 `RendererAPI` 的类方法变成了静态函数，是常用的封装手段。
+
 ### Vertex/Element Buffer
 
 Vertex Buffer 就是存储数据的地方，以 OpenGL 为例就是 vertex buffer object (VBO) 和 element buffer object (EBO)，我们需要有把内存上的数据传输到显存上的接口，激活或者失活 buffer 的接口（以便我们在运行时候改变渲染对象）等等。
@@ -51,10 +55,6 @@ Buffer Layout 就是如何解释 buffer 中的数据的意义，在 OpenGL 中�
 
 Shader 是一个 GPU 上的程序。在 OpenGL 中，主要的 Shader 是 Vertex Shader 和 Fragment Shader，具体作用就不在这里介绍了。这里我们还创建了一个 `ShaderLibrary` 以便于管理和使用 Shader 。
 
-### Renderer
-
-Renderer 由负责场景搭建的 `Renderer` 和负责具体渲染的 `RendererAPI` + `RenderCommand` 组成。`Renderer` 主要功能是创建场景的元素，包括相机，材质，集合体等。`RendererAPI` 内部的 `s_API` 定义了渲染器使用的图形 API。同时，`RendererAPI` 也封装了渲染的基本操作，如 `ClearColor` ，`DrawArrays`，`DrawElements`。`RenderCommand` 是对 `RendererAPI` 的再一次封装，把 `RendererAPI` 的类方法变成了静态函数，是常用的封装手段。
-
 ### Camera System
 
 相机系统在 3-D 渲染中是至关重要的。相机记录了空间坐标系的变换，使得几何物体能被多视角观测。我们的引擎必须要实现 perspective 的相机和 orthographic 的相机，以便于后续使用。当前相机记录了
@@ -63,7 +63,7 @@ Renderer 由负责场景搭建的 `Renderer` 和负责具体渲染的 `RendererA
 - near plane, far plane, aspect ratio 与相机的投影有关信息。
 - view matrix, projection matrix 及其逆矩阵等相机的视角矩阵，投影矩阵有关信息。
 
-**当前我们的相机没有较好地实现控制功能，以待日后补充实现。**
+**TODO**：当前相机的旋转是基于欧拉角的，后续需要改成四元数。
 
 #### Perspective Camera
 
@@ -72,6 +72,14 @@ Perspective camera 多了 field of view 信息，以便得到 perspective 投影
 #### Orthographic Camera
 
 Perspective camera 多了窗口的 width 信息，以便得到 orthographic 投影下的投影矩阵。
+
+### Texture
+
+Texture 是存储图像或者需要插值矩阵的地方。我们的引擎暂时支持 2D 的纹理。
+
+### FrameBuffer
+
+**TODO**
 
 ## Others
 
