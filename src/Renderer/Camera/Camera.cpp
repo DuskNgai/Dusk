@@ -21,6 +21,8 @@ std::unique_ptr<Camera> Camera::Create(CameraType type) {
             return std::make_unique<PerspectiveCamera>();
         case CameraType::Orthographic:
             return std::make_unique<OrthographicCamera>();
+        default:
+            return nullptr;
     }
 }
 
@@ -123,13 +125,13 @@ glm::vec3 Camera::GetWorldPositionFromNDC(glm::vec3 const& ndc_coords) const {
     auto eye_coords = this->GetInverseProjectionMatrix() * clip_coords;
     auto world_coords = this->GetInverseViewMatrix() * eye_coords;
     world_coords /= world_coords.w;
-    return glm::vec3{world_coords};
+    return {world_coords};
 }
 
 glm::vec4 Camera::GetClipPositionFromNDC(glm::vec3 const& ndc_coords) const {
     auto const& projection = this->GetProjectionMatrix();
     float const clip_w = projection[2][3] / (ndc_coords.z - (projection[2][2] / projection[3][2]));
-    return glm::vec4{ndc_coords * clip_w, clip_w};
+    return {ndc_coords * clip_w, clip_w};
 }
 
 void Camera::InvalidateViewMatrix() { this->m_invalid_view_matrix = true; }

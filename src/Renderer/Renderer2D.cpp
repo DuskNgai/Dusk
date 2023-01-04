@@ -81,9 +81,9 @@ void Renderer2D::Shutdown() {
 
 void Renderer2D::BeginScene(Camera* camera) {
     // Camera settings.
-    auto vp = camera->GetProjectionMatrix() * camera->GetViewMatrix();
     Renderer2D::s_data->texture_shader->Bind();
-    Renderer2D::s_data->texture_shader->SetMat4("u_ViewProjection", vp);
+    Renderer2D::s_data->texture_shader->SetMat4("u_Projection", camera->GetProjectionMatrix());
+    Renderer2D::s_data->texture_shader->SetMat4("u_View", camera->GetViewMatrix());
 
     Renderer2D::StartBatch();
 }
@@ -106,7 +106,7 @@ void Renderer2D::Flush() {
     // Specify the index.
     RenderCommand::DrawElements(
         Renderer2D::s_data->quad_vertex_array.get(),
-        static_cast<uint32_t>(Renderer2D::s_data->quad_vertex_buffer_cpu.size() / 4 * 6)
+        static_cast<uint32_t>(Renderer2D::s_data->quad_vertex_buffer_cpu.size() / __detail::RENDERER2D_QUADS_VERTICES_COUNT * 6)
     );
 }
 

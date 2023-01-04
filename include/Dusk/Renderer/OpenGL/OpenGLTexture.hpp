@@ -54,6 +54,7 @@ public:
     /// @brief Create a texture with the specified `width` and `height`.
     /// There is no data inside the texture.
     OpenGLTexture2D(uint32_t width, uint32_t height);
+    OpenGLTexture2D(uint32_t width, uint32_t height, uint32_t internal_fmt, uint32_t format, uint32_t data_type);
     virtual ~OpenGLTexture2D();
 
     virtual uint32_t GetNumberOfPixels() const override;

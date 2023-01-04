@@ -43,7 +43,7 @@ float OrthographicCamera::GetWidth() const { return this->m_width; }
 CameraType OrthographicCamera::GetCameraType() const { return CameraType::Orthographic; }
 
 glm::vec4 OrthographicCamera::GetClipPositionFromNDC(glm::vec3 const& ndc_coords) const {
-    return glm::vec4{ndc_coords, 1.0f};
+    return {ndc_coords, 1.0f};
 }
 
 glm::mat4 OrthographicCamera::CalculateProjectionMatrix() const {

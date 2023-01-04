@@ -155,6 +155,12 @@ OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height)
     this->Initialize(nullptr);
 }
 
+OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height, uint32_t internal_fmt, uint32_t format, uint32_t data_type)
+    : OpenGLTexture(GL_TEXTURE_2D, internal_fmt, format, data_type)
+    , m_resolution({ width, height }) {
+    this->Initialize(nullptr);
+}
+
 OpenGLTexture2D::~OpenGLTexture2D() {
     // OpenGL silently ignores 0's and names that do not correspond to existing textures.
     // Since we initialize m_texture_id to 0, we can safely call `glDeleteTextures` without checking.
