@@ -83,7 +83,7 @@ private:
 
         std::unique_ptr<VertexArray> quad_vertex_array;
         std::shared_ptr<VertexBuffer> quad_vertex_buffer;
-        std::unique_ptr<Shader> texture_shader;
+        std::shared_ptr<Shader> texture_shader;
         std::shared_ptr<Texture2D> white_texture;
     };
     static std::unique_ptr<Renderer2DData> s_data;

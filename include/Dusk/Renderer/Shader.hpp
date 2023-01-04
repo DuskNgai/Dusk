@@ -20,7 +20,7 @@ public:
     virtual ~Shader() = default;
 
 public:
-    static std::unique_ptr<Shader> Create(std::string const& vs, std::string const& fs);
+    static std::shared_ptr<Shader> Create(std::string const& vs, std::string const& fs);
 
     /// @brief Bind the shader for rendering.
     virtual void Bind() const = 0;
@@ -42,14 +42,14 @@ public:
 
 class ShaderLibrary {
 public:
-    std::unordered_map<std::string, std::unique_ptr<Shader>> m_shaders;
+    std::unordered_map<std::string, std::shared_ptr<Shader>> m_shaders;
 
 public:
-    void Add(std::string const& name, std::unique_ptr<Shader> shader);
+    void Add(std::string const& name, std::shared_ptr<Shader> shader);
     bool Exists(std::string const& name) const;
     std::size_t Size() const;
     /// @brief A pointer to accessing the shader.
-    Shader const* Get(std::string const& name);
+    std::shared_ptr<Shader> Get(std::string const& name);
 };
 
 DUSK_NAMESPACE_END

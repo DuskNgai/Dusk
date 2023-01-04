@@ -7,7 +7,7 @@ DUSK_NAMESPACE_BEGIN
 
 //! Shader
 // clang-format off
-std::unique_ptr<Shader> Shader::Create(std::string const& vs, std::string const& fs) {
+std::shared_ptr<Shader> Shader::Create(std::string const& vs, std::string const& fs) {
     switch (RendererAPI::GetAPI()) {
         case RendererAPI::API::None:      DUSK_CORE_ASSERT(false, "RendererAPI::API::None is currently not supported!"); return nullptr;
         case RendererAPI::API::OpenGL:    return std::make_unique<OpenGLShader>(vs, fs);
@@ -20,12 +20,12 @@ std::unique_ptr<Shader> Shader::Create(std::string const& vs, std::string const&
 //! Shader
 
 //! ShaderLibrary
-void ShaderLibrary::Add(std::string const& name, std::unique_ptr<Shader> shader) {
+void ShaderLibrary::Add(std::string const& name, std::shared_ptr<Shader> shader) {
     if (Exists(name)) {
         DUSK_CORE_WARN("ShaderLibrary::Add: Shader with name '{}' already exists, ignore it.", name);
         return;
     }
-    this->m_shaders[name] = std::move(shader);
+    this->m_shaders[name] = shader;
 }
 
 bool ShaderLibrary::Exists(std::string const& name) const {
@@ -36,12 +36,12 @@ std::size_t ShaderLibrary::Size() const {
     return this->m_shaders.size();
 }
 
-Shader const* ShaderLibrary::Get(std::string const& name) {
+std::shared_ptr<Shader> ShaderLibrary::Get(std::string const& name) {
     if (!this->Exists(name)) {
         DUSK_CORE_ERROR("ShaderLibrary::Get: Shader '{}' does not exist!", name);
         return nullptr;
     }
-    return this->m_shaders[name].get();
+    return this->m_shaders[name];
 }
 //! ShaderLibrary
 
