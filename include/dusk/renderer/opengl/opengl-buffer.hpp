@@ -16,13 +16,13 @@ private:
 public:
     OpenGLVertexBuffer(uint32_t size);
     OpenGLVertexBuffer(uint32_t size, float* vertices);
-    ~OpenGLVertexBuffer();
+    virtual ~OpenGLVertexBuffer();
 
 public:
-    void bind() const override;
-    void unbind() const override;
-    void set_data(uint32_t size, float* vertices) override;
-    void set_layout(BufferLayout const& layout) override;
+    virtual void bind() const override;
+    virtual void unbind() const override;
+    virtual void set_data(uint32_t size, float* vertices) override;
+    virtual void set_layout(BufferLayout const& layout) override;
     BufferLayout const& get_layout() const override;
 };
 
@@ -36,12 +36,12 @@ private:
 
 public:
     OpenGLIndexBuffer(uint32_t size, uint32_t* indices);
-    ~OpenGLIndexBuffer();
+    virtual ~OpenGLIndexBuffer();
 
 public:
-    void bind() const override;
-    void unbind() const override;
-    uint32_t size() const override;
+    virtual void bind() const override;
+    virtual void unbind() const override;
+    virtual uint32_t size() const override;
 };
 
 DUSK_NAMESPACE_END

@@ -15,6 +15,7 @@ private:
 
 public:
     OpenGLContext(GLFWwindow* window);
+    virtual ~OpenGLContext() = default;
 
 public:
     virtual void init() override;

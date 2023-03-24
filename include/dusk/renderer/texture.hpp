@@ -48,14 +48,6 @@ public:
 /// So a `shared_ptr` is necessary.
 class Texture2D : virtual public Texture {
 public:
-    /// @brief Get the width of the texture.
-    virtual uint32_t get_width() const = 0;
-    /// @brief Get the height of the texture.
-    virtual uint32_t get_height() const = 0;
-
-    /// @brief Resize the texture to the specified `new_res`.
-    virtual void resize(glm::uvec2 new_res) = 0;
-
     /// @brief Create a texture with the specified `path`.
     // TODO: Currently only supports .png, .jpg, and .bmp.
     // TODO: Support .tiff format, or a image decoder.
@@ -64,6 +56,18 @@ public:
     /// @brief Create a texture with the specified `width` and `height`.
     /// There is no data inside the texture.
     static std::shared_ptr<Texture2D> create(uint32_t width, uint32_t height);
+
+    /// @brief Create a texture with the specified information.
+    /// There is no data inside the texture.
+    static std::shared_ptr<Texture2D> create(uint32_t width, uint32_t height, uint32_t internal_format, uint32_t format, uint32_t data_type);
+
+    /// @brief Get the width of the texture.
+    virtual uint32_t get_width() const = 0;
+    /// @brief Get the height of the texture.
+    virtual uint32_t get_height() const = 0;
+
+    /// @brief Resize the texture to the specified `new_res`.
+    virtual void resize(glm::uvec2 new_res) = 0;
 };
 
 DUSK_NAMESPACE_END

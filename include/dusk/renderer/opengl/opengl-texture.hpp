@@ -19,14 +19,15 @@ protected:
 
 public:
     OpenGLTexture(uint32_t target, uint32_t internal_fmt, uint32_t format, uint32_t data_type);
+    virtual ~OpenGLTexture() = default;
 
-    uint32_t get_target() const override;
-    uint32_t get_internal_format() const override;
-    uint32_t get_format() const override;
-    uint32_t get_data_type() const override;
-    uint32_t get_texture_id() const override;
-    uint32_t get_size_in_bytes() const override;
-    uint32_t get_channels() const override;
+    virtual uint32_t get_target() const override;
+    virtual uint32_t get_internal_format() const override;
+    virtual uint32_t get_format() const override;
+    virtual uint32_t get_data_type() const override;
+    virtual uint32_t get_texture_id() const override;
+    virtual uint32_t get_size_in_bytes() const override;
+    virtual uint32_t get_channels() const override;
 
     virtual void bind(uint32_t slot) const override;
     virtual void unbind() const override;
@@ -55,9 +56,12 @@ public:
     /// @brief Create a texture with the specified `width` and `height`.
     /// There is no data inside the texture.
     OpenGLTexture2D(uint32_t width, uint32_t height);
+    /// @brief Create a texture with the specified informations.
+    /// There is no data inside the texture.
     OpenGLTexture2D(uint32_t width, uint32_t height, uint32_t internal_fmt, uint32_t format, uint32_t data_type);
     virtual ~OpenGLTexture2D();
 
+public:
     virtual uint32_t get_number_of_values() const override;
     virtual uint32_t get_width() const override;
     virtual uint32_t get_height() const override;

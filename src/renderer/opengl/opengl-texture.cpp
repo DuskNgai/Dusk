@@ -1,3 +1,8 @@
+#include <dusk/platform-detection.hpp>
+#if defined(DUSK_PLATFORM_WINDOWS)
+    #include <windows.h>
+#endif
+
 #include <glad/glad.h>
 #include <stb_image.h>
 
@@ -150,10 +155,7 @@ OpenGLTexture2D::OpenGLTexture2D(std::string const& path)
 }
 
 OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height)
-    : OpenGLTexture{ GL_TEXTURE_2D, GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE }
-    , m_resolution({ width, height }) {
-    this->init(nullptr);
-}
+    : OpenGLTexture2D(width, height, GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE) {}
 
 OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height, uint32_t internal_fmt, uint32_t format, uint32_t data_type)
     : OpenGLTexture{ GL_TEXTURE_2D, internal_fmt, format, data_type }

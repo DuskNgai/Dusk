@@ -16,7 +16,6 @@ void ImGuiLayer::on_attach() {
     ImGui::CreateContext();
 
     ImGuiIO& io = ImGui::GetIO();
-    (void)io;
     io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
     io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;   // Enable Docking

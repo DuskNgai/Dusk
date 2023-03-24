@@ -3,12 +3,14 @@
 
 #include <memory>
 
+#include <glm/glm.hpp>
+
 #include <dusk/common.hpp>
 
 DUSK_NAMESPACE_BEGIN
 
 struct FramebufferProps {
-    uint32_t Width{ 0 }, Height{ 0 };
+    glm::uvec2 Size{ 0, 0 };
     uint32_t Samples{ 1 };
 
     bool SwapChainTarget{ false };
@@ -29,6 +31,7 @@ public:
     virtual uint32_t get_color_attachment() = 0;
 
     /// @brief Resize the frame buffer.
+    virtual void resize(glm::uvec2 new_size) = 0;
     virtual void resize(uint32_t width, uint32_t height) = 0;
 
     /// @brief Create a frame buffer based on the given properties.

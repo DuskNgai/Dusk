@@ -17,6 +17,7 @@ DUSK_NAMESPACE_BEGIN
 namespace __detail {
     constexpr float RENDERER2D_TILING_SCALE{ 1.0f };  // For pure color + white texture.
     constexpr float RENDERER2D_TEXTURE_INDEX{ 0.0f }; // For pure color + white texture.
+
 #if defined(DUSK_PLATFORM_WINDOWS) && defined(__NVCC__)
     // Avoid weird bug cooperates with nvcc on Windows.
     const glm::vec4 RENDERER2D_TINT_COLOR{ 1.0f, 1.0f, 1.0f, 1.0f }; // For pure color + white texture.

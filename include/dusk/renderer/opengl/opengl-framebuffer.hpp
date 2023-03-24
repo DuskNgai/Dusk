@@ -18,12 +18,13 @@ public:
     virtual ~OpenGLFramebuffer();
 
 public:
-    void bind() override;
-    void unbind() override;
+    virtual void bind() override;
+    virtual void unbind() override;
 
-    uint32_t get_color_attachment() override;
+    virtual uint32_t get_color_attachment() override;
 
-    void resize(uint32_t width, uint32_t height) override;
+    virtual void resize(glm::uvec2 new_size) override;
+    virtual void resize(uint32_t width, uint32_t height) override;
 };
 
 DUSK_NAMESPACE_END

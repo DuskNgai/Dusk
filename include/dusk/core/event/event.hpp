@@ -87,9 +87,9 @@ public:
 #define DUSK_EVENT_CATEGORY(EVENT_CATEGORY_NAME) \
     virtual int get_category_flags() const override { return EVENT_CATEGORY_NAME; }
 
-#define DUSK_EVENT_TYPE(EVENT_TYPE_NAME)                                          \
-    static EventType get_static_type() { return EVENT_TYPE_NAME; }                \
-    EventType get_event_type() const override { return this->get_static_type(); } \
+#define DUSK_EVENT_TYPE(EVENT_TYPE_NAME)                                                  \
+    static EventType get_static_type() { return EVENT_TYPE_NAME; }                        \
+    virtual EventType get_event_type() const override { return this->get_static_type(); } \
     virtual char const* get_name() const override { return #EVENT_TYPE_NAME; }
 
 DUSK_NAMESPACE_END

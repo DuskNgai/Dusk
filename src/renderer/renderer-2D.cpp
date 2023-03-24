@@ -27,8 +27,8 @@ void Renderer2D::init() {
 
         // Actual cpu index buffer.
         Renderer2D::s_data->quad_index_buffer_cpu.reserve(__detail::RENDERER2D_INDICES_BUFFER_SIZE);
-        //! Every quad should follow this indexing format.
         {
+            //! Every quad should follow this indexing format.
             // 3------2
             // |      |
             // |      |
@@ -103,6 +103,7 @@ void Renderer2D::flush() {
         static_cast<uint32_t>(Renderer2D::s_data->quad_vertex_buffer_cpu.size()) * sizeof(Renderer2D::QuadVertex),
         reinterpret_cast<float*>(Renderer2D::s_data->quad_vertex_buffer_cpu.data())
     );
+
     // Specify the index.
     RenderCommand::draw_elements(
         Renderer2D::s_data->quad_vertex_array.get(),

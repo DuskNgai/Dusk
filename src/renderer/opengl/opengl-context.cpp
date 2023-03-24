@@ -24,7 +24,7 @@ void OpenGLContext::init() {
     auto status{ gladLoadGLLoader((GLADloadproc)glfwGetProcAddress) };
     DUSK_CORE_ASSERT(status, "Failed to initialize Glad!");
 
-    auto u8_to_i8 = [](int item) {
+    auto u8_to_i8 = [](GLenum item) {
         std::stringstream ss;
         ss << glGetString(item);
         return ss.str();
