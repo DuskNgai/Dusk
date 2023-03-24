@@ -41,7 +41,7 @@
 
 ### Renderer
 
-Renderer 由负责场景搭建的 `Renderer` 和负责具体渲染的 `RendererAPI` + `RenderCommand` 组成。`Renderer` 主要功能是创建场景的元素，包括相机，材质，集合体等。`RendererAPI` 内部的 `s_API` 定义了渲染器使用的图形 API。同时，`RendererAPI` 也封装了渲染的基本操作，如 `ClearColor` ，`DrawArrays`，`DrawElements`。`RenderCommand` 是对 `RendererAPI` 的再一次封装，把 `RendererAPI` 的类方法变成了静态函数，是常用的封装手段。
+Renderer 由负责场景搭建的 `Renderer` 和负责具体渲染的 `RendererAPI` + `RenderCommand` 组成。`Renderer` 主要功能是创建场景的元素，包括相机，材质，集合体等。`RendererAPI` 内部的 `s_API` 定义了渲染器使用的图形 API。同时，`RendererAPI` 也封装了渲染的基本操作，如 `ClearColor` ，`draw_arrays`，`draw_elements`。`RenderCommand` 是对 `RendererAPI` 的再一次封装，把 `RendererAPI` 的类方法变成了静态函数，是常用的封装手段。
 
 ### Vertex/Element Buffer
 
@@ -77,7 +77,7 @@ Perspective camera 多了窗口的 width 信息，以便得到 orthographic 投�
 
 Texture 是存储图像或者需要插值矩阵的地方。我们的引擎暂时支持 2D 的纹理。
 
-### FrameBuffer
+### Framebuffer
 
 **TODO**
 

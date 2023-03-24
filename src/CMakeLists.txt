@@ -1,3 +1,2 @@
-add_subdirectory(Core)
-add_subdirectory(Renderer)
-add_subdirectory(Utils)
+add_subdirectory(core)
+add_subdirectory(renderer)

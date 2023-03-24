@@ -60,7 +60,6 @@ endif()
 target_include_directories(dusk PUBLIC ${DUSK_INCLUDES})
 target_link_libraries(dusk PUBLIC
     ${DUSK_LIBRARIES}
-    duskCore
-    duskRenderer
-    duskUtils
+    dusk_core
+    dusk_renderer
 )
