@@ -20,13 +20,10 @@ public:
     virtual ~Shader() = default;
 
 public:
-    /// @brief Bind the shader for rendering.
     virtual void bind() const = 0;
 
-    /// @brief Unbind the shader for stoping rendering.
     virtual void unbind() const = 0;
 
-    /// @brief Set value of uniform variables
     virtual void set_int(std::string const& name, int val) const = 0;
     virtual void set_int_array(std::string const& name, int* vals, uint32_t count) const = 0;
     virtual void set_float(std::string const& name, float val) const = 0;
@@ -37,7 +34,6 @@ public:
     virtual void set_mat3(std::string const& name, glm::mat3 const& val) const = 0;
     virtual void set_mat4(std::string const& name, glm::mat4 const& val) const = 0;
 
-    /// @brief Create a shader based on the given vertex and fragment shader code.
     static std::shared_ptr<Shader> create(std::string const& vs, std::string const& fs);
 };
 

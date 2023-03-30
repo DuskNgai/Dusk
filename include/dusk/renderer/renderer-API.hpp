@@ -28,22 +28,16 @@ public:
     virtual ~RendererAPI() = default;
 
 public:
-    /// @brief Initialize all the rendering APIs related to this renderer.
     virtual void init() = 0;
 
-    /// @brief Clear the window
     virtual void clear() = 0;
 
-    /// @brief Set the new viewport especially when the window gets resized.
     virtual void set_viewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height) = 0;
 
-    /// @brief Set the window clear color.
     virtual void set_clear_color(glm::vec4 const& color) = 0;
 
-    /// @brief Set the line strip width in window.
     virtual void set_line_width(float width) = 0;
 
-    /// @brief Draw data in `vertex_array` without index buffer.
     virtual void draw_arrays(VertexArray const* vertex_array) = 0;
 
     /// @brief Draw data in `vertex_array` with index buffer.
@@ -51,10 +45,8 @@ public:
     /// If `count` is not 0, then it will draw `count / 6` triangles.
     virtual void draw_elements(VertexArray const* vertex_array, uint32_t count = 0) = 0;
 
-    /// @brief Get the current rendering API.
     static API get_API();
 
-    /// @brief Create a new rendering API.
     static std::unique_ptr<RendererAPI> create();
 };
 

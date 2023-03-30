@@ -162,6 +162,8 @@ void OpenGLShader::link_shader(GLuint vertex_shader, GLuint fragment_shader) con
 
 #ifndef NDEBUG
 void OpenGLShader::validate_shader() const {
+    glValidateProgram(this->m_shader_id);
+
     GLint is_valid{ 0 };
     glGetProgramiv(this->m_shader_id, GL_VALIDATE_STATUS, &is_valid);
     if (is_valid == GL_FALSE) {

@@ -88,10 +88,8 @@ private:
     static std::unique_ptr<Renderer2DData> s_data;
 
 public:
-    /// @brief Initialize all the rendering APIs settings related to this renderer.
     static void init();
 
-    /// @brief Shut down all the rendering APIs settings related to this renderer.
     static void shut_down();
 
     /// @brief Register objects (cameras, materials, geometries, etc) in scene.

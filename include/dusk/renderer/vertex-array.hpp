@@ -11,22 +11,12 @@ public:
     virtual ~VertexArray() = default;
 
 public:
-    /// @brief Bind the buffer for rendering.
     virtual void bind() const = 0;
-
-    /// @brief Unbind the buffer for stoping rendering.
     virtual void unbind() const = 0;
 
-    /// @brief Manage a vertex buffer.
     virtual void add_vertex_buffer(std::shared_ptr<VertexBuffer> const& vertex_buffer) = 0;
-
-    /// @brief Get vertex buffers.
     virtual std::vector<std::shared_ptr<VertexBuffer>> const& get_vertex_buffer() const = 0;
-
-    /// @brief Manage a index buffer.
     virtual void set_index_buffer(std::shared_ptr<IndexBuffer> const& index_buffer) = 0;
-
-    /// @brief Get vertex buffers.
     virtual std::shared_ptr<IndexBuffer> const& get_index_buffer() const = 0;
 
     static std::unique_ptr<VertexArray> create();

@@ -11,10 +11,10 @@ enum class CameraType {
     Perspective,
 };
 
-/// @brief Convert Y field of view used in perspective cameras to width used in orthographic cameras.
+/// @brief Used in orthographic cameras.
 float yfov_to_width(float y_fov, float distance, float aspect_ratio);
 
-/// @brief Convert width used in orthographic cameras to Y field of view used in perspective cameras.
+/// @brief Used in perspective cameras.
 float width_to_yfov(float width, float distance, float aspect_ratio);
 
 DUSK_NAMESPACE_END

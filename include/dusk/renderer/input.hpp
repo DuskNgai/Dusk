@@ -11,10 +11,8 @@ DUSK_NAMESPACE_BEGIN
 /// @class: Singleton mode of encapsuled input system.
 class Input {
 public:
-    /// @brief Check if the desired `key` is pressed.
     static bool is_key_pressed(KeyCode key);
 
-    /// @brief Check if the desired `button` is pressed.
     static bool is_mouse_button_pressed(MouseCode button);
 
     static glm::vec2 get_mouse_position();

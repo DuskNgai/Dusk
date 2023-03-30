@@ -19,8 +19,8 @@ private:
     std::unique_ptr<GraphicsContext> m_context;
     struct WindowData {
         WindowProps m_props{};
-        WindowBase::EventCallbackFunc m_callback{};
-        bool m_vert_sync{};
+        WindowBase::EventCallbackFunc m_callback{ nullptr };
+        bool m_vert_sync{ false };
     } m_data;
 
 public:
@@ -40,9 +40,7 @@ public:
     virtual void on_update() override;
 
 private:
-    /// @brief Triggered in constructor.
     void init(WindowProps const& props);
-    /// @brief Triggered in destructor.
     void shut_down();
 };
 

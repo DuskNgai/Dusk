@@ -19,22 +19,14 @@ public:
     virtual ~WindowBase() = default;
 
 public:
-    /// @return The width of the window.
     virtual uint32_t get_width() const = 0;
-
-    /// @return The height of the window.
     virtual uint32_t get_height() const = 0;
-
-    /// @return The raw pointer of the window.
     virtual void* get_window_raw_ptr() const = 0;
 
-    /// @brief Set the callback function for the window.
     virtual void set_event_callback(EventCallbackFunc callback) = 0;
 
-    /// @brief Enable vertical synchronization.
     virtual void set_vert_sync(bool enabled) = 0;
 
-    /// @return Is vertical synchronization.
     virtual bool is_vert_sync() const = 0;
 
     /// @brief Update the window based on the current state of the window.

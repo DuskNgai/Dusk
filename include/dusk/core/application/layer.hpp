@@ -30,11 +30,8 @@ public:
     virtual void on_ImGui_render();
 
     /// @brief Dealing with the event dispatched by the `Application`.
-    /// @param e The event to deal with.
     virtual void on_event(EventBase& e);
 
-    /// @brief The layer name used for debugging.
-    /// @return The name of the layer
     std::string const& get_name() const;
 };
 

@@ -37,14 +37,9 @@ private:
     /// @brief Get a uniform variable's location according to its name.
     GLint get_uniform_location(std::string const& name) const;
 
-    /// @brief Compile a shader program.
     GLuint compile_shader(std::string const& code, GLenum shader_type) const;
-
-    /// @brief Link a shader program.
     void link_shader(GLuint vertex_shader, GLuint fragment_shader) const;
-
 #ifndef NDEBUG
-    /// @brief Validate a shader program (only in debug mode).
     void validate_shader() const;
 #endif
 };

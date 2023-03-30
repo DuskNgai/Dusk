@@ -22,19 +22,14 @@ public:
     virtual ~Framebuffer() = default;
 
 public:
-    /// @brief Bind the frame buffer.
     virtual void bind() = 0;
-    /// @brief Unbind the frame buffer.
     virtual void unbind() = 0;
 
-    /// @brief Get the color attachment related to the frame buffer.
     virtual uint32_t get_color_attachment() = 0;
 
-    /// @brief Resize the frame buffer.
     virtual void resize(glm::uvec2 new_size) = 0;
     virtual void resize(uint32_t width, uint32_t height) = 0;
 
-    /// @brief Create a frame buffer based on the given properties.
     static std::shared_ptr<Framebuffer> create(FramebufferProps const& props);
 };
 

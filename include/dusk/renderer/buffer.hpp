@@ -74,10 +74,8 @@ public:
     virtual ~VertexBuffer() = default;
 
 public:
-    /// @brief Bind the buffer for rendering.
     virtual void bind() const = 0;
 
-    /// @brief Unbind the buffer for stoping rendering.
     virtual void unbind() const = 0;
 
     /// @brief Set new data for rendering, commly used for batch rendering.
@@ -89,13 +87,8 @@ public:
     /// @brief Get the layout of the data in the vertex buffer.
     virtual BufferLayout const& get_layout() const = 0;
 
-    /// @brief Used for batch rendering.
-    /// @param size The size of the buffer in bytes.
     static std::shared_ptr<VertexBuffer> create(uint32_t size);
 
-    /// @brief Used for rendering a single object.
-    /// @param size The size of the buffer in bytes.
-    /// @param vertices The vertices to be rendered.
     static std::shared_ptr<VertexBuffer> create(uint32_t size, float* vertices);
 };
 
@@ -105,16 +98,13 @@ public:
     virtual ~IndexBuffer() = default;
 
 public:
-    /// @brief Bind the buffer for rendering.
     virtual void bind() const = 0;
 
-    /// @brief Unbind the buffer for stoping rendering.
     virtual void unbind() const = 0;
 
     /// @brief The size of the index buffer in the number of indices.
     virtual uint32_t size() const = 0;
 
-    /// @brief Create a index buffer with the given `size` and `indices`.
     static std::shared_ptr<IndexBuffer> create(uint32_t size, uint32_t* indices);
 };
 

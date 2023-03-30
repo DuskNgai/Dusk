@@ -20,10 +20,8 @@ public:
     virtual ~ImGuiLayer() override = default;
 
 public:
-    /// @see Layer::OnAttach
     virtual void on_attach() override;
 
-    /// @see Layer::OnDetach
     virtual void on_detach() override;
 
     /// @brief Each frame call this function to start a new ImGui frame.
@@ -35,7 +33,6 @@ public:
     /// @brief Dispatch the event to this ImGui layer.
     virtual void on_event(EventBase& e) override;
 
-    /// @brief Set whether to block the event or not.
     void set_block_event(bool is_block);
 };
 

@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <vector>
+#include <type_traits>
 
 #include <dusk/renderer/vertex-array.hpp>
 
@@ -23,6 +24,7 @@ public:
 public:
     virtual void bind() const override;
     virtual void unbind() const override;
+
     virtual void add_vertex_buffer(std::shared_ptr<VertexBuffer> const& vertex_buffer) override;
     virtual std::vector<std::shared_ptr<VertexBuffer>> const& get_vertex_buffer() const override;
     virtual void set_index_buffer(std::shared_ptr<IndexBuffer> const& index_buffer) override;

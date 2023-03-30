@@ -42,17 +42,13 @@ public:
     /// @brief Get the current time string in yyyy-mm-dd hh:mm:ss format.
     static std::string get_current_time_string();
 
-    /// @brief Query if the timer is running.
     bool is_running() const;
-    /// @brief Query if the timer is stopping.
     bool is_stopping() const;
 
-    /// @brief Starts the clock.
     void start();
-    /// @brief Stop the clock. Accumulates the elapsed time.
     void stop();
-    /// @brief Pauses the clock. Does not accumulate the elapsed time.
     void pause();
+
     /// @brief Resets the accumulated time to 0.
     /// You don't need to reset a timer if the timer is stopping.
     void reset();
@@ -60,16 +56,13 @@ public:
     /// @brief A template member function for representing time in various formats.
     /// Default unit: `milliseconds`.
     template <typename duration_t = std::chrono::milliseconds>
-    int64_t get_elapsed_time() const;
+    int64_t get_elapsed_time() const {
+        return std::chrono::duration_cast<duration_t, int64_t>(this->m_elapsed_time).count();
+    }
 
 private:
     static std::chrono::microseconds count_ticks(clock::time_point start_tick, clock::time_point end_tick);
 };
-
-template <typename duration_t>
-int64_t Timer::get_elapsed_time() const {
-    return std::chrono::duration_cast<duration_t, int64_t>(this->m_elapsed_time).count();
-}
 
 DUSK_NAMESPACE_END
 

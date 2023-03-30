@@ -23,19 +23,13 @@ public:
     virtual uint32_t get_format() const = 0;
     /// @brief Get the data type of the texture (e.g. GL_UNSIGNED_BYTE).
     virtual uint32_t get_data_type() const = 0;
-    /// @brief Get the id of the texture.
     virtual uint32_t get_texture_id() const = 0;
-    /// @brief Get the number of pixels of the texture.
     virtual uint32_t get_number_of_values() const = 0;
-    /// @brief Get the size of the texture.
     virtual uint32_t get_size_in_bytes() const = 0;
-    /// @brief Get the number of channels of the texture.
     virtual uint32_t get_channels() const = 0;
 
-    /// @brief Bind the texture for shader.
     /// @param slot The slot of the binding the texture.
     virtual void bind(uint32_t slot) const = 0;
-    /// @brief Unbind the texture for other usage.
     virtual void unbind() const = 0;
 
     /// @brief Upload the generated texture to the GPU.
@@ -61,9 +55,7 @@ public:
     /// There is no data inside the texture.
     static std::shared_ptr<Texture2D> create(uint32_t width, uint32_t height, uint32_t internal_format, uint32_t format, uint32_t data_type);
 
-    /// @brief Get the width of the texture.
     virtual uint32_t get_width() const = 0;
-    /// @brief Get the height of the texture.
     virtual uint32_t get_height() const = 0;
 
     /// @brief Resize the texture to the specified `new_res`.

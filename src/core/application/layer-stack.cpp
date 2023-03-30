@@ -42,14 +42,16 @@ void LayerStack::pop_overlay(Layer* layer) {
     }
 }
 
-std::vector<Layer*>::iterator LayerStack::begin() { return this->m_layers.begin(); }
-std::vector<Layer*>::iterator LayerStack::end() { return this->m_layers.end(); }
-std::vector<Layer*>::const_iterator LayerStack::begin() const { return this->m_layers.begin(); }
-std::vector<Layer*>::const_iterator LayerStack::end() const { return this->m_layers.end(); }
+// clang-format off
+decltype(LayerStack::m_layers)::iterator               LayerStack::begin() { return this->m_layers.begin(); }
+decltype(LayerStack::m_layers)::iterator               LayerStack::end() { return this->m_layers.end(); }
+decltype(LayerStack::m_layers)::const_iterator         LayerStack::begin() const { return this->m_layers.begin(); }
+decltype(LayerStack::m_layers)::const_iterator         LayerStack::end() const { return this->m_layers.end(); }
 
-std::vector<Layer*>::reverse_iterator LayerStack::rbegin() { return this->m_layers.rbegin(); }
-std::vector<Layer*>::reverse_iterator LayerStack::rend() { return this->m_layers.rend(); }
-std::vector<Layer*>::const_reverse_iterator LayerStack::rbegin() const { return this->m_layers.rbegin(); }
-std::vector<Layer*>::const_reverse_iterator LayerStack::rend() const { return this->m_layers.rend(); }
+decltype(LayerStack::m_layers)::reverse_iterator       LayerStack::rbegin() { return this->m_layers.rbegin(); }
+decltype(LayerStack::m_layers)::reverse_iterator       LayerStack::rend() { return this->m_layers.rend(); }
+decltype(LayerStack::m_layers)::const_reverse_iterator LayerStack::rbegin() const { return this->m_layers.rbegin(); }
+decltype(LayerStack::m_layers)::const_reverse_iterator LayerStack::rend() const { return this->m_layers.rend(); }
+// clang-format on
 
 DUSK_NAMESPACE_END

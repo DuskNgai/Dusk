@@ -52,13 +52,11 @@ public:
     /// An event can only be in on type.
     virtual EventType get_event_type() const = 0;
 
-    /// @brief Get the name of a event.
     virtual char const* get_name() const = 0;
 
     /// @brief Get the details of a event.
     virtual std::string to_string() const;
 
-    /// @brief Check if the event belongs to a specific category.
     bool is_in_category(EventCategory category) const;
 };
 

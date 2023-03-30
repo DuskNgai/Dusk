@@ -43,9 +43,7 @@ public:
     MouseScrolledEvent(float x, float y);
 
 public:
-    /// @return Get the current mouse offset x.
     float get_offset_x() const;
-    /// @return Get the current mouse offset y.
     float get_offset_y() const;
 
     DUSK_EVENT_CATEGORY(EventCategory::EventCategoryMouse | EventCategory::EventCategoryInput);
@@ -64,7 +62,6 @@ public:
     MouseButtonEvent(MouseCode button);
 
 public:
-    /// @return Get the current mouse button code.
     MouseCode get_mouse_button() const;
 
     DUSK_EVENT_CATEGORY(EventCategory::EventCategoryMouse | EventCategory::EventCategoryInput | EventCategory::EventCategoryMouseButton);

@@ -1,7 +1,6 @@
 #ifndef _DUSK_RENDERER_OPENGL_TEXTURE_HPP_
 #define _DUSK_RENDERER_OPENGL_TEXTURE_HPP_
 
-#include <array>
 #include <utility>
 
 #include <glad/glad.h>
@@ -35,8 +34,10 @@ public:
 protected:
     /// @brief Register a texture without specifying its properties and data.
     void register_texture();
+
     /// @brief Get the number of channels of the specified `format`.
     uint32_t channels(GLenum format) const;
+
     /// @brief Get the size of the specified `data_type` in bytes.
     uint32_t data_type_size(GLenum data_type) const;
 };
