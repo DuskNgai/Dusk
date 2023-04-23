@@ -30,7 +30,7 @@ public:
     virtual void resize(glm::uvec2 new_size) = 0;
     virtual void resize(uint32_t width, uint32_t height) = 0;
 
-    static std::shared_ptr<Framebuffer> create(FramebufferProps const& props);
+    static std::unique_ptr<Framebuffer> create(FramebufferProps const& props);
 };
 
 DUSK_NAMESPACE_END

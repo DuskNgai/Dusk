@@ -127,7 +127,7 @@ void Renderer2D::next_batch() {
 
 void Renderer2D::draw_quad(glm::vec2 const& position, glm::vec2 const& size, glm::vec4 const& color) {
     // Dispatch to the 3D version of the function.
-    Renderer2D::draw_quad(glm::vec3(position, 0.0f), size, color);
+    Renderer2D::draw_quad(glm::vec3{ position, 0.0f }, size, color);
 }
 
 void Renderer2D::draw_quad(glm::vec3 const& position, glm::vec2 const& size, glm::vec4 const& color) {
@@ -139,7 +139,7 @@ void Renderer2D::draw_quad(glm::vec3 const& position, glm::vec2 const& size, glm
 
 void Renderer2D::draw_quad(glm::vec2 const& position, glm::vec2 const& size, std::shared_ptr<Texture> const& texture, float tiling_scale, glm::vec4 const& tint_color) {
     // Dispatch to the 3D version of the function.
-    Renderer2D::draw_quad(glm::vec3(position, 0.0f), size, texture, tiling_scale, tint_color);
+    Renderer2D::draw_quad(glm::vec3{ position, 0.0f }, size, texture, tiling_scale, tint_color);
 }
 
 void Renderer2D::draw_quad(glm::vec3 const& position, glm::vec2 const& size, std::shared_ptr<Texture> const& texture, float tiling_scale, glm::vec4 const& tint_color) {
@@ -151,7 +151,7 @@ void Renderer2D::draw_quad(glm::vec3 const& position, glm::vec2 const& size, std
 
 void Renderer2D::draw_rotated_quad(glm::vec2 const& position, glm::vec2 const& size, float radians, glm::vec4 const& color) {
     // Dispatch to the 3D version of the function.
-    Renderer2D::draw_rotated_quad(glm::vec3(position, 0.0f), size, radians, color);
+    Renderer2D::draw_rotated_quad(glm::vec3{ position, 0.0f }, size, radians, color);
 }
 
 void Renderer2D::draw_rotated_quad(glm::vec3 const& position, glm::vec2 const& size, float radians, glm::vec4 const& color) {
@@ -163,7 +163,7 @@ void Renderer2D::draw_rotated_quad(glm::vec3 const& position, glm::vec2 const& s
 
 void Renderer2D::draw_rotated_quad(glm::vec2 const& position, glm::vec2 const& size, float radians, std::shared_ptr<Texture> const& texture, float tiling_scale, glm::vec4 const& tint_color) {
     // Dispatch to the 3D version of the function.
-    Renderer2D::draw_rotated_quad(glm::vec3(position, 0.0f), size, radians, texture, tiling_scale, tint_color);
+    Renderer2D::draw_rotated_quad(glm::vec3{ position, 0.0f }, size, radians, texture, tiling_scale, tint_color);
 }
 
 void Renderer2D::draw_rotated_quad(glm::vec3 const& position, glm::vec2 const& size, float radians, std::shared_ptr<Texture> const& texture, float tiling_scale, glm::vec4 const& tint_color) {

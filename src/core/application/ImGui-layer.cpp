@@ -75,7 +75,7 @@ void ImGuiLayer::end_frame() {
 }
 
 void ImGuiLayer::on_event(EventBase& e) {
-    if (m_block_event) {
+    if (this->m_block_event) {
         ImGuiIO& io = ImGui::GetIO();
         e.m_handled |= e.is_in_category(EventCategoryMouse) & io.WantCaptureMouse;
         e.m_handled |= e.is_in_category(EventCategoryKeyboard) & io.WantCaptureKeyboard;

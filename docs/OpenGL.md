@@ -23,3 +23,7 @@
 调用了 `glDeleteShader` 后，如果 `shader` 对象连接在一个 `program` 对象上，它将被标记为删除，但是在它不再连接在任何 `program` 对象上之前，对于任何渲染环境来说，它都不会被删除（也就是说，它必须从它所连接的地方分离（`detach`）出来，才会被删除）。
 
 如果 `shader` 已经因为 `glDeleteShader` 而标记为删除，并且它没有附加（`attach`）到任何 `program` 对象，那么它将在被分离后被删除。
+
+## Depth Testing
+
+Depth Buffer 是在 Fragment Shader 运行之后在屏幕空间中运行的。`gl_FragCoord` 的 `x` 和 `y` 分量代表了片段的屏幕空间坐标，`z` 分量代表了片段的深度值。

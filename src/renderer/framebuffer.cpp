@@ -5,7 +5,7 @@
 DUSK_NAMESPACE_BEGIN
 
 // clang-format off
-std::shared_ptr<Framebuffer> Framebuffer::create(FramebufferProps const& props) {
+std::unique_ptr<Framebuffer> Framebuffer::create(FramebufferProps const& props) {
     switch (RendererAPI::get_API()) {
         case RendererAPI::API::None:      DUSK_CORE_ASSERT(false, "RendererAPI::API::None is currently not supported!"); return nullptr;
         case RendererAPI::API::OpenGL:    return std::make_unique<OpenGLFramebuffer>(props);

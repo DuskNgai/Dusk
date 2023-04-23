@@ -30,9 +30,9 @@ void OpenGLContext::init() {
         return ss.str();
     };
     DUSK_CORE_INFO("OpenGL Info:");
-    DUSK_CORE_INFO("Vendor: {:s}", u8_to_i8(GL_VENDOR));
-    DUSK_CORE_INFO("Renderer: {:s}", u8_to_i8(GL_RENDERER));
-    DUSK_CORE_INFO("Version: {:s}", u8_to_i8(GL_VERSION));
+    DUSK_CORE_INFO("\tVendor: {:s}", u8_to_i8(GL_VENDOR));
+    DUSK_CORE_INFO("\tRenderer: {:s}", u8_to_i8(GL_RENDERER));
+    DUSK_CORE_INFO("\tVersion: {:s}", u8_to_i8(GL_VERSION));
 }
 
 void OpenGLContext::swap_buffers() {

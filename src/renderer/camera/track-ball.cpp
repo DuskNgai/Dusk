@@ -68,7 +68,7 @@ bool TrackBall::on_mouse_button_released(MouseButtonReleasedEvent& e) {
 }
 
 bool TrackBall::on_window_resize(WindowResizeEvent& e) {
-    this->set_aspect_ratio((float)e.get_width() / (float)e.get_height());
+    this->set_aspect_ratio(static_cast<float>(e.get_width()) / static_cast<float>(e.get_height()));
     return false;
 }
 
