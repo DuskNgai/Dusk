@@ -15,8 +15,10 @@
 
 #include <dusk/core/utils/key-code.hpp>
 #include <dusk/core/utils/mouse-code.hpp>
-#include <dusk/core/utils/utils.hpp>
+#include <dusk/core/utils/range.hpp>
 #include <dusk/core/utils/timer.hpp>
+#include <dusk/core/utils/utils.hpp>
+#include <dusk/core/utils/zip.hpp>
 
 #include <dusk/renderer/camera/orthographic-camera.hpp>
 #include <dusk/renderer/camera/perspective-camera.hpp>

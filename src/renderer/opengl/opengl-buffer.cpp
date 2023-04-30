@@ -5,16 +5,16 @@
 DUSK_NAMESPACE_BEGIN
 
 //! OpenGLVertexBuffer
-OpenGLVertexBuffer::OpenGLVertexBuffer(uint32_t size) {
+OpenGLVertexBuffer::OpenGLVertexBuffer(uint32_t size_in_bytes) {
     glCreateBuffers(1, &this->m_buffer_id);
     glBindBuffer(GL_ARRAY_BUFFER, this->m_buffer_id);
-    glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, size_in_bytes, nullptr, GL_DYNAMIC_DRAW);
 }
 
-OpenGLVertexBuffer::OpenGLVertexBuffer(uint32_t size, float* vertices) {
+OpenGLVertexBuffer::OpenGLVertexBuffer(uint32_t size_in_bytes, float const* vertices) {
     glCreateBuffers(1, &this->m_buffer_id);
     glBindBuffer(GL_ARRAY_BUFFER, this->m_buffer_id);
-    glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, size_in_bytes, vertices, GL_STATIC_DRAW);
 }
 
 OpenGLVertexBuffer::~OpenGLVertexBuffer() {
@@ -29,9 +29,9 @@ void OpenGLVertexBuffer::unbind() const {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void OpenGLVertexBuffer::set_data(uint32_t size, float* vertices) {
+void OpenGLVertexBuffer::set_data(uint32_t size_in_bytes, float const* vertices) {
     glBindBuffer(GL_ARRAY_BUFFER, this->m_buffer_id);
-    glBufferSubData(GL_ARRAY_BUFFER, 0, size, vertices);
+    glBufferSubData(GL_ARRAY_BUFFER, 0, size_in_bytes, vertices);
 }
 
 void OpenGLVertexBuffer::set_layout(BufferLayout const& layout) {
@@ -44,13 +44,13 @@ BufferLayout const& OpenGLVertexBuffer::get_layout() const {
 //! OpenGLVertexBuffer
 
 //! OpenGLIndexBuffer
-OpenGLIndexBuffer::OpenGLIndexBuffer(uint32_t size, uint32_t* indices)
-    : m_size{ size } {
+OpenGLIndexBuffer::OpenGLIndexBuffer(uint32_t size_in_bytes, uint32_t const* indices)
+    : m_size{ size_in_bytes / static_cast<uint32_t>(sizeof(uint32_t)) } {
     glCreateBuffers(1, &this->m_buffer_id);
     // GL_ELEMENT_ARRAY_BUFFER is not valid without an actively bound VAO
     // Binding with GL_ARRAY_BUFFER allows the data to be loaded regardless of VAO state.
     glBindBuffer(GL_ARRAY_BUFFER, this->m_buffer_id);
-    glBufferData(GL_ARRAY_BUFFER, size * sizeof(uint32_t), indices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, size_in_bytes, indices, GL_STATIC_DRAW);
 }
 
 OpenGLIndexBuffer::~OpenGLIndexBuffer() {

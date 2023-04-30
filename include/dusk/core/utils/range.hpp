@@ -1,6 +1,8 @@
 #ifndef _DUSK_CORE_UTILS_RANGE_HPP_
 #define _DUSK_CORE_UTILS_RANGE_HPP_
 
+#include <type_traits>
+
 #include <dusk/common.hpp>
 
 DUSK_NAMESPACE_BEGIN
@@ -8,7 +10,7 @@ DUSK_NAMESPACE_BEGIN
 namespace RangerDetail {
 
     template <typename T>
-    struct RangerIterator {
+    class RangerIterator {
     public:
         using difference_type = std::ptrdiff_t;
         using size_type = std::size_t;
@@ -17,9 +19,9 @@ namespace RangerDetail {
         using reference = T const&;
         using iterator_category = std::random_access_iterator_tag;
 
-    public:
+    private:
         T value{};
-        T const &start{}, end{}, step{};
+        T const start{}, end{}, step{};
 
     public:
         RangerIterator() = default;
@@ -96,23 +98,25 @@ namespace RangerDetail {
     };
 
     template <typename T>
-    struct Ranger {
+    class Ranger {
     public:
         using iterator = RangerIterator<T>;
         using value_type = T;
 
-    public:
-        T m_start, m_end, m_step;
+    private:
+        T const start, finish, step;
 
     public:
         Ranger(T const& start, T const& end, T const& step)
-            : m_start{ start }
-            , m_end{ end }
-            , m_step{ step } {}
+            : start{ start }
+            , finish{ end }
+            , step{ step } {}
 
     public:
-        iterator begin() { return iterator{ this->m_start, this->m_start, this->m_end, this->m_step }; }
-        iterator end() { return iterator{ this->m_end, this->m_start, this->m_end, this->m_step }; }
+        iterator begin() { return iterator{ this->start, this->start, this->finish, this->step }; }
+        iterator end() { return iterator{ this->finish, this->start, this->finish, this->step }; }
+        std::reverse_iterator<iterator> rbegin() { return std::reverse_iterator<iterator>{ this->end() }; }
+        std::reverse_iterator<iterator> rend() { return std::reverse_iterator<iterator>{ this->begin() }; }
     };
 
 } // namespace RangerDetail
@@ -123,14 +127,16 @@ auto range(T const& end) {
     return RangerDetail::Ranger<T>{ T{}, end, T{ 1 } };
 }
 
-template <typename T>
-auto range(T const& start, T const& end) {
-    return RangerDetail::Ranger<T>{ start, end, T{ 1 } };
+template <typename T, typename U>
+auto range(T const& start, U const& end) {
+    using least_common_t = decltype(std::declval<decltype(std::declval<T>() + 1)>() + std::declval<decltype(std::declval<U>() - 1)>());
+    return RangerDetail::Ranger<least_common_t>{ static_cast<least_common_t>(start), static_cast<least_common_t>(end), 1 };
 }
 
-template <typename T>
-auto range(T const& start, T const& end, T const& step) {
-    return RangerDetail::Ranger<T>{ start, end, step };
+template <typename T, typename U, typename V>
+auto range(T const& start, U const& end, V const& step) {
+    using least_common_t = decltype(std::declval<decltype(std::declval<T>() + std::declval<V>())>() + std::declval<decltype(std::declval<U>() - std::declval<V>())>());
+    return RangerDetail::Ranger<least_common_t>{ static_cast<least_common_t>(start), static_cast<least_common_t>(end), static_cast<least_common_t>(step) };
 }
 
 DUSK_NAMESPACE_END

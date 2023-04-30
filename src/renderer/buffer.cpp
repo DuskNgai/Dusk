@@ -93,20 +93,20 @@ void BufferLayout::calculate_offset() {
 
 // clang-format off
 //! VertexBuffer
-std::shared_ptr<VertexBuffer> VertexBuffer::create(uint32_t size) {
+std::shared_ptr<VertexBuffer> VertexBuffer::create(uint32_t size_in_bytes) {
     switch (RendererAPI::get_API()) {
         case RendererAPI::API::None:      DUSK_CORE_ASSERT(false, "RendererAPI::API::None is currently not supported!"); return nullptr;
-        case RendererAPI::API::OpenGL:    return std::make_shared<OpenGLVertexBuffer>(size);
+        case RendererAPI::API::OpenGL:    return std::make_shared<OpenGLVertexBuffer>(size_in_bytes);
         case RendererAPI::API::Vulkan:    DUSK_CORE_ASSERT(false, "RendererAPI::API::Vulkan is currently not supported!"); return nullptr;
         case RendererAPI::API::DirectX12: DUSK_CORE_ASSERT(false, "RendererAPI::API::DirectX12 is currently not supported!"); return nullptr;
         default: DUSK_CORE_ASSERT(false, "Unrecognized RendererAPI::API!"); return nullptr;
     }
 }
 
-std::shared_ptr<VertexBuffer> VertexBuffer::create(uint32_t size, float* vertices) {
+std::shared_ptr<VertexBuffer> VertexBuffer::create(uint32_t size_in_bytes, float const* vertices) {
     switch (RendererAPI::get_API()) {
         case RendererAPI::API::None:      DUSK_CORE_ASSERT(false, "RendererAPI::API::None is currently not supported!"); return nullptr;
-        case RendererAPI::API::OpenGL:    return std::make_shared<OpenGLVertexBuffer>(size, vertices);
+        case RendererAPI::API::OpenGL:    return std::make_shared<OpenGLVertexBuffer>(size_in_bytes, vertices);
         case RendererAPI::API::Vulkan:    DUSK_CORE_ASSERT(false, "RendererAPI::API::Vulkan is currently not supported!"); return nullptr;
         case RendererAPI::API::DirectX12: DUSK_CORE_ASSERT(false, "RendererAPI::API::DirectX12 is currently not supported!"); return nullptr;
         default: DUSK_CORE_ASSERT(false, "Unrecognized RendererAPI::API!"); return nullptr;
@@ -115,10 +115,10 @@ std::shared_ptr<VertexBuffer> VertexBuffer::create(uint32_t size, float* vertice
 //! VertexBuffer
 
 //! IndexBuffer
-std::shared_ptr<IndexBuffer> IndexBuffer::create(uint32_t size, unsigned* indices) {
+std::shared_ptr<IndexBuffer> IndexBuffer::create(uint32_t size_in_bytes, uint32_t const* indices) {
     switch (RendererAPI::get_API()) {
         case RendererAPI::API::None:      DUSK_CORE_ASSERT(false, "RendererAPI::API::None is currently not supported!"); return nullptr;
-        case RendererAPI::API::OpenGL:    return std::make_shared<OpenGLIndexBuffer>(size, indices);
+        case RendererAPI::API::OpenGL:    return std::make_shared<OpenGLIndexBuffer>(size_in_bytes, indices);
         case RendererAPI::API::Vulkan:    DUSK_CORE_ASSERT(false, "RendererAPI::API::Vulkan is currently not supported!"); return nullptr;
         case RendererAPI::API::DirectX12: DUSK_CORE_ASSERT(false, "RendererAPI::API::DirectX12 is currently not supported!"); return nullptr;
         default: DUSK_CORE_ASSERT(false, "Unrecognized RendererAPI::API!"); return nullptr;

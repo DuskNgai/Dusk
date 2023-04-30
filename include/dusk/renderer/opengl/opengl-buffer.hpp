@@ -14,14 +14,14 @@ private:
     BufferLayout m_layout;
 
 public:
-    OpenGLVertexBuffer(uint32_t size);
-    OpenGLVertexBuffer(uint32_t size, float* vertices);
+    OpenGLVertexBuffer(uint32_t size_in_bytes);
+    OpenGLVertexBuffer(uint32_t size_in_bytes, float const* vertices);
     virtual ~OpenGLVertexBuffer();
 
 public:
     virtual void bind() const override;
     virtual void unbind() const override;
-    virtual void set_data(uint32_t size, float* vertices) override;
+    virtual void set_data(uint32_t size_in_bytes, float const* vertices) override;
     virtual void set_layout(BufferLayout const& layout) override;
     BufferLayout const& get_layout() const override;
 };
@@ -35,7 +35,7 @@ private:
     uint32_t m_size;
 
 public:
-    OpenGLIndexBuffer(uint32_t size, uint32_t* indices);
+    OpenGLIndexBuffer(uint32_t size_in_bytes, uint32_t const* indices);
     virtual ~OpenGLIndexBuffer();
 
 public:

@@ -25,7 +25,7 @@ public:
     virtual void unbind() const = 0;
 
     virtual void set_int(std::string const& name, int val) const = 0;
-    virtual void set_int_array(std::string const& name, int* vals, uint32_t count) const = 0;
+    virtual void set_int_array(std::string const& name, int const* vals, uint32_t count) const = 0;
     virtual void set_float(std::string const& name, float val) const = 0;
     virtual void set_vec2(std::string const& name, glm::vec2 const& val) const = 0;
     virtual void set_vec3(std::string const& name, glm::vec3 const& val) const = 0;

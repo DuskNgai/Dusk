@@ -32,9 +32,9 @@ public:
 
     /// @brief Submit graphics primitives to render.
     static void submit(
-        Shader const* shader,
-        VertexArray const* vertex_array,
-        glm::mat4 const& model = glm::mat4(1.0f)
+        std::shared_ptr<Shader> const& shader,
+        std::unique_ptr<VertexArray> const& vertex_array,
+        glm::mat4 const& model
     );
 };
 

@@ -79,7 +79,7 @@ public:
     virtual void unbind() const = 0;
 
     /// @brief Set new data for rendering, commly used for batch rendering.
-    virtual void set_data(uint32_t size, float* vertices) = 0;
+    virtual void set_data(uint32_t size_in_bytes, float const* vertices) = 0;
 
     /// @brief Set the layout of the data in the vertex buffer.
     virtual void set_layout(BufferLayout const& layout) = 0;
@@ -87,9 +87,9 @@ public:
     /// @brief Get the layout of the data in the vertex buffer.
     virtual BufferLayout const& get_layout() const = 0;
 
-    static std::shared_ptr<VertexBuffer> create(uint32_t size);
+    static std::shared_ptr<VertexBuffer> create(uint32_t size_in_bytes);
 
-    static std::shared_ptr<VertexBuffer> create(uint32_t size, float* vertices);
+    static std::shared_ptr<VertexBuffer> create(uint32_t size_in_bytes, float const* vertices);
 };
 
 /// @class The interface class for renderer and rendering API related to index buffer.
@@ -105,7 +105,7 @@ public:
     /// @brief The size of the index buffer in the number of indices.
     virtual uint32_t size() const = 0;
 
-    static std::shared_ptr<IndexBuffer> create(uint32_t size, uint32_t* indices);
+    static std::shared_ptr<IndexBuffer> create(uint32_t size_in_bytes, uint32_t const* indices);
 };
 
 DUSK_NAMESPACE_END

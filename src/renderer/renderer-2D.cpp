@@ -1,4 +1,5 @@
 #include <dusk/core/utils/utils.hpp>
+#include <dusk/core/utils/range.hpp>
 #include <dusk/renderer/renderer-2D.hpp>
 #include <dusk/renderer/render-command.hpp>
 #include <dusk/log.hpp>
@@ -34,7 +35,7 @@ void Renderer2D::init() {
             // |      |
             // 0------1
             uint32_t offset{ 0 };
-            for (uint32_t i{ 0 }; i < __detail::RENDERER2D_QUADS_BUFFER_SIZE; ++i) {
+            for (auto _ : range(__detail::RENDERER2D_QUADS_BUFFER_SIZE)) {
                 Renderer2D::s_data->quad_index_buffer_cpu.push_back(offset + 0);
                 Renderer2D::s_data->quad_index_buffer_cpu.push_back(offset + 1);
                 Renderer2D::s_data->quad_index_buffer_cpu.push_back(offset + 2);
@@ -58,7 +59,7 @@ void Renderer2D::init() {
         );
         Renderer2D::s_data->texture_shader->bind();
         auto sampler{ IntegerSequenceToArray(std::make_integer_sequence<int, __detail::RENDERER2D_TEXTURE_SLOTS_SIZE>{}) };
-        Renderer2D::s_data->texture_shader->set_int_array("u_Textures", sampler.data(), __detail::RENDERER2D_TEXTURE_SLOTS_SIZE);
+        Renderer2D::s_data->texture_shader->set_int_array("u_Textures", sampler.data(), sampler.size());
     }
     // Texture
     {
@@ -94,7 +95,7 @@ void Renderer2D::end_scene() {
 
 void Renderer2D::flush() {
     // Bind all the textures.
-    for (std::size_t i{ 0 }; i < Renderer2D::s_data->texture_slots_cpu.size(); ++i) {
+    for (auto i : range(Renderer2D::s_data->texture_slots_cpu.size())) {
         Renderer2D::s_data->texture_slots_cpu[i]->bind(i);
     }
 
@@ -178,14 +179,12 @@ void Renderer2D::draw_quad(glm::mat4 const& model, glm::vec4 const& color) {
         Renderer2D::next_batch();
     }
 
-    // clang-format off
     // Fill the quad vertex buffer.
-    for (uint32_t i{ 0 }; i < __detail::RENDERER2D_QUADS_VERTICES_COUNT; ++i) {
-        Renderer2D::s_data->quad_vertex_buffer_cpu.push_back({
-            model * __detail::RENDERER2D_VERTICES[i], color, __detail::RENDERER2D_UVS[i], __detail::RENDERER2D_TEXTURE_INDEX, __detail::RENDERER2D_TILING_SCALE
-        });
+    for (auto i : range(__detail::RENDERER2D_QUADS_VERTICES_COUNT)) {
+        Renderer2D::s_data->quad_vertex_buffer_cpu.push_back(
+            { model * __detail::RENDERER2D_VERTICES[i], color, __detail::RENDERER2D_UVS[i], __detail::RENDERER2D_TEXTURE_INDEX, __detail::RENDERER2D_TILING_SCALE }
+        );
     }
-    // clang-format on
 
     //! BUG
     // Set uniform variables in shader.
@@ -200,7 +199,7 @@ void Renderer2D::draw_quad(glm::mat4 const& model, std::shared_ptr<Texture> cons
 
     float texture_index{ 0.0f };
     // Check if we had submit the texture before;
-    for (std::size_t i{ 1 }; i < Renderer2D::s_data->texture_slots_cpu.size(); ++i) {
+    for (auto i : range(1, Renderer2D::s_data->texture_slots_cpu.size())) {
         if (Renderer2D::s_data->texture_slots_cpu[i]->get_texture_id() == texture->get_texture_id()) {
             texture_index = static_cast<float>(i);
             break;
@@ -215,14 +214,12 @@ void Renderer2D::draw_quad(glm::mat4 const& model, std::shared_ptr<Texture> cons
         Renderer2D::s_data->texture_slots_cpu.push_back(texture);
     }
 
-    // clang-format off
     // Fill the quad vertex buffer.
-    for (uint32_t i{ 0 }; i < __detail::RENDERER2D_QUADS_VERTICES_COUNT; ++i) {
-        Renderer2D::s_data->quad_vertex_buffer_cpu.push_back({
-            model * __detail::RENDERER2D_VERTICES[i], __detail::RENDERER2D_COLOR, __detail::RENDERER2D_UVS[i], texture_index, tiling_scale
-        });
+    for (auto i : range(__detail::RENDERER2D_QUADS_VERTICES_COUNT)) {
+        Renderer2D::s_data->quad_vertex_buffer_cpu.push_back(
+            { model * __detail::RENDERER2D_VERTICES[i], __detail::RENDERER2D_COLOR, __detail::RENDERER2D_UVS[i], texture_index, tiling_scale }
+        );
     }
-    // clang-format on
 
     //! BUG
     // Set uniform variables in shader.

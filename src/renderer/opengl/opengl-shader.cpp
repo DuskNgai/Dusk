@@ -37,7 +37,7 @@ void OpenGLShader::set_int(std::string const& name, int val) const {
     glUniform1i(location, val);
 }
 
-void OpenGLShader::set_int_array(std::string const& name, int* vals, uint32_t count) const {
+void OpenGLShader::set_int_array(std::string const& name, int const* vals, uint32_t count) const {
     auto location{ this->get_uniform_location(name) };
     glUniform1iv(location, count, vals);
 }
