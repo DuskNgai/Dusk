@@ -2,12 +2,12 @@
 #define _DUSK_RENDERER_SHADER_HPP_
 
 #include <string>
-#include <unordered_map>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
 #include <dusk/common.hpp>
+#include <dusk/core/utils/indexed-map.hpp>
 
 DUSK_NAMESPACE_BEGIN
 
@@ -39,14 +39,18 @@ public:
 
 class ShaderLibrary {
 public:
-    std::unordered_map<std::string, std::shared_ptr<Shader>> m_shaders;
+    IndexedMap<std::string, std::shared_ptr<Shader>> m_shaders;
 
 public:
-    void add(std::string const& name, std::shared_ptr<Shader> shader);
-    bool exists(std::string const& name) const;
+    void emplace(std::string const& name, std::shared_ptr<Shader> shader);
+    bool contains(std::string const& name) const;
     std::size_t size() const;
+
     /// @brief A pointer to accessing the shader.
-    std::shared_ptr<Shader> get(std::string const& name);
+    std::shared_ptr<Shader> get(std::string const& name) const;
+
+    /// @brief A pair of name and pointer to accessing the shader.
+    std::pair<std::string, std::shared_ptr<Shader>> get(std::size_t index) const;
 };
 
 DUSK_NAMESPACE_END

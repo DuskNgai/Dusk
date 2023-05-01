@@ -34,7 +34,7 @@ public:
     static void submit(
         std::shared_ptr<Shader> const& shader,
         std::unique_ptr<VertexArray> const& vertex_array,
-        glm::mat4 const& model
+        glm::mat4 const& model = glm::mat4(1.0f)
     );
 };
 

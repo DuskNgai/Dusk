@@ -54,8 +54,8 @@ void Renderer2D::init() {
     // Read shader file.
     {
         Renderer2D::s_data->texture_shader = Shader::create(
-            read_text_file(get_file_path("assets/shaders/BatchTextureVertexShader.glsl")),
-            read_text_file(get_file_path("assets/shaders/BatchTextureFragmentShader.glsl"))
+            read_text_file(get_file_path("assets/shaders/BatchTextureVS.glsl")),
+            read_text_file(get_file_path("assets/shaders/BatchTextureFS.glsl"))
         );
         Renderer2D::s_data->texture_shader->bind();
         auto sampler{ IntegerSequenceToArray(std::make_integer_sequence<int, __detail::RENDERER2D_TEXTURE_SLOTS_SIZE>{}) };

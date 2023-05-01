@@ -27,7 +27,6 @@ void Renderer::submit(std::shared_ptr<Shader> const& shader, std::unique_ptr<Ver
     shader->set_mat4("u_View", Renderer::s_render_data->camera->get_view_matrix());
     shader->set_mat4("u_Model", model);
 
-    vertex_array->bind();
     RenderCommand::draw_elements(vertex_array.get());
 }
 

@@ -6,7 +6,7 @@ Dusk 引擎是作为我各个图形学项目的基础渲染器。当前的实现
 
 ## Plan
 
-1. 一个 3-D 渲染器，支持一般的 OpenGL 渲染。（Dusk）
+1. 一个 3-D 渲染器，支持一般的 OpenGL 渲染。（[Learn-OpenGL](https://github.com/DuskNgai/Learn-OpenGL)）
     1. 文件管理系统。
     2. 基于 `ImGui` 的比较好的 UI 界面。
 2. 一个 3-D 神经网络渲染器，支持基于 CUDA 的神经辐射场（NeRF）渲染。(Mod-NeRF)
@@ -18,7 +18,7 @@ Dusk 引擎是作为我各个图形学项目的基础渲染器。当前的实现
 3. 一个 2-D 图片查看器，支持一般的图像格式。（Image-Viewer）
     1. LDR: PNG, JPG, TIFF。
     2. HDR: EXR, HDR。
-4. 一个 3-D 光追渲染器，支持基于 Cpp/CUDA/Vulkan 的渲染。（PBR-Renderer）
+4. 一个 3-D 光追渲染器，支持基于 Cpp/CUDA/Vulkan 的渲染。（Ray-Tracer）
     1. Cpp 实现的 PBRT。
     2. 实现 Vulkan + CUDA 的 ReSTIR。
 

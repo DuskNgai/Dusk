@@ -20,28 +20,24 @@ std::shared_ptr<Shader> Shader::create(std::string const& vs, std::string const&
 //! Shader
 
 //! ShaderLibrary
-void ShaderLibrary::add(std::string const& name, std::shared_ptr<Shader> shader) {
-    if (exists(name)) {
-        DUSK_CORE_WARN("ShaderLibrary::add: Shader with name '{}' already exists, ignore it.", name);
-        return;
-    }
-    this->m_shaders[name] = shader;
+void ShaderLibrary::emplace(std::string const& name, std::shared_ptr<Shader> shader) {
+    this->m_shaders.emplace(name, shader);
 }
 
-bool ShaderLibrary::exists(std::string const& name) const {
-    return this->m_shaders.find(name) != this->m_shaders.end();
+bool ShaderLibrary::contains(std::string const& name) const {
+    return this->m_shaders.contains(name);
 }
 
 std::size_t ShaderLibrary::size() const {
     return this->m_shaders.size();
 }
 
-std::shared_ptr<Shader> ShaderLibrary::get(std::string const& name) {
-    if (!this->exists(name)) {
-        DUSK_CORE_ERROR("ShaderLibrary::get: Shader '{}' does not exist!", name);
-        return nullptr;
-    }
-    return this->m_shaders[name];
+std::shared_ptr<Shader> ShaderLibrary::get(std::string const& name) const {
+    return this->m_shaders.get(name);
+}
+
+std::pair<std::string, std::shared_ptr<Shader>> ShaderLibrary::get(std::size_t index) const {
+    return this->m_shaders.get(index);
 }
 //! ShaderLibrary
 
