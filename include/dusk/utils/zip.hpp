@@ -5,7 +5,7 @@
 #include <type_traits>
 
 #include <dusk/common.hpp>
-#include <dusk/core/utils/for-each.hpp>
+#include <dusk/utils/for-each.hpp>
 
 DUSK_NAMESPACE_BEGIN
 
@@ -54,7 +54,7 @@ namespace ZipperDetail {
         using pointer = typename iterator_tool<TupleOfIterables>::pointer;
         // TODO
         using iterator_category = std::bidirectional_iterator_tag;
-    
+
         using Iterators = typename iterator_tool<TupleOfIterables>::iterators;
 
     public:

@@ -5,7 +5,7 @@
 
 #include <sstream>
 
-#include <glad/glad.h>
+#include <glad/gl.h>
 #include <GLFW/glfw3.h>
 
 #include <dusk/assert.hpp>
@@ -21,14 +21,15 @@ OpenGLContext::OpenGLContext(GLFWwindow* window)
 
 void OpenGLContext::init() {
     glfwMakeContextCurrent(this->m_window);
-    auto status{ gladLoadGLLoader((GLADloadproc)glfwGetProcAddress) };
-    DUSK_CORE_ASSERT(status, "Failed to initialize Glad!");
 
-    auto u8_to_i8 = [](GLenum item) {
+    auto version{ gladLoadGL(glfwGetProcAddress) };
+    DUSK_CORE_INFO("OpenGL Version: {:d}.{:d}", GLAD_VERSION_MAJOR(version), GLAD_VERSION_MINOR(version));
+
+    auto u8_to_i8{ [](GLenum item) {
         std::stringstream ss;
         ss << glGetString(item);
         return ss.str();
-    };
+    } };
     DUSK_CORE_INFO("OpenGL Info:");
     DUSK_CORE_INFO("\tVendor: {:s}", u8_to_i8(GL_VENDOR));
     DUSK_CORE_INFO("\tRenderer: {:s}", u8_to_i8(GL_RENDERER));

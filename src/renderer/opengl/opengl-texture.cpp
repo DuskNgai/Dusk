@@ -3,7 +3,8 @@
     #include <windows.h>
 #endif
 
-#include <glad/glad.h>
+#include <glad/gl.h>
+#define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
 #include <dusk/assert.hpp>
@@ -12,12 +13,50 @@
 
 DUSK_NAMESPACE_BEGIN
 
+static constexpr uint32_t get_opengl_internal_format(TextureInternalFormat format) {
+    switch (format) {
+        case TextureInternalFormat::None: return 0;
+        case TextureInternalFormat::Depth: return GL_DEPTH_COMPONENT;
+        case TextureInternalFormat::Stencil: return GL_STENCIL_INDEX;
+        case TextureInternalFormat::DepthStencil: return GL_DEPTH_STENCIL;
+        case TextureInternalFormat::Red: return GL_RED;
+        case TextureInternalFormat::RG: return GL_RG;
+        case TextureInternalFormat::RGB: return GL_RGB;
+        case TextureInternalFormat::RGBA: return GL_RGBA;
+        default: DUSK_ASSERT(false, "Invalid texture internal format"); return 0;
+    }
+}
+
+static constexpr uint32_t get_opengl_format(TextureFormat format) {
+    switch (format) {
+        case TextureFormat::None: return 0;
+        case TextureFormat::Depth: return GL_DEPTH_COMPONENT;
+        case TextureFormat::Stencil: return GL_STENCIL_INDEX;
+        case TextureFormat::DepthStencil: return GL_DEPTH_STENCIL;
+        case TextureFormat::Red: return GL_RED;
+        case TextureFormat::RG: return GL_RG;
+        case TextureFormat::RGB: return GL_RGB;
+        case TextureFormat::RGBA: return GL_RGBA;
+        default: DUSK_ASSERT(false, "Invalid texture internal format"); return 0;
+    }
+}
+
+static constexpr uint32_t get_opengl_data_type(TextureDataType type) {
+    switch (type) {
+        case TextureDataType::None: return 0;
+        case TextureDataType::UnsignedByte: return GL_UNSIGNED_BYTE;
+        case TextureDataType::UnsignedInt_24_8: return GL_UNSIGNED_INT_24_8;
+        case TextureDataType::Float: return GL_FLOAT;
+        default: DUSK_ASSERT(false, "Invalid texture internal format"); return 0;
+    }
+}
+
 //! OpenGLTexture
-OpenGLTexture::OpenGLTexture(uint32_t target, uint32_t internal_fmt, uint32_t format, uint32_t data_type)
+OpenGLTexture::OpenGLTexture(uint32_t target, TextureInternalFormat internal_fmt, TextureFormat format, TextureDataType data_type)
     : m_target{ target }
-    , m_internal_fmt{ internal_fmt }
-    , m_format{ format }
-    , m_data_type{ data_type } {
+    , m_internal_fmt{ get_opengl_internal_format(internal_fmt) }
+    , m_format{ get_opengl_format(format) }
+    , m_data_type{ get_opengl_data_type(data_type) } {
     this->register_texture();
 }
 
@@ -112,7 +151,7 @@ uint32_t OpenGLTexture::data_type_size(GLenum data_type) const {
 
 //! OpenGLTexture2D
 OpenGLTexture2D::OpenGLTexture2D(std::string const& path)
-    : OpenGLTexture{ GL_TEXTURE_2D, 0, 0, 0 } {
+    : OpenGLTexture{ GL_TEXTURE_2D, TextureInternalFormat::None, TextureFormat::None, TextureDataType::None } {
     // Load image data from `path`.
     int w, h, c;
     stbi_set_flip_vertically_on_load(true);
@@ -155,9 +194,9 @@ OpenGLTexture2D::OpenGLTexture2D(std::string const& path)
 }
 
 OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height)
-    : OpenGLTexture2D(width, height, GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE) {}
+    : OpenGLTexture2D(width, height, TextureInternalFormat::RGBA, TextureFormat::RGBA, TextureDataType::UnsignedByte) {}
 
-OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height, uint32_t internal_fmt, uint32_t format, uint32_t data_type)
+OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height, TextureInternalFormat internal_fmt, TextureFormat format, TextureDataType data_type)
     : OpenGLTexture{ GL_TEXTURE_2D, internal_fmt, format, data_type }
     , m_resolution({ width, height }) {
     this->init(nullptr);

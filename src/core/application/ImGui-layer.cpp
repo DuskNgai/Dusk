@@ -1,9 +1,9 @@
-#include <glad/glad.h>
+#include <glad/gl.h>
 #include <GLFW/glfw3.h>
 
 #include <dusk/core/application/ImGui-layer.hpp>
 #include <dusk/core/application/application.hpp>
-#include <dusk/core/utils/utils.hpp>
+#include <dusk/utils/utils.hpp>
 
 DUSK_NAMESPACE_BEGIN
 

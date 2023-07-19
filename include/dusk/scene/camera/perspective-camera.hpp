@@ -1,36 +1,35 @@
-#ifndef _DUSK_RENDERER_CAMERA_ORTHOGRAPHIC_CAMERA_HPP_
-#define _DUSK_RENDERER_CAMERA_ORTHOGRAPHIC_CAMERA_HPP_
+#ifndef _DUSK_RENDERER_CAMERA_PERSPECTIVE_CAMERA_HPP_
+#define _DUSK_RENDERER_CAMERA_PERSPECTIVE_CAMERA_HPP_
 
-#include <dusk/renderer/camera/camera.hpp>
+#include <dusk/scene/camera/camera.hpp>
 
 DUSK_NAMESPACE_BEGIN
 
-/// @class Orthographic view camera.
+/// @class Perspective view camera.
 /// @see Camera
-class OrthographicCamera final : public Camera {
+class PerspectiveCamera final : public Camera {
 private:
-    float m_width;
+    // Fov in y direction, in degrees.
+    float m_field_of_view;
 
 public:
-    OrthographicCamera(
+    PerspectiveCamera(
         glm::vec3 look_from = __detail::CAMERA_LOOK_FROM,
         glm::vec3 look_to = __detail::CAMERA_LOOK_TO,
         glm::vec3 look_up = __detail::CAMERA_LOOK_UP,
         float near_plane = __detail::CAMERA_NEAR_PLANE,
         float far_plane = __detail::CAMERA_FAR_PLANE,
         float aspect_ratio = __detail::CAMERA_APECT_RATIO,
-        float width = __detail::CAMERA_WIDTH
+        float field_of_view = __detail::CAMERA_FIELD_OF_VIEW
     );
-    virtual ~OrthographicCamera() = default;
-    virtual OrthographicCamera* clone() const override;
+    virtual ~PerspectiveCamera() = default;
+    virtual PerspectiveCamera* clone() const override;
 
     virtual void update_from(Camera const* other) override;
     virtual void zoom(float delta) override;
 
-    void set_width(float val);
-    float get_width() const;
-
-    virtual glm::vec4 get_clip_position_from_NDC(glm::vec3 const& ndc_coords) const override;
+    void set_field_of_view(float degrees);
+    float get_field_of_view() const;
 
     virtual CameraType get_camera_type() const override;
 
@@ -40,4 +39,4 @@ private:
 
 DUSK_NAMESPACE_END
 
-#endif // !_DUSK_RENDERER_CAMERA_ORTHOGRAPHIC_CAMERA_HPP_
+#endif // !_DUSK_RENDERER_CAMERA_PERSPECTIVE_CAMERA_HPP_

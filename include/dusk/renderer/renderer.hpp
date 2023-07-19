@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include <dusk/renderer/camera/camera.hpp>
+#include <dusk/scene/camera/camera.hpp>
 #include <dusk/renderer/render-command.hpp>
 #include <dusk/renderer/shader.hpp>
 #include <dusk/renderer/vertex-array.hpp>

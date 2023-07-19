@@ -1,6 +1,6 @@
-#include <spdlog/sinks/stdout_color_sinks.h>
-
 #include <dusk/log.hpp>
+
+#include <spdlog/sinks/stdout_color_sinks.h>
 
 DUSK_NAMESPACE_BEGIN
 

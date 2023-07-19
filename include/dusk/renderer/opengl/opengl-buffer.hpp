@@ -10,7 +10,7 @@ DUSK_NAMESPACE_BEGIN
 /// @see VertexBuffer
 class OpenGLVertexBuffer : public VertexBuffer {
 private:
-    uint32_t m_buffer_id;
+    uint32_t m_buffer_id{ 0 };
     BufferLayout m_layout;
 
 public:

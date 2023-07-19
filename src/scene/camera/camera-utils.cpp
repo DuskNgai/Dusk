@@ -2,7 +2,7 @@
 
 #include <glm/glm.hpp>
 
-#include <dusk/renderer/camera/camera-utils.hpp>
+#include <dusk/scene/camera/camera-utils.hpp>
 
 DUSK_NAMESPACE_BEGIN
 

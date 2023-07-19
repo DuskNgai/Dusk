@@ -3,8 +3,8 @@
 
 #include <glm/glm.hpp>
 
-#include <dusk/core/utils/key-code.hpp>
-#include <dusk/core/utils/mouse-code.hpp>
+#include <dusk/utils/key-code.hpp>
+#include <dusk/utils/mouse-code.hpp>
 
 DUSK_NAMESPACE_BEGIN
 

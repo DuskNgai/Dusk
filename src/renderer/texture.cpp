@@ -28,7 +28,7 @@ std::shared_ptr<Texture2D> Texture2D::create(uint32_t width, uint32_t height) {
     }
 }
 
-std::shared_ptr<Texture2D> Texture2D::create(uint32_t width, uint32_t height, uint32_t internal_fmt, uint32_t format, uint32_t data_type) {
+std::shared_ptr<Texture2D> Texture2D::create(uint32_t width, uint32_t height, TextureInternalFormat internal_fmt, TextureFormat format, TextureDataType data_type) {
     switch (RendererAPI::get_API()) {
         case RendererAPI::API::None:      DUSK_CORE_ASSERT(false, "RendererAPI::API::None is currently not supported!"); return nullptr;
         case RendererAPI::API::OpenGL:    return std::make_shared<OpenGLTexture2D>(width, height, internal_fmt, format, data_type);

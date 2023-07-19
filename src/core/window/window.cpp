@@ -23,13 +23,8 @@ void* Window::get_window_raw_ptr() const { return this->m_window; }
 void Window::set_event_callback(EventCallbackFunc callback) { this->m_data.m_callback = callback; }
 
 void Window::set_vert_sync(bool enabled) {
-    if (enabled) {
-        glfwSwapInterval(1);
-    }
-    else {
-        glfwSwapInterval(0);
-    }
     this->m_data.m_vert_sync = enabled;
+    this->m_data.m_vert_sync ? glfwSwapInterval(1) : glfwSwapInterval(0);
 }
 
 bool Window::is_vert_sync() const {
@@ -44,16 +39,11 @@ void Window::on_update() {
 void Window::init(WindowProps const& props) {
     this->m_data.m_props = props;
 
-    DUSK_CORE_INFO(
-        "Created a [{:d} x {:d}] window with title \"{:s}\".",
-        this->m_data.m_props.m_width, this->m_data.m_props.m_height, this->m_data.m_props.m_title
-    );
-
     if (s_glfw_window_count == 0) {
         DUSK_CORE_ASSERT(glfwInit(), "Failed to initialize GLFW.");
         glfwSetErrorCallback(
             [](int error, char const* description) {
-                DUSK_CORE_ERROR("Dusk GLFW Error {:d}: {:s}\n", error, description);
+                DUSK_CORE_ERROR("GLFW Error {:d}: {:s}\n", error, description);
             }
         );
     }
@@ -69,6 +59,11 @@ void Window::init(WindowProps const& props) {
         this->m_data.m_props.m_title.c_str(), nullptr, nullptr
     );
     ++s_glfw_window_count;
+
+    DUSK_CORE_INFO(
+        "Created a [{:d} x {:d}] window with title \"{:s}\".",
+        this->m_data.m_props.m_width, this->m_data.m_props.m_height, this->m_data.m_props.m_title
+    );
 
     this->m_context = GraphicsContext::create(this->m_window);
     this->m_context->init();

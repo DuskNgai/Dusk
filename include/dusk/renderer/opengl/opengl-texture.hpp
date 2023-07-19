@@ -3,7 +3,7 @@
 
 #include <utility>
 
-#include <glad/glad.h>
+#include <glad/gl.h>
 #include <glm/glm.hpp>
 
 #include <dusk/renderer/texture.hpp>
@@ -17,7 +17,7 @@ protected:
     GLenum m_target{ 0 }, m_internal_fmt{ 0 }, m_format{ 0 }, m_data_type{ 0 };
 
 public:
-    OpenGLTexture(uint32_t target, uint32_t internal_fmt, uint32_t format, uint32_t data_type);
+    OpenGLTexture(uint32_t target, TextureInternalFormat internal_fmt, TextureFormat format, TextureDataType data_type);
     virtual ~OpenGLTexture() = default;
 
     virtual uint32_t get_target() const override;
@@ -59,7 +59,7 @@ public:
     OpenGLTexture2D(uint32_t width, uint32_t height);
     /// @brief Create a texture with the specified informations.
     /// There is no data inside the texture.
-    OpenGLTexture2D(uint32_t width, uint32_t height, uint32_t internal_fmt, uint32_t format, uint32_t data_type);
+    OpenGLTexture2D(uint32_t width, uint32_t height, TextureInternalFormat internal_fmt, TextureFormat format, TextureDataType data_type);
     virtual ~OpenGLTexture2D();
 
 public:

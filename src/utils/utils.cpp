@@ -3,7 +3,7 @@
 
 #include <dusk/assert.hpp>
 #include <dusk/log.hpp>
-#include <dusk/core/utils/utils.hpp>
+#include <dusk/utils/utils.hpp>
 
 DUSK_NAMESPACE_BEGIN
 

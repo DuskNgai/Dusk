@@ -1,5 +1,5 @@
-#include <dusk/core/utils/utils.hpp>
-#include <dusk/core/utils/range.hpp>
+#include <dusk/utils/utils.hpp>
+#include <dusk/utils/range.hpp>
 #include <dusk/renderer/renderer-2D.hpp>
 #include <dusk/renderer/render-command.hpp>
 #include <dusk/log.hpp>

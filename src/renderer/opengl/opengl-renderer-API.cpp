@@ -1,20 +1,23 @@
-#include <glad/glad.h>
+#include <glad/gl.h>
 
 #include <dusk/renderer/opengl/opengl-renderer-API.hpp>
 
 DUSK_NAMESPACE_BEGIN
 
 void OpenGLRendererAPI::init() {
-    // Blending texture.
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     // Depth test.
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
+    // Stencil test.
+    // glEnable(GL_STENCIL_TEST);
+    // glStencilFunc(GL_EQUAL, 1, 0xFF);
+    // Blending texture.
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void OpenGLRendererAPI::clear() {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }
 
 void OpenGLRendererAPI::set_viewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height) {

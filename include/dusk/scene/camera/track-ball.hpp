@@ -6,9 +6,9 @@
 #include <dusk/core/event/key-event.hpp>
 #include <dusk/core/event/mouse-event.hpp>
 #include <dusk/core/event/window-event.hpp>
-#include <dusk/renderer/camera/camera.hpp>
-#include <dusk/renderer/camera/orthographic-camera.hpp>
-#include <dusk/renderer/camera/perspective-camera.hpp>
+#include <dusk/scene/camera/camera.hpp>
+#include <dusk/scene/camera/orthographic-camera.hpp>
+#include <dusk/scene/camera/perspective-camera.hpp>
 
 DUSK_NAMESPACE_BEGIN
 

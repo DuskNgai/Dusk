@@ -53,7 +53,7 @@ public:
 
 public:
     /// @brief The stride is the total size of one vertex information.
-    uint32_t GetStride() const;
+    uint32_t get_stride() const;
 
     /// @brief Get the exactly vertex information.
     std::vector<BufferElement> const& get_elements() const;

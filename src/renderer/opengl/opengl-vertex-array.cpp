@@ -1,4 +1,4 @@
-#include <glad/glad.h>
+#include <glad/gl.h>
 
 #include <dusk/assert.hpp>
 #include <dusk/renderer/opengl/opengl-vertex-array.hpp>
@@ -60,7 +60,7 @@ void OpenGLVertexArray::add_vertex_buffer(std::shared_ptr<VertexBuffer> const& v
             index, elem.get_element_count(),
             ShaderDataType2OpenGLDataType(elem.type),
             elem.normalized ? GL_TRUE : GL_FALSE,
-            vertex_buffer->get_layout().GetStride(), (void const*)static_cast<std::size_t>(elem.offset)
+            vertex_buffer->get_layout().get_stride(), (void const*)static_cast<std::size_t>(elem.offset)
         );
         ++index;
     }

@@ -33,17 +33,14 @@ public:
     /// It just removes the overlay layer from the stack, disable the functionality of the overlay layer.
     void pop_overlay(Layer* layer);
 
-    // clang-format off
-    decltype(m_layers)::iterator               begin();
-    decltype(m_layers)::iterator               end();
-    decltype(m_layers)::const_iterator         begin() const;
-    decltype(m_layers)::const_iterator         end() const;
+    auto layer_end() { return this->m_layers.begin() + this->m_insert_index; }
+    auto overlay_begin() { return this->layer_end(); }
 
-    decltype(m_layers)::reverse_iterator       rbegin();
-    decltype(m_layers)::reverse_iterator       rend();
-    decltype(m_layers)::const_reverse_iterator rbegin() const;
-    decltype(m_layers)::const_reverse_iterator rend() const;
-    // clang-format on
+    auto begin() { return this->m_layers.begin(); }
+    auto end() { return this->m_layers.end(); }
+
+    auto rbegin() { return this->m_layers.rbegin(); }
+    auto rend() { return this->m_layers.rend(); }
 };
 
 DUSK_NAMESPACE_END

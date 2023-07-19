@@ -1,6 +1,6 @@
-#include <dusk/core/utils/timer.hpp>
+#include <dusk/utils/timer.hpp>
 #include <dusk/renderer/input.hpp>
-#include <dusk/renderer/camera/track-ball.hpp>
+#include <dusk/scene/camera/track-ball.hpp>
 
 DUSK_NAMESPACE_BEGIN
 

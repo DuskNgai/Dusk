@@ -17,7 +17,7 @@ DUSK_NAMESPACE_BEGIN
 // The category of all the events.
 // clang-format off
 enum EventCategory {
-    None = 0,
+    None                     = 0,
     EventCategoryApplication = (1 << 0),
     EventCategoryInput       = (1 << 1),
     EventCategoryKeyboard    = (1 << 2),
@@ -32,7 +32,7 @@ enum class EventType : int32_t {
     ApplicationTick, ApplicationRender, ApplicationUpdate,
     WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
     KeyPressed, KeyReleased, KeyTyped,
-    MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
+    MouseMoved, MouseScrolled, MouseButtonPressed, MouseButtonReleased
 };
 // clang-format on
 

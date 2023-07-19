@@ -2,7 +2,7 @@
 #define _DUSK_CORE_EVENT_KEY_EVENT_HPP_
 
 #include <dusk/core/event/event.hpp>
-#include <dusk/core/utils/key-code.hpp>
+#include <dusk/utils/key-code.hpp>
 
 DUSK_NAMESPACE_BEGIN
 

@@ -1,7 +1,7 @@
 #include <dusk/assert.hpp>
 #include <dusk/log.hpp>
 #include <dusk/core/application/application.hpp>
-#include <dusk/core/utils/timer.hpp>
+#include <dusk/utils/timer.hpp>
 #include <dusk/renderer/renderer.hpp>
 
 #include <GLFW/glfw3.h>
@@ -31,21 +31,17 @@ Application::~Application() {
 
 void Application::push_layer(Layer* layer) {
     this->m_layer_stack.push_layer(layer);
-    layer->on_attach();
 }
 
 void Application::push_overlay(Layer* layer) {
     this->m_layer_stack.push_overlay(layer);
-    layer->on_attach();
 }
 
 void Application::pop_layer(Layer* layer) {
-    layer->on_detach();
     this->m_layer_stack.pop_layer(layer);
 }
 
 void Application::pop_overlay(Layer* layer) {
-    layer->on_detach();
     this->m_layer_stack.pop_overlay(layer);
 }
 

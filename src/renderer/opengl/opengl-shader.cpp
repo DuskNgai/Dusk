@@ -7,8 +7,8 @@
 DUSK_NAMESPACE_BEGIN
 
 OpenGLShader::OpenGLShader(std::string const& vs, std::string const& fs) {
-    GLuint vertex_shader = this->compile_shader(vs, GL_VERTEX_SHADER);
-    GLuint fragment_shader = this->compile_shader(fs, GL_FRAGMENT_SHADER);
+    GLuint vertex_shader{ this->compile_shader(vs, GL_VERTEX_SHADER) };
+    GLuint fragment_shader{ this->compile_shader(fs, GL_FRAGMENT_SHADER) };
 
     // Vertex and fragment shaders are successfully compiled.
     // Now time to link them together into a program.
@@ -32,57 +32,68 @@ void OpenGLShader::unbind() const {
     glUseProgram(0);
 }
 
-void OpenGLShader::set_int(std::string const& name, int val) const {
+void OpenGLShader::set_int(std::string_view name, int val) const {
     auto location{ this->get_uniform_location(name) };
     glUniform1i(location, val);
 }
 
-void OpenGLShader::set_int_array(std::string const& name, int const* vals, uint32_t count) const {
+void OpenGLShader::set_int_array(std::string_view name, int const* vals, uint32_t count) const {
     auto location{ this->get_uniform_location(name) };
     glUniform1iv(location, count, vals);
 }
 
-void OpenGLShader::set_float(std::string const& name, float val) const {
+void OpenGLShader::set_float(std::string_view name, float val) const {
     auto location{ this->get_uniform_location(name) };
     glUniform1f(location, val);
 }
 
-void OpenGLShader::set_vec2(std::string const& name, glm::vec2 const& val) const {
+void OpenGLShader::set_vec2(std::string_view name, glm::vec2 const& val) const {
     auto location{ this->get_uniform_location(name) };
     glUniform2f(location, val.x, val.y);
 }
 
-void OpenGLShader::set_vec3(std::string const& name, glm::vec3 const& val) const {
+void OpenGLShader::set_vec3(std::string_view name, glm::vec3 const& val) const {
     auto location{ this->get_uniform_location(name) };
     glUniform3f(location, val.x, val.y, val.z);
 }
 
-void OpenGLShader::set_vec4(std::string const& name, glm::vec4 const& val) const {
+void OpenGLShader::set_vec4(std::string_view name, glm::vec4 const& val) const {
     auto location{ this->get_uniform_location(name) };
     glUniform4f(location, val.x, val.y, val.z, val.w);
 }
 
-void OpenGLShader::set_mat2(std::string const& name, glm::mat2 const& val) const {
+void OpenGLShader::set_mat2(std::string_view name, glm::mat2 const& val) const {
     auto location{ this->get_uniform_location(name) };
     glUniformMatrix2fv(location, 1, GL_FALSE, glm::value_ptr(val));
 }
 
-void OpenGLShader::set_mat3(std::string const& name, glm::mat3 const& val) const {
+void OpenGLShader::set_mat3(std::string_view name, glm::mat3 const& val) const {
     auto location{ this->get_uniform_location(name) };
     glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(val));
 }
 
-void OpenGLShader::set_mat4(std::string const& name, glm::mat4 const& val) const {
+void OpenGLShader::set_mat4(std::string_view name, glm::mat4 const& val) const {
     auto location{ this->get_uniform_location(name) };
     glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(val));
 }
 
-GLint OpenGLShader::get_uniform_location(std::string const& name) const {
-    // Cache it if not find.
-    if (this->m_uniform_cache.find(name) == this->m_uniform_cache.end()) {
-        this->m_uniform_cache[name] = glGetUniformLocation(this->m_shader_id, name.c_str());
+GLint OpenGLShader::get_uniform_location(std::string_view name) const {
+    // Check if the uniform is already in the cache
+    auto it{ this->m_uniform_cache.find(name) };
+    if (it != this->m_uniform_cache.end()) {
+        return it->second;
     }
-    return this->m_uniform_cache[name];
+    else {
+        std::string name_s{ name };
+        auto location{ glGetUniformLocation(this->m_shader_id, name_s.c_str()) };
+        this->m_uniform_cache.try_emplace(std::move(name_s), location);
+
+        if (location == -1) {
+            DUSK_CORE_ERROR("Uniform \"{:s}\" not found", name);
+        }
+
+        return location;
+    }
 }
 
 GLuint OpenGLShader::compile_shader(std::string const& code, GLenum shader_type) const {

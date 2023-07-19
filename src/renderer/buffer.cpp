@@ -70,7 +70,7 @@ BufferLayout::BufferLayout(std::initializer_list<BufferElement> elements)
     this->calculate_offset();
 }
 
-uint32_t BufferLayout::GetStride() const { return this->m_total_size; }
+uint32_t BufferLayout::get_stride() const { return this->m_total_size; }
 
 std::vector<BufferElement> const& BufferLayout::get_elements() const {
     return this->m_elements;

@@ -1,4 +1,4 @@
-#include <glad/glad.h>
+#include <glad/gl.h>
 
 #include <dusk/renderer/opengl/opengl-buffer.hpp>
 

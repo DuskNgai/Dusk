@@ -1,6 +1,6 @@
 #include <random>
 
-#include <dusk/core/utils/uuid.hpp>
+#include <dusk/utils/uuid.hpp>
 
 DUSK_NAMESPACE_BEGIN
 

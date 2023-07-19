@@ -13,17 +13,6 @@
 #include <dusk/core/event/mouse-event.hpp>
 #include <dusk/core/event/window-event.hpp>
 
-#include <dusk/core/utils/key-code.hpp>
-#include <dusk/core/utils/mouse-code.hpp>
-#include <dusk/core/utils/range.hpp>
-#include <dusk/core/utils/timer.hpp>
-#include <dusk/core/utils/utils.hpp>
-#include <dusk/core/utils/zip.hpp>
-
-#include <dusk/renderer/camera/orthographic-camera.hpp>
-#include <dusk/renderer/camera/perspective-camera.hpp>
-#include <dusk/renderer/camera/track-ball.hpp>
-
 #include <dusk/renderer/buffer.hpp>
 #include <dusk/renderer/framebuffer.hpp>
 #include <dusk/renderer/input.hpp>
@@ -32,5 +21,16 @@
 #include <dusk/renderer/shader.hpp>
 #include <dusk/renderer/texture.hpp>
 #include <dusk/renderer/vertex-array.hpp>
+
+#include <dusk/scene/camera/orthographic-camera.hpp>
+#include <dusk/scene/camera/perspective-camera.hpp>
+#include <dusk/scene/camera/track-ball.hpp>
+
+#include <dusk/utils/key-code.hpp>
+#include <dusk/utils/mouse-code.hpp>
+#include <dusk/utils/range.hpp>
+#include <dusk/utils/timer.hpp>
+#include <dusk/utils/utils.hpp>
+#include <dusk/utils/zip.hpp>
 
 #endif // !_DUSK_HPP_

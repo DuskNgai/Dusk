@@ -1,7 +1,7 @@
 #ifndef _DUSK_WINDOW_WINDOW_HPP_
 #define _DUSK_WINDOW_WINDOW_HPP_
 
-#include <glad/glad.h>
+#include <glad/gl.h>
 #include <GLFW/glfw3.h>
 
 #include <dusk/core/event/application-event.hpp>

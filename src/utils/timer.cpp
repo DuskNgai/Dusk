@@ -2,7 +2,7 @@
     #include <dusk/log.hpp>
 #endif
 
-#include <dusk/core/utils/timer.hpp>
+#include <dusk/utils/timer.hpp>
 
 DUSK_NAMESPACE_BEGIN
 

@@ -8,6 +8,34 @@
 
 DUSK_NAMESPACE_BEGIN
 
+enum class TextureInternalFormat {
+    None,
+    Depth,
+    Stencil,
+    DepthStencil,
+    Red,
+    RG,
+    RGB,
+    RGBA,
+};
+
+enum class TextureFormat {
+    None,
+    Depth,
+    Stencil,
+    DepthStencil,
+    Red,
+    RG,
+    RGB,
+    RGBA,
+};
+enum class TextureDataType {
+    None,
+    UnsignedByte,
+    UnsignedInt_24_8,
+    Float,
+};
+
 /// @class The base class for texture.
 /// Texture is sharing once it is created.
 class Texture {
@@ -53,7 +81,7 @@ public:
 
     /// @brief Create a texture with the specified information.
     /// There is no data inside the texture.
-    static std::shared_ptr<Texture2D> create(uint32_t width, uint32_t height, uint32_t internal_format, uint32_t format, uint32_t data_type);
+    static std::shared_ptr<Texture2D> create(uint32_t width, uint32_t height, TextureInternalFormat internal_format, TextureFormat format, TextureDataType data_type);
 
     virtual uint32_t get_width() const = 0;
     virtual uint32_t get_height() const = 0;

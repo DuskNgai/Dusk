@@ -2,7 +2,7 @@
 #define _DUSK_CORE_EVENT_MOUSE_EVENT_HPP_
 
 #include <dusk/core/event/event.hpp>
-#include <dusk/core/utils/mouse-code.hpp>
+#include <dusk/utils/mouse-code.hpp>
 
 DUSK_NAMESPACE_BEGIN
 
