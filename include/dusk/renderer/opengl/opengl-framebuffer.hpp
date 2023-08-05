@@ -11,14 +11,13 @@ DUSK_NAMESPACE_BEGIN
 class OpenGLFramebuffer : public Framebuffer {
 private:
     uint32_t m_frame_buffer_id{ 0 };
-    FramebufferProps m_props;
 
-    std::vector<uint32_t> m_color_attachments;
-    uint32_t m_depth_attachment{ 0 };
-    uint32_t m_stencil_attachment{ 0 };
+    std::vector<std::shared_ptr<Texture>> m_color_attachments;
+    std::shared_ptr<Texture> m_depth_attachment{};
+    std::shared_ptr<Texture> m_stencil_attachment{};
 
 public:
-    OpenGLFramebuffer();
+    OpenGLFramebuffer(uint32_t width, uint32_t height);
     virtual ~OpenGLFramebuffer();
 
 public:
@@ -44,7 +43,7 @@ private:
 
     AttachmentType get_next_color_attachment() const;
 
-    virtual void register_attachment(AttachmentType attachment_id, uint32_t tex_id) override;
+    virtual void register_attachment(AttachmentType attachment_id, std::shared_ptr<Texture> texture) override;
     virtual void unregister_attachment(AttachmentType attachment_id) override;
 };
 

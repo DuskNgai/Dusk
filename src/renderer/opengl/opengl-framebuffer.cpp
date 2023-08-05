@@ -13,7 +13,7 @@ static constexpr uint32_t get_attachment_type(AttachmentType type) {
         case AttachmentType::Depth: return GL_DEPTH_ATTACHMENT;
         case AttachmentType::Stencil: return GL_STENCIL_ATTACHMENT;
         case AttachmentType::DepthStencil: return GL_DEPTH_STENCIL_ATTACHMENT;
-        case AttachmentType::Color0: return GL_COLOR_ATTACHMENT0;
+        case AttachmentType::Color0:
         case AttachmentType::Color1:
         case AttachmentType::Color2:
         case AttachmentType::Color3:
@@ -50,9 +50,18 @@ static constexpr uint32_t get_attachment_type(AttachmentType type) {
     }
 }
 
-OpenGLFramebuffer::OpenGLFramebuffer() {
+OpenGLFramebuffer::OpenGLFramebuffer(uint32_t width, uint32_t height) {
     glCreateFramebuffers(1, &this->m_frame_buffer_id);
-    this->m_color_attachments.resize(OpenGLFramebuffer::get_max_color_attachments(), 0);
+    this->m_color_attachments.resize(OpenGLFramebuffer::get_max_color_attachments(), nullptr);
+
+    this->bind();
+    this->attach_texture(Texture2D::create(width, height));
+    this->attach_texture(
+        AttachmentType::DepthStencil,
+        Texture2D::create(width, height, TextureInternalFormat::DepthStencil, TextureFormat::DepthStencil, TextureDataType::UnsignedInt_24_8)
+    );
+    DUSK_ASSERT(this->status() == GL_FRAMEBUFFER_COMPLETE, "Framebuffer is incomplete!");
+    this->unbind();
 }
 
 OpenGLFramebuffer::~OpenGLFramebuffer() {
@@ -77,18 +86,17 @@ uint32_t OpenGLFramebuffer::get_frame_buffer_id() const {
 
 uint32_t OpenGLFramebuffer::get_color_attachment_id(uint32_t index) const {
     DUSK_ASSERT(index < this->m_color_attachments.size(), "Invalid color attachment index");
-    return this->m_color_attachments[index];
+    return this->m_color_attachments[index]->get_texture_id();
 }
 
 AttachmentType OpenGLFramebuffer::attach_texture(std::shared_ptr<Texture> texture) {
     auto attachment_id{ this->get_next_color_attachment() };
-    this->register_attachment(attachment_id, texture->get_texture_id());
-    glFramebufferTexture2D(GL_FRAMEBUFFER, get_attachment_type(attachment_id), GL_TEXTURE_2D, texture->get_texture_id(), 0);
+    this->attach_texture(attachment_id, texture);
     return attachment_id;
 }
 
 void OpenGLFramebuffer::attach_texture(AttachmentType attachment_id, std::shared_ptr<Texture> texture) {
-    this->register_attachment(attachment_id, texture->get_texture_id());
+    this->register_attachment(attachment_id, texture);
     glFramebufferTexture2D(GL_FRAMEBUFFER, get_attachment_type(attachment_id), GL_TEXTURE_2D, texture->get_texture_id(), 0);
 }
 
@@ -146,31 +154,31 @@ AttachmentType OpenGLFramebuffer::num_to_id(uint32_t num) {
 }
 
 AttachmentType OpenGLFramebuffer::get_next_color_attachment() const {
-    auto it = std::find(this->m_color_attachments.begin(), this->m_color_attachments.end(), 0);
+    auto it{ std::find(this->m_color_attachments.begin(), this->m_color_attachments.end(), nullptr) };
     DUSK_ASSERT(it != this->m_color_attachments.end(), "No more color attachments available");
     return OpenGLFramebuffer::num_to_id(static_cast<GLuint>(std::distance(this->m_color_attachments.begin(), it)));
 }
 
-void OpenGLFramebuffer::register_attachment(AttachmentType attachment_id, GLuint tex_id) {
+void OpenGLFramebuffer::register_attachment(AttachmentType attachment_id, std::shared_ptr<Texture> texture) {
     if (attachment_id == AttachmentType::Depth) {
-        this->m_depth_attachment = tex_id;
+        this->m_depth_attachment = texture;
     }
     else if (attachment_id == AttachmentType::Stencil) {
-        this->m_stencil_attachment = tex_id;
+        this->m_stencil_attachment = texture;
     }
     else if (attachment_id == AttachmentType::DepthStencil) {
-        this->m_depth_attachment = tex_id;
-        this->m_stencil_attachment = tex_id;
+        this->m_depth_attachment = texture;
+        this->m_stencil_attachment = texture;
     }
     else {
         auto color_attachment_index{ OpenGLFramebuffer::id_to_num(attachment_id) };
         DUSK_ASSERT(color_attachment_index < OpenGLFramebuffer::get_max_color_attachments(), "Invalid color attachment index");
-        this->m_color_attachments[color_attachment_index] = tex_id;
+        this->m_color_attachments[color_attachment_index] = texture;
     }
 }
 
 void OpenGLFramebuffer::unregister_attachment(AttachmentType attachment_id) {
-    this->register_attachment(attachment_id, 0);
+    this->register_attachment(attachment_id, nullptr);
 }
 
 DUSK_NAMESPACE_END

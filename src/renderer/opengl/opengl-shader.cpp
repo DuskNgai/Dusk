@@ -86,12 +86,12 @@ GLint OpenGLShader::get_uniform_location(std::string_view name) const {
     else {
         std::string name_s{ name };
         auto location{ glGetUniformLocation(this->m_shader_id, name_s.c_str()) };
-        this->m_uniform_cache.try_emplace(std::move(name_s), location);
 
         if (location == -1) {
             DUSK_CORE_ERROR("Uniform \"{:s}\" not found", name);
         }
 
+        this->m_uniform_cache.try_emplace(std::move(name_s), location);
         return location;
     }
 }

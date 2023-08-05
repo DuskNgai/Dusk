@@ -49,13 +49,6 @@ enum class AttachmentType {
     Color31
 };
 
-struct FramebufferProps {
-    glm::uvec2 Size{ 0, 0 };
-    uint32_t Samples{ 1 };
-
-    bool SwapChainTarget{ false };
-};
-
 /// @class The offline rendering buffer.
 class Framebuffer {
 public:
@@ -69,7 +62,7 @@ public:
     virtual uint32_t get_frame_buffer_id() const = 0;
     virtual uint32_t get_color_attachment_id(uint32_t index) const = 0;
 
-    virtual void register_attachment(AttachmentType attachment_id, uint32_t tex_id) = 0;
+    virtual void register_attachment(AttachmentType attachment_id, std::shared_ptr<Texture> texture) = 0;
     virtual void unregister_attachment(AttachmentType attachment_id) = 0;
 
     virtual AttachmentType attach_texture(std::shared_ptr<Texture> texture) = 0;
@@ -80,7 +73,7 @@ public:
     // virtual void resize(glm::uvec2 new_size) = 0;
     // virtual void resize(uint32_t width, uint32_t height) = 0;
 
-    static std::unique_ptr<Framebuffer> create();
+    static std::unique_ptr<Framebuffer> create(uint32_t width, uint32_t height);
 };
 
 DUSK_NAMESPACE_END

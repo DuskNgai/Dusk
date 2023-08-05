@@ -185,11 +185,6 @@ void Renderer2D::draw_quad(glm::mat4 const& model, glm::vec4 const& color) {
             { model * __detail::RENDERER2D_VERTICES[i], color, __detail::RENDERER2D_UVS[i], __detail::RENDERER2D_TEXTURE_INDEX, __detail::RENDERER2D_TILING_SCALE }
         );
     }
-
-    //! BUG
-    // Set uniform variables in shader.
-    Renderer2D::s_data->texture_shader->bind();
-    Renderer2D::s_data->texture_shader->set_vec4("u_Color", __detail::RENDERER2D_TINT_COLOR);
 }
 
 void Renderer2D::draw_quad(glm::mat4 const& model, std::shared_ptr<Texture> const& texture, float tiling_scale, glm::vec4 const& tint_color) {
@@ -220,11 +215,6 @@ void Renderer2D::draw_quad(glm::mat4 const& model, std::shared_ptr<Texture> cons
             { model * __detail::RENDERER2D_VERTICES[i], __detail::RENDERER2D_COLOR, __detail::RENDERER2D_UVS[i], texture_index, tiling_scale }
         );
     }
-
-    //! BUG
-    // Set uniform variables in shader.
-    Renderer2D::s_data->texture_shader->bind();
-    Renderer2D::s_data->texture_shader->set_vec4("u_Color", tint_color);
 }
 
 DUSK_NAMESPACE_END

@@ -1,8 +1,3 @@
-#include <dusk/platform-detection.hpp>
-#if defined(DUSK_PLATFORM_WINDOWS)
-    #include <windows.h>
-#endif
-
 #include <glad/gl.h>
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
@@ -37,7 +32,7 @@ static constexpr uint32_t get_opengl_format(TextureFormat format) {
         case TextureFormat::RG: return GL_RG;
         case TextureFormat::RGB: return GL_RGB;
         case TextureFormat::RGBA: return GL_RGBA;
-        default: DUSK_ASSERT(false, "Invalid texture internal format"); return 0;
+        default: DUSK_ASSERT(false, "Invalid texture format"); return 0;
     }
 }
 
@@ -47,7 +42,7 @@ static constexpr uint32_t get_opengl_data_type(TextureDataType type) {
         case TextureDataType::UnsignedByte: return GL_UNSIGNED_BYTE;
         case TextureDataType::UnsignedInt_24_8: return GL_UNSIGNED_INT_24_8;
         case TextureDataType::Float: return GL_FLOAT;
-        default: DUSK_ASSERT(false, "Invalid texture internal format"); return 0;
+        default: DUSK_ASSERT(false, "Invalid data type"); return 0;
     }
 }
 
@@ -70,7 +65,7 @@ uint32_t OpenGLTexture::get_data_type() const { return this->m_data_type; }
 
 uint32_t OpenGLTexture::get_texture_id() const { return this->m_texture_id; }
 
-uint32_t OpenGLTexture::get_size_in_bytes() const { return this->channels(this->get_format()) * this->data_type_size(this->get_data_type()); }
+uint32_t OpenGLTexture::get_size_in_bytes() const { return this->get_channels() * this->data_type_size(this->get_data_type()); }
 
 uint32_t OpenGLTexture::get_channels() const { return this->channels(this->get_format()); }
 

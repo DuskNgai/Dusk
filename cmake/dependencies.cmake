@@ -1,3 +1,5 @@
+CPMAddPackage("gh:skypjack/entt@3.12.2")
+
 CPMAddPackage("gh:fmtlib/fmt#9.1.0")
 
 CPMAddPackage(
@@ -9,7 +11,7 @@ CPMAddPackage(
 
 if (glad_ADDED)
     add_subdirectory("${glad_SOURCE_DIR}/cmake" glad_cmake)
-    glad_add_library(glad_gl_core_33 REPRODUCIBLE API gl:core=3.3)
+    glad_add_library(glad_gl_core_45 REPRODUCIBLE API gl:core=4.5)
 endif()
 
 CPMAddPackage(
@@ -33,7 +35,8 @@ if (imgui_ADDED)
         "${imgui_SOURCE_DIR}/backends/imgui_impl_opengl3.cpp"
     )
     add_library(imgui STATIC ${imgui_SOURCE_FILES})
-    target_include_directories(imgui PUBLIC "${imgui_SOURCE_DIR}")
+    target_include_directories(imgui PRIVATE "${imgui_SOURCE_DIR}")
+    target_link_libraries(imgui PRIVATE glad_gl_core_45)
 endif()
 
 CPMAddPackage(

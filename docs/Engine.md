@@ -79,7 +79,11 @@ Texture 是存储图像或者需要插值矩阵的地方。我们的引擎暂时
 
 ### Framebuffer
 
-**TODO**
+Framebuffer 是画板，存储需要画布（Texture、Renderbuffer）。
+
+## Entity Component System
+
+被渲染的物体需要知道自己所处的场景，以及场景中的别的物体，以完成碰撞检测之类的事情。因此我们需要一个管理物体的系统即 Entity Component System。采用 Array of Structure 的效率会更高。其中 Structure 是一个 Entity，它包含了各种 Component。
 
 ## Others
 

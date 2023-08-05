@@ -4,6 +4,7 @@ aux_source_directory("core/event" DUSK_SOURCE_FILES)
 aux_source_directory("core/window" DUSK_SOURCE_FILES)
 aux_source_directory("renderer" DUSK_SOURCE_FILES)
 aux_source_directory("renderer/opengl" DUSK_SOURCE_FILES)
+aux_source_directory("scene" DUSK_SOURCE_FILES)
 aux_source_directory("scene/camera" DUSK_SOURCE_FILES)
 aux_source_directory("utils" DUSK_SOURCE_FILES)
 

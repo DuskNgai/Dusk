@@ -17,8 +17,9 @@ list(APPEND DUSK_INCLUDES
 )
 
 list(APPEND DUSK_LIBRARIES
+    EnTT
     fmt::fmt
-    glad_gl_core_33
+    glad_gl_core_45
     glfw
     glm::glm
     imgui
