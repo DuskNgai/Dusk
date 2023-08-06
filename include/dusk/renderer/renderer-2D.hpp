@@ -20,7 +20,6 @@ namespace __detail {
 
 #if defined(DUSK_PLATFORM_WINDOWS) && defined(__NVCC__)
     // Avoid weird bug cooperates with nvcc on Windows.
-    const glm::vec4 RENDERER2D_TINT_COLOR{ 1.0f, 1.0f, 1.0f, 1.0f }; // For pure color + white texture.
     const glm::vec4 RENDERER2D_COLOR{ 1.0f, 1.0f, 1.0f, 1.0f };      // For texture.
 
     const std::array<glm::vec4, 4> RENDERER2D_VERTICES{
@@ -36,7 +35,6 @@ namespace __detail {
         glm::vec2{0.0f, 1.0f},
     };
 #else
-    constexpr glm::vec4 RENDERER2D_TINT_COLOR{ 1.0f, 1.0f, 1.0f, 1.0f }; // For pure color + white texture.
     constexpr glm::vec4 RENDERER2D_COLOR{ 1.0f, 1.0f, 1.0f, 1.0f };      // For texture.
 
     constexpr std::array<glm::vec4, 4> RENDERER2D_VERTICES{
@@ -109,8 +107,8 @@ public:
     /// @param texture The texture of the quad.
     static void draw_quad(glm::vec2 const& position, glm::vec2 const& size, glm::vec4 const& color);
     static void draw_quad(glm::vec3 const& position, glm::vec2 const& size, glm::vec4 const& color);
-    static void draw_quad(glm::vec2 const& position, glm::vec2 const& size, std::shared_ptr<Texture> const& texture, float tiling_scale = 1.0f, glm::vec4 const& tint_color = glm::vec4{ 1.0f });
-    static void draw_quad(glm::vec3 const& position, glm::vec2 const& size, std::shared_ptr<Texture> const& texture, float tiling_scale = 1.0f, glm::vec4 const& tint_color = glm::vec4{ 1.0f });
+    static void draw_quad(glm::vec2 const& position, glm::vec2 const& size, std::shared_ptr<Texture> const& texture, float tiling_scale = 1.0f);
+    static void draw_quad(glm::vec3 const& position, glm::vec2 const& size, std::shared_ptr<Texture> const& texture, float tiling_scale = 1.0f);
 
     /// @brief Draw a rotated quad/square with rotation axis z.
     /// @param position The center of the quad.
@@ -120,8 +118,13 @@ public:
     /// @param texture The texture of the quad, 0 for pure white texture.
     static void draw_rotated_quad(glm::vec2 const& position, glm::vec2 const& size, float radians, glm::vec4 const& color);
     static void draw_rotated_quad(glm::vec3 const& position, glm::vec2 const& size, float radians, glm::vec4 const& color);
-    static void draw_rotated_quad(glm::vec2 const& position, glm::vec2 const& size, float radians, std::shared_ptr<Texture> const& texture, float tiling_scale = 1.0f, glm::vec4 const& tint_color = glm::vec4{ 1.0f });
-    static void draw_rotated_quad(glm::vec3 const& position, glm::vec2 const& size, float radians, std::shared_ptr<Texture> const& texture, float tiling_scale = 1.0f, glm::vec4 const& tint_color = glm::vec4{ 1.0f });
+    static void draw_rotated_quad(glm::vec2 const& position, glm::vec2 const& size, float radians, std::shared_ptr<Texture> const& texture, float tiling_scale = 1.0f);
+    static void draw_rotated_quad(glm::vec3 const& position, glm::vec2 const& size, float radians, std::shared_ptr<Texture> const& texture, float tiling_scale = 1.0f);
+
+    /// @brief Final `draw_quad` dispatched function for pure color.
+    static void draw_quad(glm::mat4 const& model, glm::vec4 const& color);
+    /// @brief Final `draw_quad` dispatched function for texture.
+    static void draw_quad(glm::mat4 const& model, std::shared_ptr<Texture> const& texture, float tiling_scale = 1.0f);
 
 private:
     /// @brief Clear the CPU buffer.
@@ -130,12 +133,6 @@ private:
     /// @brief Upload and draw the data stored in the CPU buffer (flush)
     /// and clear them (start_batch).
     static void next_batch();
-
-    /// @brief Final `draw_quad` dispatched function for pure color.
-    static void draw_quad(glm::mat4 const& model, glm::vec4 const& color);
-
-    /// @brief Final `draw_quad` dispatched function for texture.
-    static void draw_quad(glm::mat4 const& model, std::shared_ptr<Texture> const& texture, float tiling_scale = 1.0f, glm::vec4 const& tint_color = glm::vec4{ 1.0f });
 };
 
 DUSK_NAMESPACE_END

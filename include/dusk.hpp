@@ -22,9 +22,12 @@
 #include <dusk/renderer/texture.hpp>
 #include <dusk/renderer/vertex-array.hpp>
 
+#include <dusk/scene/scene.hpp>
 #include <dusk/scene/camera/orthographic-camera.hpp>
 #include <dusk/scene/camera/perspective-camera.hpp>
 #include <dusk/scene/camera/track-ball.hpp>
+#include <dusk/scene/component/component.hpp>
+#include <dusk/scene/entity/entity.hpp>
 
 #include <dusk/utils/key-code.hpp>
 #include <dusk/utils/mouse-code.hpp>

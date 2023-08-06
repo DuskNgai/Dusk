@@ -1,3 +1,10 @@
+find_program(CCACHE_FOUND ccache)
+if (CCACHE_FOUND)
+    message(STATUS "Using ccache")
+    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
+    set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
+endif()
+
 CPMAddPackage("gh:skypjack/entt@3.12.2")
 
 CPMAddPackage("gh:fmtlib/fmt#9.1.0")
@@ -9,6 +16,7 @@ CPMAddPackage(
     DOWNLOAD_ONLY YES
 )
 
+# https://github.com/Dav1dde/glad/wiki/C#including-glad-sources
 if (glad_ADDED)
     add_subdirectory("${glad_SOURCE_DIR}/cmake" glad_cmake)
     glad_add_library(glad_gl_core_45 REPRODUCIBLE API gl:core=4.5)
@@ -35,8 +43,8 @@ if (imgui_ADDED)
         "${imgui_SOURCE_DIR}/backends/imgui_impl_opengl3.cpp"
     )
     add_library(imgui STATIC ${imgui_SOURCE_FILES})
-    target_include_directories(imgui PRIVATE "${imgui_SOURCE_DIR}")
-    target_link_libraries(imgui PRIVATE glad_gl_core_45)
+    target_include_directories(imgui PUBLIC "${imgui_SOURCE_DIR}")
+    target_link_libraries(imgui PRIVATE glfw)
 endif()
 
 CPMAddPackage(
@@ -46,6 +54,8 @@ CPMAddPackage(
     OPTIONS
         "JSON_BuildTests OFF"
 )
+
+find_package(OpenMP REQUIRED)
 
 CPMAddPackage("gh:gabime/spdlog@1.11.0")
 
@@ -62,5 +72,3 @@ if (stb_ADDED)
 endif()
 
 CPMAddPackage("gh:tinyobjloader/tinyobjloader#v2.0.0rc10")
-
-find_package(OpenMP REQUIRED)
