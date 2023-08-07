@@ -7,6 +7,14 @@
 
 DUSK_NAMESPACE_BEGIN
 
+enum class RenderTest {
+    None = 0,
+    BlendTest,
+    DepthTest,
+    MultiSample,
+    StencilTest
+};
+
 /// @class The runtime graphics APIs.
 /// Usually this singleton class will not be called directly,
 /// we will use static methods in `RenderCommand` instead.
@@ -31,6 +39,10 @@ public:
     virtual void init() = 0;
 
     virtual void clear() = 0;
+
+    virtual void enable_render_test(RenderTest test) = 0;
+
+    virtual void disable_render_test(RenderTest test) = 0;
 
     virtual void set_viewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height) = 0;
 

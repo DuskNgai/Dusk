@@ -46,7 +46,9 @@ static constexpr uint32_t get_attachment_type(AttachmentType type) {
         case AttachmentType::Color30:
         case AttachmentType::Color31:
             return GL_COLOR_ATTACHMENT0 + static_cast<uint32_t>(type) - static_cast<uint32_t>(AttachmentType::Color0);
-        default: DUSK_ASSERT(false, "Invalid attachment type"); return 0;
+        default:
+            DUSK_ASSERT(false, "Invalid attachment type");
+            return 0;
     }
 }
 
@@ -86,9 +88,9 @@ uint32_t OpenGLFramebuffer::get_frame_buffer_id() const {
     return this->m_frame_buffer_id;
 }
 
-uint32_t OpenGLFramebuffer::get_color_attachment_id(uint32_t index) const {
+std::shared_ptr<Texture2D> OpenGLFramebuffer::get_color_attachment(uint32_t index) const {
     DUSK_ASSERT(index < this->m_color_attachments.size(), "Invalid color attachment index");
-    return this->m_color_attachments[index]->get_texture_id();
+    return this->m_color_attachments[index];
 }
 
 AttachmentType OpenGLFramebuffer::attach_texture(std::shared_ptr<Texture2D> texture) {
@@ -130,16 +132,16 @@ void OpenGLFramebuffer::resize(uint32_t new_width, uint32_t new_height) {
 
     for (auto&& attachment : this->m_color_attachments) {
         if (attachment != nullptr) {
-            attachment->resize(this->m_width, this->m_height );
+            attachment->resize(this->m_width, this->m_height);
         }
     }
 
     if (this->m_depth_attachment != nullptr) {
-        this->m_depth_attachment->resize(this->m_width, this->m_height );
+        this->m_depth_attachment->resize(this->m_width, this->m_height);
     }
 
     if (this->m_stencil_attachment != nullptr) {
-        this->m_stencil_attachment->resize(this->m_width, this->m_height );
+        this->m_stencil_attachment->resize(this->m_width, this->m_height);
     }
 }
 

@@ -52,6 +52,7 @@ void Window::init(WindowProps const& props) {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
+    glfwWindowHint(GLFW_SAMPLES, 4);
 
     this->m_window = glfwCreateWindow(
         static_cast<int>(this->m_data.m_props.m_width),

@@ -17,6 +17,8 @@ private:
 public:
     static void init();
     static void clear();
+    static void enable_render_test(RenderTest test);
+    static void disable_render_test(RenderTest test);
     static void set_viewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height);
     static void set_clear_color(glm::vec4 const& color);
     static void set_line_width(float width);

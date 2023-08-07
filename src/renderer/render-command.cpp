@@ -12,6 +12,14 @@ void RenderCommand::clear() {
     RenderCommand::s_render_api->clear();
 }
 
+void RenderCommand::enable_render_test(RenderTest test) {
+    RenderCommand::s_render_api->enable_render_test(test);
+}
+
+void RenderCommand::disable_render_test(RenderTest test) {
+    RenderCommand::s_render_api->disable_render_test(test);
+}
+
 void RenderCommand::set_viewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height) {
     RenderCommand::s_render_api->set_viewport(x, y, width, height);
 }

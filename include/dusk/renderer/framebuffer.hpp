@@ -60,7 +60,7 @@ public:
     virtual uint32_t status() const = 0;
 
     virtual uint32_t get_frame_buffer_id() const = 0;
-    virtual uint32_t get_color_attachment_id(uint32_t index) const = 0;
+    virtual std::shared_ptr<Texture2D> get_color_attachment(uint32_t index) const = 0;
 
     virtual void register_attachment(AttachmentType attachment_id, std::shared_ptr<Texture2D> texture) = 0;
     virtual void unregister_attachment(AttachmentType attachment_id) = 0;

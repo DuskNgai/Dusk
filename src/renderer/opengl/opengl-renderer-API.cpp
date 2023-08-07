@@ -1,19 +1,15 @@
 #include <glad/gl.h>
 
+#include <dusk/assert.hpp>
 #include <dusk/renderer/opengl/opengl-renderer-API.hpp>
 
 DUSK_NAMESPACE_BEGIN
 
 void OpenGLRendererAPI::init() {
-    // Depth test.
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LEQUAL);
-    // Stencil test.
-    // glEnable(GL_STENCIL_TEST);
-    // glStencilFunc(GL_EQUAL, 1, 0xFF);
-    // Blending texture.
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    this->enable_render_test(RenderTest::DepthTest);
+    // this->enable_render_test(RenderTest::StencilTest);
+    this->enable_render_test(RenderTest::BlendTest);
+    this->enable_render_test(RenderTest::MultiSample);
 }
 
 void OpenGLRendererAPI::clear() {
@@ -22,6 +18,48 @@ void OpenGLRendererAPI::clear() {
 
 void OpenGLRendererAPI::set_viewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height) {
     glViewport(x, y, width, height);
+}
+
+void OpenGLRendererAPI::enable_render_test(RenderTest test) {
+    switch (test) {
+        case RenderTest::DepthTest:
+            glEnable(GL_DEPTH_TEST);
+            glDepthFunc(GL_LEQUAL);
+            break;
+        case RenderTest::StencilTest:
+            glEnable(GL_STENCIL_TEST);
+            break;
+        case RenderTest::BlendTest:
+            glEnable(GL_BLEND);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            break;
+        case RenderTest::MultiSample:
+            glEnable(GL_MULTISAMPLE);
+            break;
+        default:
+            DUSK_CORE_ASSERT(false, "Unknown render test!");
+            break;
+    }
+}
+
+void OpenGLRendererAPI::disable_render_test(RenderTest test) {
+    switch (test) {
+        case RenderTest::DepthTest:
+            glDisable(GL_DEPTH_TEST);
+            break;
+        case RenderTest::StencilTest:
+            glDisable(GL_STENCIL_TEST);
+            break;
+        case RenderTest::BlendTest:
+            glDisable(GL_BLEND);
+            break;
+        case RenderTest::MultiSample:
+            glDisable(GL_MULTISAMPLE);
+            break;
+        default:
+            DUSK_CORE_ASSERT(false, "Unknown render test!");
+            break;
+    }
 }
 
 void OpenGLRendererAPI::set_clear_color(glm::vec4 const& color) {
