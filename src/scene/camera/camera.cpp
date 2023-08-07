@@ -5,8 +5,12 @@
 DUSK_NAMESPACE_BEGIN
 
 Camera::Camera(
-    glm::vec3 look_from, glm::vec3 look_to, glm::vec3 look_up,
-    float near_plane, float far_plane, float aspect_ratio
+    glm::vec3 look_from,
+    glm::vec3 look_to,
+    glm::vec3 look_up,
+    float near_plane,
+    float far_plane,
+    float aspect_ratio
 )
     : m_look_from{ look_from }
     , m_look_to{ look_to }

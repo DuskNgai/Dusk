@@ -62,16 +62,15 @@ public:
     virtual uint32_t get_frame_buffer_id() const = 0;
     virtual uint32_t get_color_attachment_id(uint32_t index) const = 0;
 
-    virtual void register_attachment(AttachmentType attachment_id, std::shared_ptr<Texture> texture) = 0;
+    virtual void register_attachment(AttachmentType attachment_id, std::shared_ptr<Texture2D> texture) = 0;
     virtual void unregister_attachment(AttachmentType attachment_id) = 0;
 
-    virtual AttachmentType attach_texture(std::shared_ptr<Texture> texture) = 0;
-    virtual void attach_texture(AttachmentType attachment_id, std::shared_ptr<Texture> texture) = 0;
+    virtual AttachmentType attach_texture(std::shared_ptr<Texture2D> texture) = 0;
+    virtual void attach_texture(AttachmentType attachment_id, std::shared_ptr<Texture2D> texture) = 0;
     virtual void detach_texture(AttachmentType attachment_id) = 0;
     virtual void detach_all_textures() = 0;
 
-    // virtual void resize(glm::uvec2 new_size) = 0;
-    // virtual void resize(uint32_t width, uint32_t height) = 0;
+    virtual void resize(uint32_t new_width, uint32_t new_height) = 0;
 
     static std::unique_ptr<Framebuffer> create(uint32_t width, uint32_t height);
 };

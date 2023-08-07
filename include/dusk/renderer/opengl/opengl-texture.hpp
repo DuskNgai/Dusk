@@ -47,7 +47,7 @@ protected:
 class OpenGLTexture2D : public OpenGLTexture
     , public Texture2D {
 private:
-    glm::uvec2 m_resolution{ 0, 0 };
+    uint32_t m_width{ 0 }, m_height{ 0 };
 
 public:
     /// @brief Create a texture with the specified `path`.
@@ -68,7 +68,7 @@ public:
     virtual uint32_t get_height() const override;
 
     virtual void set_data(void const* data) override;
-    virtual void resize(glm::uvec2 new_res) override;
+    virtual void resize(uint32_t new_width, uint32_t new_height) override;
 
 private:
     /// @brief Initialize the texture data with the specified `data`.

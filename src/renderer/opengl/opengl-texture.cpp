@@ -181,7 +181,7 @@ OpenGLTexture2D::OpenGLTexture2D(std::string const& path)
     }
     this->m_data_type = GL_UNSIGNED_BYTE;
 
-    this->resize({ w, h });
+    this->resize(w, h);
     this->set_data(image_data);
 
     // The image data is unused, free it.
@@ -193,7 +193,8 @@ OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height)
 
 OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height, TextureInternalFormat internal_fmt, TextureFormat format, TextureDataType data_type)
     : OpenGLTexture{ GL_TEXTURE_2D, internal_fmt, format, data_type }
-    , m_resolution({ width, height }) {
+    , m_width{ width }
+    , m_height{ height } {
     this->init(nullptr);
 }
 
@@ -203,11 +204,11 @@ OpenGLTexture2D::~OpenGLTexture2D() {
     glDeleteTextures(1, &this->m_texture_id);
 }
 
-uint32_t OpenGLTexture2D::get_number_of_values() const { return this->m_resolution[0] * this->m_resolution[1]; }
+uint32_t OpenGLTexture2D::get_number_of_values() const { return this->m_width * this->m_height; }
 
-uint32_t OpenGLTexture2D::get_width() const { return this->m_resolution[0]; }
+uint32_t OpenGLTexture2D::get_width() const { return this->m_width; }
 
-uint32_t OpenGLTexture2D::get_height() const { return this->m_resolution[1]; }
+uint32_t OpenGLTexture2D::get_height() const { return this->m_height; }
 
 void OpenGLTexture2D::set_data(void const* data) {
     this->bind(0);
@@ -219,11 +220,12 @@ void OpenGLTexture2D::set_data(void const* data) {
     );
 }
 
-void OpenGLTexture2D::resize(glm::uvec2 new_res) {
-    if (new_res == this->m_resolution) {
+void OpenGLTexture2D::resize(uint32_t new_width, uint32_t new_height) {
+    if (new_width == this->m_width && new_height == this->m_height) {
         return;
     }
-    this->m_resolution = new_res;
+    this->m_width = new_width;
+    this->m_height = new_height;
     this->init(nullptr);
 }
 

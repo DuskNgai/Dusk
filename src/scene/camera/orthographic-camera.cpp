@@ -5,8 +5,12 @@
 DUSK_NAMESPACE_BEGIN
 
 OrthographicCamera::OrthographicCamera(
-    glm::vec3 look_from, glm::vec3 look_to, glm::vec3 look_up,
-    float near_plane, float far_plane, float aspect_ratio,
+    glm::vec3 look_from,
+    glm::vec3 look_to,
+    glm::vec3 look_up,
+    float near_plane,
+    float far_plane,
+    float aspect_ratio,
     float width
 )
     : Camera{ look_from, look_to, look_up, near_plane, far_plane, aspect_ratio }

@@ -86,8 +86,8 @@ public:
     virtual uint32_t get_width() const = 0;
     virtual uint32_t get_height() const = 0;
 
-    /// @brief Resize the texture to the specified `new_res`.
-    virtual void resize(glm::uvec2 new_res) = 0;
+    /// @brief Resize the texture to the specified `width` and `height`.
+    virtual void resize(uint32_t new_width, uint32_t new_height) = 0;
 };
 
 DUSK_NAMESPACE_END

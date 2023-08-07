@@ -35,6 +35,9 @@ void TrackBall::on_update() {
 }
 
 void TrackBall::on_event(EventBase& e) {
+    if (e.m_handled) {
+        return;
+    }
     EventDispatcher dispatcher(e);
     dispatcher.dispatch<MouseMovedEvent>(DUSK_BIND_CLASS_FN(TrackBall::on_mouse_moved));
     dispatcher.dispatch<MouseScrolledEvent>(DUSK_BIND_CLASS_FN(TrackBall::on_mouse_scrolled));

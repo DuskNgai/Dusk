@@ -50,7 +50,9 @@ static constexpr uint32_t get_attachment_type(AttachmentType type) {
     }
 }
 
-OpenGLFramebuffer::OpenGLFramebuffer(uint32_t width, uint32_t height) {
+OpenGLFramebuffer::OpenGLFramebuffer(uint32_t width, uint32_t height)
+    : m_width{ width }
+    , m_height{ height } {
     glCreateFramebuffers(1, &this->m_frame_buffer_id);
     this->m_color_attachments.resize(OpenGLFramebuffer::get_max_color_attachments(), nullptr);
 
@@ -89,13 +91,13 @@ uint32_t OpenGLFramebuffer::get_color_attachment_id(uint32_t index) const {
     return this->m_color_attachments[index]->get_texture_id();
 }
 
-AttachmentType OpenGLFramebuffer::attach_texture(std::shared_ptr<Texture> texture) {
+AttachmentType OpenGLFramebuffer::attach_texture(std::shared_ptr<Texture2D> texture) {
     auto attachment_id{ this->get_next_color_attachment() };
     this->attach_texture(attachment_id, texture);
     return attachment_id;
 }
 
-void OpenGLFramebuffer::attach_texture(AttachmentType attachment_id, std::shared_ptr<Texture> texture) {
+void OpenGLFramebuffer::attach_texture(AttachmentType attachment_id, std::shared_ptr<Texture2D> texture) {
     this->register_attachment(attachment_id, texture);
     glFramebufferTexture2D(GL_FRAMEBUFFER, get_attachment_type(attachment_id), GL_TEXTURE_2D, texture->get_texture_id(), 0);
 }
@@ -119,25 +121,27 @@ void OpenGLFramebuffer::detach_all_textures() {
     }
 }
 
-// void OpenGLFramebuffer::resize(glm::uvec2 new_size) {
-//     if (this->m_frame_buffer_id) {
-//         glDeleteFramebuffers(1, &this->m_frame_buffer_id);
-//         glDeleteTextures(1, &this->m_color_attachment);
-//         glDeleteTextures(1, &this->m_depth_attachment);
+void OpenGLFramebuffer::resize(uint32_t new_width, uint32_t new_height) {
+    if (this->m_width == new_width and this->m_height == new_height) {
+        return;
+    }
+    this->m_width = new_width;
+    this->m_height = new_height;
 
-//         this->m_color_attachment = 0;
-//         this->m_depth_attachment = 0;
-//     }
+    for (auto&& attachment : this->m_color_attachments) {
+        if (attachment != nullptr) {
+            attachment->resize(this->m_width, this->m_height );
+        }
+    }
 
-//     glCreateFramebuffers(1, &this->m_frame_buffer_id);
-//     this->bind();
+    if (this->m_depth_attachment != nullptr) {
+        this->m_depth_attachment->resize(this->m_width, this->m_height );
+    }
 
-//     this->m_props.Size = new_size;
-// }
-
-// void OpenGLFramebuffer::resize(uint32_t width, uint32_t height) {
-//     this->resize({ width, height });
-// }
+    if (this->m_stencil_attachment != nullptr) {
+        this->m_stencil_attachment->resize(this->m_width, this->m_height );
+    }
+}
 
 uint32_t OpenGLFramebuffer::get_max_color_attachments() {
     int32_t max_color_attachments;
@@ -159,7 +163,7 @@ AttachmentType OpenGLFramebuffer::get_next_color_attachment() const {
     return OpenGLFramebuffer::num_to_id(static_cast<GLuint>(std::distance(this->m_color_attachments.begin(), it)));
 }
 
-void OpenGLFramebuffer::register_attachment(AttachmentType attachment_id, std::shared_ptr<Texture> texture) {
+void OpenGLFramebuffer::register_attachment(AttachmentType attachment_id, std::shared_ptr<Texture2D> texture) {
     if (attachment_id == AttachmentType::Depth) {
         this->m_depth_attachment = texture;
     }

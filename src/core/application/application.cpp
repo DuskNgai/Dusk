@@ -68,11 +68,6 @@ void Application::run() {
 }
 
 void Application::on_event(EventBase& e) {
-    EventDispatcher dispatcher(e);
-    dispatcher.dispatch<WindowCloseEvent>(DUSK_BIND_CLASS_FN(Application::on_window_close));
-    dispatcher.dispatch<WindowResizeEvent>(DUSK_BIND_CLASS_FN(Application::on_window_resize));
-    dispatcher.dispatch<KeyPressedEvent>(DUSK_BIND_CLASS_FN(Application::on_key_pressed));
-
     // Dealing with events backward.
     // That is, the layer that is rendered at the top of the window receives the event first.
     for (auto it{ this->m_layer_stack.rbegin() }; it != this->m_layer_stack.rend(); ++it) {
@@ -81,6 +76,14 @@ void Application::on_event(EventBase& e) {
         }
         (*it)->on_event(e);
     }
+    if (e.m_handled) {
+        return;
+    }
+    // The window is at the bottom of the layerstack.
+    EventDispatcher dispatcher(e);
+    dispatcher.dispatch<WindowCloseEvent>(DUSK_BIND_CLASS_FN(Application::on_window_close));
+    dispatcher.dispatch<WindowResizeEvent>(DUSK_BIND_CLASS_FN(Application::on_window_resize));
+    dispatcher.dispatch<KeyPressedEvent>(DUSK_BIND_CLASS_FN(Application::on_key_pressed));
 }
 
 Application* Application::get() { return Application::s_instance; }
