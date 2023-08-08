@@ -1,5 +1,5 @@
-#ifndef _DUSK_UTILS_UUID_H_
-#define _DUSK_UTILS_UUID_H_
+#ifndef _DUSK_UTILS_UUID_HPP_
+#define _DUSK_UTILS_UUID_HPP_
 
 #include <cstdint>
 
@@ -33,4 +33,4 @@ namespace std {
     };
 } // namespace std
 
-#endif // !_DUSK_UTILS_UUID_H_
+#endif // !_DUSK_UTILS_UUID_HPP_

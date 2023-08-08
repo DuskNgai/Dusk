@@ -28,24 +28,38 @@ void ImGuiLayer::on_attach() {
 
     // Setup Platform/Renderer backends
     ImGui_ImplGlfw_InitForOpenGL(window, true);
-    ImGui_ImplOpenGL3_Init("#version 330");
+    ImGui_ImplOpenGL3_Init("#version 450");
 
-    // Scaling the ImGui window size
-    float x_scale, y_scale;
+    // Scaling the ImGui window size to match the resolution of the screen
+    float x_scale, y_scale, font_size;
     glfwGetWindowContentScale(window, &x_scale, &y_scale);
     if (x_scale > 1.0f) {
         ImGui::GetStyle().ScaleAllSizes(x_scale);
-        io.Fonts->AddFontFromFileTTF(get_file_path("assets/fonts/SourceCodePro.ttf").c_str(), 15.0f * x_scale);
+        font_size = 15.0f * x_scale;
     }
     else {
-        io.Fonts->AddFontFromFileTTF(get_file_path("assets/fonts/SourceCodePro.ttf").c_str(), 20.0f);
+        font_size = 20.0f;
     }
+    io.Fonts->AddFontFromFileTTF(get_file_path("assets/fonts/SourceCodePro.ttf").c_str(), font_size);
 }
 
 void ImGuiLayer::on_detach() {
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
+}
+
+void ImGuiLayer::on_update() {}
+
+void ImGuiLayer::on_ImGui_render() {}
+
+void ImGuiLayer::on_event(EventBase& e) {
+    // Disable event handling if ImGui wants to capture the event.
+    if (this->is_block_event()) {
+        ImGuiIO& io = ImGui::GetIO();
+        e.mark_as_handled(e.is_in_category(EventCategoryMouse) & io.WantCaptureMouse);
+        e.mark_as_handled(e.is_in_category(EventCategoryKeyboard) & io.WantCaptureKeyboard);
+    }
 }
 
 void ImGuiLayer::begin_frame() {
@@ -57,11 +71,11 @@ void ImGuiLayer::begin_frame() {
 void ImGuiLayer::end_frame() {
     // Rendering
     ImGuiIO& io{ ImGui::GetIO() };
-    Application* app{ Application::get() };
-    io.DisplaySize = ImVec2(
-        static_cast<float>(app->get_window()->get_width()),
-        static_cast<float>(app->get_window()->get_height())
-    );
+    auto window{ Application::get()->get_window() };
+    io.DisplaySize = {
+        static_cast<float>(window->get_width()),
+        static_cast<float>(window->get_height())
+    };
 
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -74,14 +88,12 @@ void ImGuiLayer::end_frame() {
     }
 }
 
-void ImGuiLayer::on_event(EventBase& e) {
-    if (this->m_block_event) {
-        ImGuiIO& io = ImGui::GetIO();
-        e.m_handled |= e.is_in_category(EventCategoryMouse) & io.WantCaptureMouse;
-        e.m_handled |= e.is_in_category(EventCategoryKeyboard) & io.WantCaptureKeyboard;
-    }
+bool ImGuiLayer::is_block_event() const {
+    return this->m_block_event;
 }
 
-void ImGuiLayer::set_block_event(bool is_block) { this->m_block_event = is_block; }
+void ImGuiLayer::set_block_event(bool is_block) {
+    this->m_block_event = is_block;
+}
 
 DUSK_NAMESPACE_END

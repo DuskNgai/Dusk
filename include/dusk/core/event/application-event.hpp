@@ -5,7 +5,7 @@
 
 DUSK_NAMESPACE_BEGIN
 
-/// @class: The base class for event that are related to application events.
+/// @brief: The base class for event that are related to application events.
 /// The class derived from this class is in the category of `Application`.
 /// @see `EventBase`
 class ApplicationEvent : public EventBase {

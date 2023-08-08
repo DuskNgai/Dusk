@@ -1,5 +1,5 @@
-#ifndef _DUSK_CORE_UTILS_RANGE_HPP_
-#define _DUSK_CORE_UTILS_RANGE_HPP_
+#ifndef _DUSK_UTILS_RANGE_HPP_
+#define _DUSK_UTILS_RANGE_HPP_
 
 #include <type_traits>
 
@@ -141,4 +141,4 @@ auto range(T const& start, U const& end, V const& step) {
 
 DUSK_NAMESPACE_END
 
-#endif // !_DUSK_CORE_UTILS_RANGE_HPP_
+#endif // !_DUSK_UTILS_RANGE_HPP_

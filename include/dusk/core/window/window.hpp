@@ -1,5 +1,5 @@
-#ifndef _DUSK_WINDOW_WINDOW_HPP_
-#define _DUSK_WINDOW_WINDOW_HPP_
+#ifndef _DUSK_CORE_WINDOW_WINDOW_HPP_
+#define _DUSK_CORE_WINDOW_WINDOW_HPP_
 
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
@@ -40,10 +40,10 @@ public:
     virtual void on_update() override;
 
 private:
-    void init(WindowProps const& props);
-    void shut_down();
+    void initialize(WindowProps const& props);
+    void terminate();
 };
 
 DUSK_NAMESPACE_END
 
-#endif // !_DUSK_WINDOW_WINDOW_HPP_
+#endif // !_DUSK_CORE_WINDOW_WINDOW_HPP_

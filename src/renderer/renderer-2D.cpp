@@ -8,7 +8,7 @@ DUSK_NAMESPACE_BEGIN
 
 std::unique_ptr<Renderer2D::Renderer2DData> Renderer2D::Renderer2D::s_data{ std::make_unique<Renderer2D::Renderer2DData>() };
 
-void Renderer2D::init() {
+void Renderer2D::initialize() {
     Renderer2D::s_data->quad_vertex_array = VertexArray::create();
 
     // A square/quad that can be reused.
@@ -69,13 +69,13 @@ void Renderer2D::init() {
         Renderer2D::s_data->white_texture = Texture2D::create(1, 1);
         // ABGR, reverse of RGBA, little endian.
         uint32_t white_texture_data{ 0xffffffff };
-        Renderer2D::s_data->white_texture->set_data(&white_texture_data);
+        Renderer2D::s_data->white_texture->upload(&white_texture_data);
         // Texture slot 0 is reserved for white texture.
         Renderer2D::s_data->texture_slots_cpu.push_back(Renderer2D::s_data->white_texture);
     }
 }
 
-void Renderer2D::shut_down() {
+void Renderer2D::terminate() {
     // Free all.
     Renderer2D::s_data.reset();
 }
@@ -100,7 +100,7 @@ void Renderer2D::flush() {
     }
 
     // Upload cpu data to gpu.
-    Renderer2D::s_data->quad_vertex_buffer->set_data(
+    Renderer2D::s_data->quad_vertex_buffer->upload(
         static_cast<uint32_t>(Renderer2D::s_data->quad_vertex_buffer_cpu.size()) * sizeof(Renderer2D::QuadVertex),
         reinterpret_cast<float*>(Renderer2D::s_data->quad_vertex_buffer_cpu.data())
     );

@@ -36,7 +36,7 @@ enum class TextureDataType {
     Float,
 };
 
-/// @class The base class for texture.
+/// @brief The base class for texture.
 /// Texture is sharing once it is created.
 class Texture {
 public:
@@ -63,10 +63,10 @@ public:
     /// @brief Upload the generated texture to the GPU.
     /// The `size` of the texture should be compatible with the properties of target texture.
     /// E.g. `size` = texture.width * texture.height * texture.channels;
-    virtual void set_data(void const* data) = 0;
+    virtual void upload(void const* data) = 0;
 };
 
-/// @class Once a texture is created, it can be used across multiple renderer processes.
+/// @brief Once a texture is created, it can be used across multiple renderer processes.
 /// So a `shared_ptr` is necessary.
 class Texture2D : virtual public Texture {
 public:

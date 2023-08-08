@@ -1,5 +1,5 @@
-#ifndef _DUSK_RENDERER_OPENGL_FRAME_BUFFER_HPP_
-#define _DUSK_RENDERER_OPENGL_FRAME_BUFFER_HPP_
+#ifndef _DUSK_RENDERER_OPENGL_OPENGL_FRAMEBUFFER_HPP_
+#define _DUSK_RENDERER_OPENGL_OPENGL_FRAMEBUFFER_HPP_
 
 #include <vector>
 
@@ -20,7 +20,7 @@ private:
 
 public:
     OpenGLFramebuffer(uint32_t width, uint32_t height);
-    virtual ~OpenGLFramebuffer();
+    virtual ~OpenGLFramebuffer() override;
 
 public:
     virtual void bind() override;
@@ -50,4 +50,4 @@ private:
 
 DUSK_NAMESPACE_END
 
-#endif
+#endif // !_DUSK_RENDERER_OPENGL_OPENGL_FRAMEBUFFER_HPP_

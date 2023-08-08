@@ -1,3 +1,5 @@
+#include <fmt/core.h>
+
 #include <dusk/core/event/key-event.hpp>
 
 DUSK_NAMESPACE_BEGIN
@@ -17,25 +19,19 @@ KeyPressedEvent::KeyPressedEvent(KeyCode key_code, bool is_repeat)
 bool KeyPressedEvent::is_repeat() const { return this->m_is_repeat; }
 
 std::string KeyPressedEvent::to_string() const {
-    std::stringstream ss;
-    ss << "KeyPressedEvent: " << static_cast<int>(this->get_key_code()) << " (repeat = " << this->is_repeat() << ")";
-    return ss.str();
+    return fmt::format("KeyPressedEvent: {:d} (repeated = {})", static_cast<uint32_t>(this->get_key_code()), this->is_repeat());
 }
 //! KeyPressedEvent
 
 //! KeyReleasedEvent
 std::string KeyReleasedEvent::to_string() const {
-    std::stringstream ss;
-    ss << "KeyReleasedEvent: " << static_cast<int>(this->get_key_code());
-    return ss.str();
+    return fmt::format("KeyReleasedEvent: {:d}", static_cast<uint32_t>(this->get_key_code()));
 }
 //! KeyReleasedEvent
 
 //! KeyTypedEvent
 std::string KeyTypedEvent::to_string() const {
-    std::stringstream ss;
-    ss << "KeyTypedEvent: " << static_cast<int>(this->get_key_code());
-    return ss.str();
+    return fmt::format("KeyTypedEvent: {:d}", static_cast<uint32_t>(this->get_key_code()));
 }
 //! KeyTypedEvent
 

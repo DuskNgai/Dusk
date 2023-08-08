@@ -5,13 +5,13 @@ DUSK_NAMESPACE_BEGIN
 
 std::unique_ptr<Renderer::RenderData> Renderer::s_render_data{ std::make_unique<RenderData>() };
 
-void Renderer::init() {
-    RenderCommand::init();
-    Renderer2D::init();
+void Renderer::initialize() {
+    RenderCommand::initialize();
+    Renderer2D::initialize();
 }
 
-void Renderer::shut_down() {
-    Renderer2D::shut_down();
+void Renderer::terminate() {
+    Renderer2D::terminate();
 }
 
 void Renderer::begin_scene(Camera* camera) {

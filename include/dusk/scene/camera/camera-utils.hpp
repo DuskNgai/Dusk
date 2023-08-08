@@ -1,5 +1,5 @@
-#ifndef _DUSK_RENDERER_CAMERA_CAMERA_UTILS_HPP_
-#define _DUSK_RENDERER_CAMERA_CAMERA_UTILS_HPP_
+#ifndef _DUSK_SCENE_CAMERA_CAMERA_UTILS_HPP_
+#define _DUSK_SCENE_CAMERA_CAMERA_UTILS_HPP_
 
 #include <dusk/common.hpp>
 
@@ -19,4 +19,4 @@ float width_to_yfov(float width, float distance, float aspect_ratio);
 
 DUSK_NAMESPACE_END
 
-#endif // !_DUSK_RENDERER_CAMERA_CAMERA_UTILS_HPP_
+#endif // !_DUSK_SCENE_CAMERA_CAMERA_UTILS_HPP_

@@ -9,6 +9,7 @@
 #include <dusk/core/application/layer.hpp>
 
 #include <dusk/core/event/application-event.hpp>
+#include <dusk/core/event/event-dispatcher.hpp>
 #include <dusk/core/event/key-event.hpp>
 #include <dusk/core/event/mouse-event.hpp>
 #include <dusk/core/event/window-event.hpp>

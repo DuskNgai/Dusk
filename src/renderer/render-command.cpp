@@ -4,8 +4,8 @@ DUSK_NAMESPACE_BEGIN
 
 std::unique_ptr<RendererAPI> RenderCommand::s_render_api{ RendererAPI::create() };
 
-void RenderCommand::init() {
-    RenderCommand::s_render_api->init();
+void RenderCommand::initialize() {
+    RenderCommand::s_render_api->initialize();
 }
 
 void RenderCommand::clear() {

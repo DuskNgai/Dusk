@@ -1,5 +1,5 @@
-#ifndef _DUSK_WINDOW_WINDOW_BASE_HPP_
-#define _DUSK_WINDOW_WINDOW_BASE_HPP_
+#ifndef _DUSK_CORE_WINDOW_WINDOW_BASE_HPP_
+#define _DUSK_CORE_WINDOW_WINDOW_BASE_HPP_
 
 #include <functional>
 #include <memory>
@@ -10,7 +10,7 @@
 
 DUSK_NAMESPACE_BEGIN
 
-/// @class: Base class for all the windows in different platforms.
+/// @brief: Base class for all the windows in different platforms.
 class WindowBase {
 public:
     using EventCallbackFunc = std::function<void(EventBase&)>;
@@ -39,4 +39,4 @@ public:
 
 DUSK_NAMESPACE_END
 
-#endif // !_DUSK_WINDOW_WINDOW_BASE_HPP_
+#endif // !_DUSK_CORE_WINDOW_WINDOW_BASE_HPP_

@@ -8,7 +8,7 @@
 
 DUSK_NAMESPACE_BEGIN
 
-/// @class The timer and clock class.
+/// @brief The timer and clock class.
 class Timer {
 public:
     // clang-format off

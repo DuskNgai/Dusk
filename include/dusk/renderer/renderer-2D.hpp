@@ -20,7 +20,7 @@ namespace __detail {
 
 #if defined(DUSK_PLATFORM_WINDOWS) && defined(__NVCC__)
     // Avoid weird bug cooperates with nvcc on Windows.
-    const glm::vec4 RENDERER2D_COLOR{ 1.0f, 1.0f, 1.0f, 1.0f };      // For texture.
+    const glm::vec4 RENDERER2D_COLOR{ 1.0f, 1.0f, 1.0f, 1.0f }; // For texture.
 
     const std::array<glm::vec4, 4> RENDERER2D_VERTICES{
         glm::vec4{-0.5f, -0.5f, 0.0f, 1.0f},
@@ -35,7 +35,7 @@ namespace __detail {
         glm::vec2{0.0f, 1.0f},
     };
 #else
-    constexpr glm::vec4 RENDERER2D_COLOR{ 1.0f, 1.0f, 1.0f, 1.0f };      // For texture.
+    constexpr glm::vec4 RENDERER2D_COLOR{ 1.0f, 1.0f, 1.0f, 1.0f }; // For texture.
 
     constexpr std::array<glm::vec4, 4> RENDERER2D_VERTICES{
         glm::vec4{-0.5f, -0.5f, 0.0f, 1.0f},
@@ -58,7 +58,7 @@ namespace __detail {
     constexpr uint32_t RENDERER2D_TEXTURE_SLOTS_SIZE{ 32 }; // May be different at different platform.
 } // namespace __detail
 
-/// @class A 2D basic primitives rendering library.
+/// @brief A 2D basic primitives rendering library.
 /// Currently supported primitives:
 /// Quad
 class Renderer2D {
@@ -86,9 +86,9 @@ private:
     static std::unique_ptr<Renderer2DData> s_data;
 
 public:
-    static void init();
+    static void initialize();
 
-    static void shut_down();
+    static void terminate();
 
     /// @brief Register objects (cameras, materials, geometries, etc) in scene.
     static void begin_scene(Camera* camera);

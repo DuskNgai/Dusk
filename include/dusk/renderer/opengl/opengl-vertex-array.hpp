@@ -1,5 +1,5 @@
-#ifndef _DUSK_RENDERER_OPENGL_VERTEX_ARRAY_HPP_
-#define _DUSK_RENDERER_OPENGL_VERTEX_ARRAY_HPP_
+#ifndef _DUSK_RENDERER_OPENGL_OPENGL_VERTEX_ARRAY_HPP_
+#define _DUSK_RENDERER_OPENGL_OPENGL_VERTEX_ARRAY_HPP_
 
 #include <memory>
 #include <vector>
@@ -9,7 +9,7 @@
 
 DUSK_NAMESPACE_BEGIN
 
-/// @class Vertex array using OpenGL APIs.
+/// @brief Vertex array using OpenGL APIs.
 /// @see VertexArray
 class OpenGLVertexArray : public VertexArray {
 private:
@@ -19,7 +19,7 @@ private:
 
 public:
     OpenGLVertexArray();
-    virtual ~OpenGLVertexArray();
+    virtual ~OpenGLVertexArray() override;
 
 public:
     virtual void bind() const override;
@@ -33,4 +33,4 @@ public:
 
 DUSK_NAMESPACE_END
 
-#endif // !_DUSK_RENDERER_OPENGL_VERTEX_ARRAY_HPP_
+#endif // !_DUSK_RENDERER_OPENGL_OPENGL_VERTEX_ARRAY_HPP_

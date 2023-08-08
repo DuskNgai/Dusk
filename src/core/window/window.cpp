@@ -7,11 +7,11 @@ DUSK_NAMESPACE_BEGIN
 static std::size_t s_glfw_window_count{ 0 };
 
 Window::Window(WindowProps const& props) {
-    this->init(props);
+    this->initialize(props);
 }
 
 Window::~Window() {
-    this->shut_down();
+    this->terminate();
 }
 
 uint32_t Window::get_width() const { return this->m_data.m_props.m_width; }
@@ -36,7 +36,7 @@ void Window::on_update() {
     this->m_context->swap_buffers();
 }
 
-void Window::init(WindowProps const& props) {
+void Window::initialize(WindowProps const& props) {
     this->m_data.m_props = props;
 
     if (s_glfw_window_count == 0) {
@@ -57,7 +57,9 @@ void Window::init(WindowProps const& props) {
     this->m_window = glfwCreateWindow(
         static_cast<int>(this->m_data.m_props.m_width),
         static_cast<int>(this->m_data.m_props.m_height),
-        this->m_data.m_props.m_title.c_str(), nullptr, nullptr
+        this->m_data.m_props.m_title.c_str(),
+        nullptr,
+        nullptr
     );
     ++s_glfw_window_count;
 
@@ -67,8 +69,6 @@ void Window::init(WindowProps const& props) {
     );
 
     this->m_context = GraphicsContext::create(this->m_window);
-    this->m_context->init();
-
     this->set_vert_sync(true);
 
     // Set GLFW callbacks
@@ -145,14 +145,13 @@ void Window::init(WindowProps const& props) {
         WindowData* data{ (WindowData*)glfwGetWindowUserPointer(window) };
 
         MouseMovedEvent e(
-            static_cast<float>(xpos), static_cast<float>(ypos),
-            static_cast<float>(data->m_props.m_width), static_cast<float>(data->m_props.m_height)
+            static_cast<float>(xpos), static_cast<float>(ypos)
         );
         data->m_callback(e);
     });
 }
 
-void Window::shut_down() {
+void Window::terminate() {
     glfwDestroyWindow(this->m_window);
     --s_glfw_window_count;
 

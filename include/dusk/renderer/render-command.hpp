@@ -7,7 +7,7 @@
 
 DUSK_NAMESPACE_BEGIN
 
-/// @class The static method class for encapsulating the rendering APIs.
+/// @brief The static method class for encapsulating the rendering APIs.
 /// Also a singleton class for which a program only needs one renderer.
 /// @see RendererAPI
 class RenderCommand {
@@ -15,7 +15,7 @@ private:
     static std::unique_ptr<RendererAPI> s_render_api;
 
 public:
-    static void init();
+    static void initialize();
     static void clear();
     static void enable_render_test(RenderTest test);
     static void disable_render_test(RenderTest test);

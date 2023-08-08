@@ -1,5 +1,5 @@
-#ifndef _DUSK_RENDERER_OPENGL_SHADER_HPP_
-#define _DUSK_RENDERER_OPENGL_SHADER_HPP_
+#ifndef _DUSK_RENDERER_OPENGL_OPENGL_SHADER_HPP_
+#define _DUSK_RENDERER_OPENGL_OPENGL_SHADER_HPP_
 
 #include <map>
 
@@ -17,7 +17,7 @@ private:
 
 public:
     OpenGLShader(std::string const& vs, std::string const& fs);
-    virtual ~OpenGLShader();
+    virtual ~OpenGLShader() override;
 
 public:
     virtual void bind() const override;
@@ -46,4 +46,4 @@ private:
 
 DUSK_NAMESPACE_END
 
-#endif // !_DUSK_RENDERER_OPENGL_SHADER_HPP_
+#endif // !_DUSK_RENDERER_OPENGL_OPENGL_SHADER_HPP_

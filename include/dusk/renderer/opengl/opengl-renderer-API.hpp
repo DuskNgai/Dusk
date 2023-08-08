@@ -1,5 +1,5 @@
-#ifndef _DUSK_RENDERER_OPENGL_RENDERER_API_HPP_
-#define _DUSK_RENDERER_OPENGL_RENDERER_API_HPP_
+#ifndef _DUSK_RENDERER_OPENGL_OPENGL_RENDERER_API_HPP_
+#define _DUSK_RENDERER_OPENGL_OPENGL_RENDERER_API_HPP_
 
 #include <dusk/renderer/renderer-API.hpp>
 
@@ -11,7 +11,7 @@ public:
     virtual ~OpenGLRendererAPI() = default;
 
 public:
-    virtual void init() override;
+    virtual void initialize() override;
     virtual void clear() override;
     virtual void enable_render_test(RenderTest test) override;
     virtual void disable_render_test(RenderTest test) override;
@@ -24,4 +24,4 @@ public:
 
 DUSK_NAMESPACE_END
 
-#endif // !_DUSK_RENDERER_OPENGL_RENDERER_API_HPP_
+#endif // !_DUSK_RENDERER_OPENGL_OPENGL_RENDERER_API_HPP_

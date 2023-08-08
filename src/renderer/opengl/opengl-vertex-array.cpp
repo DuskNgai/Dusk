@@ -6,7 +6,7 @@
 DUSK_NAMESPACE_BEGIN
 
 OpenGLVertexArray::OpenGLVertexArray() {
-    glGenVertexArrays(1, &this->m_array_id);
+    glCreateVertexArrays(1, &this->m_array_id);
 }
 
 OpenGLVertexArray::~OpenGLVertexArray() {

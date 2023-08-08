@@ -1,5 +1,5 @@
-#ifndef _DUSK_RENDERER_GRAPHCIS_CONTEXT_HPP_
-#define _DUSK_RENDERER_GRAPHCIS_CONTEXT_HPP_
+#ifndef _DUSK_RENDERER_GRAPHICS_CONTEXT_HPP_
+#define _DUSK_RENDERER_GRAPHICS_CONTEXT_HPP_
 
 #include <memory>
 
@@ -12,8 +12,6 @@ public:
     virtual ~GraphicsContext() = default;
 
 public:
-    virtual void init() = 0;
-
     virtual void swap_buffers() = 0;
 
     static std::unique_ptr<GraphicsContext> create(void* window);
@@ -21,4 +19,4 @@ public:
 
 DUSK_NAMESPACE_END
 
-#endif // !_DUSK_RENDERER_GRAPHCIS_CONTEXT_HPP_
+#endif // !_DUSK_RENDERER_GRAPHICS_CONTEXT_HPP_

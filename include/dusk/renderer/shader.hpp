@@ -11,7 +11,7 @@
 
 DUSK_NAMESPACE_BEGIN
 
-/// @class The interface class for renderer and rendering API related to shader.
+/// @brief The interface class for renderer and rendering API related to shader.
 class Shader {
 protected:
     unsigned int m_shader_id;

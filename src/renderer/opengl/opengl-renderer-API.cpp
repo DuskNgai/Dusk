@@ -5,7 +5,7 @@
 
 DUSK_NAMESPACE_BEGIN
 
-void OpenGLRendererAPI::init() {
+void OpenGLRendererAPI::initialize() {
     this->enable_render_test(RenderTest::DepthTest);
     // this->enable_render_test(RenderTest::StencilTest);
     this->enable_render_test(RenderTest::BlendTest);

@@ -10,7 +10,12 @@ bool EventBase::is_in_category(EventCategory category) const {
     return (this->get_category_flags() & category) != EventCategory::None;
 }
 
-EventDispatcher::EventDispatcher(EventBase& event)
-    : m_event{ event } {}
+bool EventBase::is_handled() const {
+    return this->m_handled;
+}
+
+void EventBase::mark_as_handled(bool is_handled) {
+    this->m_handled |= is_handled;
+}
 
 DUSK_NAMESPACE_END

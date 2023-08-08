@@ -29,8 +29,8 @@ void OpenGLVertexBuffer::unbind() const {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void OpenGLVertexBuffer::set_data(uint32_t size_in_bytes, float const* vertices) {
-    glBindBuffer(GL_ARRAY_BUFFER, this->m_buffer_id);
+void OpenGLVertexBuffer::upload(uint32_t size_in_bytes, float const* vertices) {
+    this->bind();
     glBufferSubData(GL_ARRAY_BUFFER, 0, size_in_bytes, vertices);
 }
 

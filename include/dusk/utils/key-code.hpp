@@ -1,5 +1,5 @@
-#ifndef _DUSK_KEY_CODE_HPP_
-#define _DUSK_KEY_CODE_HPP_
+#ifndef _DUSK_UTILS_KEY_CODE_HPP_
+#define _DUSK_UTILS_KEY_CODE_HPP_
 
 #include <dusk/common.hpp>
 
@@ -143,4 +143,4 @@ enum class KeyCode : uint16_t {
 
 DUSK_NAMESPACE_END
 
-#endif // !_DUSK_KEY_CODE_HPP_
+#endif // !_DUSK_UTILS_KEY_CODE_HPP_

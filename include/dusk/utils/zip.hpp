@@ -1,5 +1,5 @@
-#ifndef _DUSK_CORE_UTILS_ZIP_HPP_
-#define _DUSK_CORE_UTILS_ZIP_HPP_
+#ifndef _DUSK_UTILS_ZIP_HPP_
+#define _DUSK_UTILS_ZIP_HPP_
 
 #include <tuple>
 #include <type_traits>
@@ -193,4 +193,4 @@ auto enumerate(Iterable&&... args) {
 
 DUSK_NAMESPACE_END
 
-#endif // !_DUSK_CORE_UTILS_ZIP_HPP_
+#endif // !_DUSK_UTILS_ZIP_HPP_

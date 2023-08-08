@@ -5,7 +5,7 @@
 
 DUSK_NAMESPACE_BEGIN
 
-/// @class The interface class for renderer and rendering API related to vertex array.
+/// @brief The interface class for renderer and rendering API related to vertex array.
 class VertexArray {
 public:
     virtual ~VertexArray() = default;

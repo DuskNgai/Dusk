@@ -1,3 +1,5 @@
+#include <fmt/core.h>
+
 #include <dusk/core/event/window-event.hpp>
 
 DUSK_NAMESPACE_BEGIN
@@ -12,9 +14,7 @@ uint32_t WindowResizeEvent::get_width() const { return this->m_width; }
 uint32_t WindowResizeEvent::get_height() const { return this->m_height; }
 
 std::string WindowResizeEvent::to_string() const {
-    std::stringstream ss;
-    ss << "WindowResizeEvent: [" << this->get_width() << ", " << this->get_height() << "]";
-    return ss.str();
+    return fmt::format("WindowResizeEvent: ({:d}, {:d})", this->get_width(), this->get_height());
 }
 //! WindowResizeEvent
 

@@ -1,5 +1,5 @@
-#ifndef _DUSK_RENDERER_FRAME_BUFFER_HPP_
-#define _DUSK_RENDERER_FRAME_BUFFER_HPP_
+#ifndef _DUSK_RENDERER_FRAMEBUFFER_HPP_
+#define _DUSK_RENDERER_FRAMEBUFFER_HPP_
 
 #include <memory>
 
@@ -49,7 +49,7 @@ enum class AttachmentType {
     Color31
 };
 
-/// @class The offline rendering buffer.
+/// @brief The offline rendering buffer.
 class Framebuffer {
 public:
     virtual ~Framebuffer() = default;
@@ -77,4 +77,4 @@ public:
 
 DUSK_NAMESPACE_END
 
-#endif // !_DUSK_RENDERER_FRAME_BUFFER_HPP_
+#endif // !_DUSK_RENDERER_FRAMEBUFFER_HPP_

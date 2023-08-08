@@ -9,7 +9,7 @@
 
 DUSK_NAMESPACE_BEGIN
 
-/// @class Application
+/// @brief Application
 /// @brief The base class for applications whom requires
 /// a window and interactive operations.
 /// One can consider this class as a shell.

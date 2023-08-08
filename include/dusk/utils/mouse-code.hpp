@@ -1,5 +1,5 @@
-#ifndef _DUSK_MOUSE_CODE_HPP_
-#define _DUSK_MOUSE_CODE_HPP_
+#ifndef _DUSK_UTILS_MOUSE_CODE_HPP_
+#define _DUSK_UTILS_MOUSE_CODE_HPP_
 
 #include <dusk/common.hpp>
 
@@ -26,4 +26,4 @@ enum class MouseCode : uint16_t {
 
 DUSK_NAMESPACE_END
 
-#endif // !_DUSK_MOUSE_CODE_HPP_
+#endif // !_DUSK_UTILS_MOUSE_CODE_HPP_

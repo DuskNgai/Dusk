@@ -5,7 +5,7 @@
 
 DUSK_NAMESPACE_BEGIN
 
-/// @class Base class for layers.
+/// @brief Base class for layers.
 /// One can consider this class as a execution core.
 /// Override this class to set your own logic.
 class Layer {
@@ -18,19 +18,19 @@ public:
 
 public:
     /// @brief A constructor that should be triggered once upon a layer is created.
-    virtual void on_attach();
+    virtual void on_attach() = 0;
 
     /// @brief A destructor that should be triggered once upon a layer is destroyed.
-    virtual void on_detach();
+    virtual void on_detach() = 0;
 
     /// @brief Update the everything in this layer with the current state.
-    virtual void on_update();
+    virtual void on_update() = 0;
 
     /// @brief If a layer contains a ImGui layer, it should render all they need.
-    virtual void on_ImGui_render();
+    virtual void on_ImGui_render() = 0;
 
     /// @brief Dealing with the event dispatched by the `Application`.
-    virtual void on_event(EventBase& e);
+    virtual void on_event(EventBase& e) = 0;
 
     std::string const& get_name() const;
 };

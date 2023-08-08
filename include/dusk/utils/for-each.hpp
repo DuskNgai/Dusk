@@ -1,5 +1,5 @@
-#ifndef _DUSK_CORE_UTILS_FOR_EACH_HPP_
-#define _DUSK_CORE_UTILS_FOR_EACH_HPP_
+#ifndef _DUSK_UTILS_FOR_EACH_HPP_
+#define _DUSK_UTILS_FOR_EACH_HPP_
 
 #include <tuple>
 
@@ -46,4 +46,4 @@ void for_each_in_two_tuples(Func&& f, TupleType1&& t1, TupleType2&& t2) {
 
 DUSK_NAMESPACE_END
 
-#endif // !_DUSK_CORE_UTILS_FOR_EACH_HPP_
+#endif // !_DUSK_UTILS_FOR_EACH_HPP_

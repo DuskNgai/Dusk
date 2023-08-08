@@ -10,7 +10,7 @@
 
 DUSK_NAMESPACE_BEGIN
 
-/// @class An abstract class which defines the interface for rendering.
+/// @brief An abstract class which defines the interface for rendering.
 /// It is independent of the rendering APIs.
 class Renderer {
 private:
@@ -20,9 +20,9 @@ private:
     static std::unique_ptr<RenderData> s_render_data;
 
 public:
-    static void init();
+    static void initialize();
 
-    static void shut_down();
+    static void terminate();
 
     /// @brief Register objects (cameras, materials, geometries, etc) in scene.
     static void begin_scene(Camera* camera);

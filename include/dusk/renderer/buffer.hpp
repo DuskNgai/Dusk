@@ -10,7 +10,7 @@
 
 DUSK_NAMESPACE_BEGIN
 
-/// @class Existing shader data types.
+/// @brief Existing shader data types.
 // clang-format off
 enum class ShaderDataType {
     None = 0,
@@ -22,7 +22,7 @@ enum class ShaderDataType {
 };
 // clang-format on
 
-/// @class The information of the vertex buffer data.
+/// @brief The information of the vertex buffer data.
 struct BufferElement {
 public:
     ShaderDataType type;
@@ -41,7 +41,7 @@ public:
     int32_t get_element_count() const;
 };
 
-/// @class The unity of the information of the vertex buffer data.
+/// @brief The unity of the information of the vertex buffer data.
 class BufferLayout {
 private:
     uint32_t m_total_size;
@@ -68,7 +68,7 @@ private:
     void calculate_offset();
 };
 
-/// @class The interface class for renderer and rendering API related to vertex buffer.
+/// @brief The interface class for renderer and rendering API related to vertex buffer.
 class VertexBuffer {
 public:
     virtual ~VertexBuffer() = default;
@@ -79,7 +79,7 @@ public:
     virtual void unbind() const = 0;
 
     /// @brief Set new data for rendering, commly used for batch rendering.
-    virtual void set_data(uint32_t size_in_bytes, float const* vertices) = 0;
+    virtual void upload(uint32_t size_in_bytes, float const* vertices) = 0;
 
     /// @brief Set the layout of the data in the vertex buffer.
     virtual void set_layout(BufferLayout const& layout) = 0;
@@ -92,7 +92,7 @@ public:
     static std::shared_ptr<VertexBuffer> create(uint32_t size_in_bytes, float const* vertices);
 };
 
-/// @class The interface class for renderer and rendering API related to index buffer.
+/// @brief The interface class for renderer and rendering API related to index buffer.
 class IndexBuffer {
 public:
     virtual ~IndexBuffer() = default;

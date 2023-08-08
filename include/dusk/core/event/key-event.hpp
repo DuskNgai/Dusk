@@ -6,9 +6,8 @@
 
 DUSK_NAMESPACE_BEGIN
 
-/// @class: The base class for event that are related to keyboard events.
-/// The class derived from this class is in the category of `Input` and `Keyboard`.
-/// @see `EventBase`
+/// @brief Base class for key events.
+/// Derived classes are in the category of `Input` or `Keyboard`.
 class KeyEvent : public EventBase {
 protected:
     KeyCode m_key_code;
@@ -22,7 +21,6 @@ public:
     DUSK_EVENT_CATEGORY(EventCategory::EventCategoryInput | EventCategory::EventCategoryKeyboard);
 };
 
-/// @see `KeyEvent`
 class KeyPressedEvent : public KeyEvent {
 private:
     bool m_is_repeat;
@@ -36,7 +34,6 @@ public:
     virtual std::string to_string() const override;
 };
 
-/// @see `KeyEvent`
 class KeyReleasedEvent : public KeyEvent {
 public:
     using KeyEvent::KeyEvent;
@@ -46,7 +43,6 @@ public:
     virtual std::string to_string() const override;
 };
 
-/// @see `KeyEvent`
 class KeyTypedEvent : public KeyEvent {
 public:
     using KeyEvent::KeyEvent;

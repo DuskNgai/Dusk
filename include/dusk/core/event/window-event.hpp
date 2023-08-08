@@ -5,9 +5,8 @@
 
 DUSK_NAMESPACE_BEGIN
 
-/// @class: The base class for event that are related to window events.
+/// @brief: The base class for event that are related to window events.
 /// The class derived from this class is in the category of `Application`.
-/// @see `EventBase`
 class WindowEvent : public EventBase {
 public:
     WindowEvent() = default;
@@ -15,7 +14,6 @@ public:
     DUSK_EVENT_CATEGORY(EventCategory::EventCategoryApplication);
 };
 
-/// @see `WindowEvent`
 class WindowResizeEvent : public WindowEvent {
 private:
     uint32_t m_width, m_height;
@@ -31,7 +29,6 @@ public:
     virtual std::string to_string() const override;
 };
 
-/// @see `WindowEvent`
 class WindowCloseEvent : public WindowEvent {
 public:
     WindowCloseEvent() = default;

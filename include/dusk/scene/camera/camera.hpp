@@ -1,5 +1,5 @@
-#ifndef _DUSK_RENDERER_CAMERA_CAMERA_HPP_
-#define _DUSK_RENDERER_CAMERA_CAMERA_HPP_
+#ifndef _DUSK_SCENE_CAMERA_CAMERA_HPP_
+#define _DUSK_SCENE_CAMERA_CAMERA_HPP_
 
 #include <memory>
 
@@ -30,7 +30,7 @@ namespace __detail {
     constexpr float CAMERA_WIDTH{ 3.2f };
 } // namespace __detail
 
-/// @class The base class for FPS-like cameras.
+/// @brief The base class for FPS-like cameras.
 /// @see OrthographicCamera, PerspectiveCamera
 class Camera {
 protected:
@@ -106,4 +106,4 @@ protected:
 
 DUSK_NAMESPACE_END
 
-#endif // !_DUSK_RENDERER_CAMERA_CAMERA_HPP_
+#endif // !_DUSK_SCENE_CAMERA_CAMERA_HPP_

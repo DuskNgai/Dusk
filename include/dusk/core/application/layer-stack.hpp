@@ -7,7 +7,7 @@
 
 DUSK_NAMESPACE_BEGIN
 
-/// @class An abstract class for storing layers.
+/// @brief An abstract class for storing layers.
 /// The layers in layer stack will be executed in forward and backward order.
 class LayerStack {
 private:
@@ -33,14 +33,15 @@ public:
     /// It just removes the overlay layer from the stack, disable the functionality of the overlay layer.
     void pop_overlay(Layer* layer);
 
-    auto layer_end() { return this->m_layers.begin() + this->m_insert_index; }
-    auto overlay_begin() { return this->layer_end(); }
-
     auto begin() { return this->m_layers.begin(); }
     auto end() { return this->m_layers.end(); }
 
     auto rbegin() { return this->m_layers.rbegin(); }
     auto rend() { return this->m_layers.rend(); }
+
+private:
+    auto layer_end() { return this->m_layers.begin() + this->m_insert_index; }
+    auto overlay_begin() { return this->layer_end(); }
 };
 
 DUSK_NAMESPACE_END

@@ -9,7 +9,7 @@
 
 DUSK_NAMESPACE_BEGIN
 
-/// @class A special layer for only dealing with the events related to ImGui.
+/// @brief A special layer for only dealing with the events related to ImGui.
 /// @see Layer
 class ImGuiLayer : public Layer {
 private:
@@ -24,14 +24,20 @@ public:
 
     virtual void on_detach() override;
 
+    virtual void on_update() override;
+
+    virtual void on_ImGui_render() override;
+
+    /// @brief Dispatch the event to this ImGui layer.
+    virtual void on_event(EventBase& e) override;
+
     /// @brief Each frame call this function to start a new ImGui frame.
     void begin_frame();
 
     /// @brief Each frame call this function to end the current ImGui frame.
     void end_frame();
 
-    /// @brief Dispatch the event to this ImGui layer.
-    virtual void on_event(EventBase& e) override;
+    bool is_block_event() const;
 
     void set_block_event(bool is_block);
 };

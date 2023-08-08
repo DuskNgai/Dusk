@@ -1,11 +1,11 @@
-#ifndef _DUSK_RENDERER_CAMERA_ORTHOGRAPHIC_CAMERA_HPP_
-#define _DUSK_RENDERER_CAMERA_ORTHOGRAPHIC_CAMERA_HPP_
+#ifndef _DUSK_SCENE_CAMERA_ORTHOGRAPHIC_CAMERA_HPP_
+#define _DUSK_SCENE_CAMERA_ORTHOGRAPHIC_CAMERA_HPP_
 
 #include <dusk/scene/camera/camera.hpp>
 
 DUSK_NAMESPACE_BEGIN
 
-/// @class Orthographic view camera.
+/// @brief Orthographic view camera.
 /// @see Camera
 class OrthographicCamera final : public Camera {
 private:
@@ -40,4 +40,4 @@ private:
 
 DUSK_NAMESPACE_END
 
-#endif // !_DUSK_RENDERER_CAMERA_ORTHOGRAPHIC_CAMERA_HPP_
+#endif // !_DUSK_SCENE_CAMERA_ORTHOGRAPHIC_CAMERA_HPP_

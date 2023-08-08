@@ -6,33 +6,28 @@
 
 DUSK_NAMESPACE_BEGIN
 
-/// @class: The base class for event that are related to mouse move events.
-/// The class derived from this class is in the category of `Mouse` and `Input`.
-/// @see `EventBase`
+/// @brief Base class for mouse events.
+/// Derived classes are in the category of `Input` or `Mouse`.
 class MouseMovedEvent : public EventBase {
 private:
-    float m_mouse_x, m_mouse_y, m_window_width, m_window_height;
+    float m_x, m_y;
 
 public:
-    MouseMovedEvent(float x, float y, float window_width, float window_height);
+    MouseMovedEvent(float x, float y);
 
 public:
-    /// @return Get the current mouse position x.
+    /// @return Gets the mouse position x in [0, W].
     float get_x() const;
-    /// @return Get the current mouse position y.
-    float get_y() const;
 
-    /// @return Get the current mouse position x in NDC.
-    float get_ndc_x() const;
-    /// @return Get the current mouse position y in NDC.
-    float get_ndc_y() const;
+    /// @return Gets the mouse position y in [0, W].
+    float get_y() const;
 
     DUSK_EVENT_CATEGORY(EventCategory::EventCategoryMouse | EventCategory::EventCategoryInput);
     DUSK_EVENT_TYPE(EventType::MouseMoved);
     virtual std::string to_string() const override;
 };
 
-/// @class: The base class for event that are related to mouse scroll events.
+/// @brief: The base class for event that are related to mouse scroll events.
 /// The class derived from this class is in the category of `Mouse` and `Input`.
 /// @see `EventBase`
 class MouseScrolledEvent : public EventBase {
@@ -43,7 +38,10 @@ public:
     MouseScrolledEvent(float x, float y);
 
 public:
+    /// @return Gets the mouse scroll offset x.
     float get_offset_x() const;
+
+    /// @return Gets the mouse scroll offset y.
     float get_offset_y() const;
 
     DUSK_EVENT_CATEGORY(EventCategory::EventCategoryMouse | EventCategory::EventCategoryInput);
@@ -51,23 +49,21 @@ public:
     virtual std::string to_string() const override;
 };
 
-/// @class: The base class for event that are related to mouse button events.
-/// The class derived from this class is in the category of `Mouse`, `Input`, and `MouseButton`.
-/// @see `EventBase`
+/// @brief Base clas for mouse button event.
+/// Derived classes are in the category of `Input` or `Mouse` or `MouseButton`.
 class MouseButtonEvent : public EventBase {
 protected:
-    MouseCode m_button;
+    MouseCode m_mouse_code;
 
 public:
-    MouseButtonEvent(MouseCode button);
+    MouseButtonEvent(MouseCode mouse_code);
 
 public:
-    MouseCode get_mouse_button() const;
+    MouseCode get_mouse_code() const;
 
     DUSK_EVENT_CATEGORY(EventCategory::EventCategoryMouse | EventCategory::EventCategoryInput | EventCategory::EventCategoryMouseButton);
 };
 
-/// @see `MouseButtonEvent`
 class MouseButtonPressedEvent : public MouseButtonEvent {
 public:
     using MouseButtonEvent::MouseButtonEvent;
@@ -77,7 +73,6 @@ public:
     virtual std::string to_string() const override;
 };
 
-/// @see `MouseButtonEvent`
 class MouseButtonReleasedEvent : public MouseButtonEvent {
 public:
     using MouseButtonEvent::MouseButtonEvent;

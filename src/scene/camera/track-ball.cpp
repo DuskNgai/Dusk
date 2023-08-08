@@ -1,6 +1,8 @@
-#include <dusk/utils/timer.hpp>
+#include <dusk/core/application/application.hpp>
+#include <dusk/core/event/event-dispatcher.hpp>
 #include <dusk/renderer/input.hpp>
 #include <dusk/scene/camera/track-ball.hpp>
+#include <dusk/utils/timer.hpp>
 
 DUSK_NAMESPACE_BEGIN
 
@@ -35,19 +37,20 @@ void TrackBall::on_update() {
 }
 
 void TrackBall::on_event(EventBase& e) {
-    if (e.m_handled) {
-        return;
+    if (not e.is_handled()) {
+        EventDispatcher dispatcher(e);
+        dispatcher.dispatch<MouseMovedEvent>(DUSK_BIND_CLASS_FN(TrackBall::on_mouse_moved));
+        dispatcher.dispatch<MouseScrolledEvent>(DUSK_BIND_CLASS_FN(TrackBall::on_mouse_scrolled));
+        dispatcher.dispatch<MouseButtonPressedEvent>(DUSK_BIND_CLASS_FN(TrackBall::on_mouse_button_pressed));
+        dispatcher.dispatch<MouseButtonReleasedEvent>(DUSK_BIND_CLASS_FN(TrackBall::on_mouse_button_released));
+        dispatcher.dispatch<WindowResizeEvent>(DUSK_BIND_CLASS_FN(TrackBall::on_window_resize));
     }
-    EventDispatcher dispatcher(e);
-    dispatcher.dispatch<MouseMovedEvent>(DUSK_BIND_CLASS_FN(TrackBall::on_mouse_moved));
-    dispatcher.dispatch<MouseScrolledEvent>(DUSK_BIND_CLASS_FN(TrackBall::on_mouse_scrolled));
-    dispatcher.dispatch<MouseButtonPressedEvent>(DUSK_BIND_CLASS_FN(TrackBall::on_mouse_button_pressed));
-    dispatcher.dispatch<MouseButtonReleasedEvent>(DUSK_BIND_CLASS_FN(TrackBall::on_mouse_button_released));
-    dispatcher.dispatch<WindowResizeEvent>(DUSK_BIND_CLASS_FN(TrackBall::on_window_resize));
 }
 
 bool TrackBall::on_mouse_moved(MouseMovedEvent& e) {
-    this->rotate(e.get_ndc_x(), e.get_ndc_y());
+    auto ndc_x = e.get_x() * 2.0f / Application::get()->get_window()->get_width() - 1.0f;
+    auto ndc_y = e.get_y() * 2.0f / Application::get()->get_window()->get_height() - 1.0f;
+    this->rotate(ndc_x, ndc_y);
     return false;
 }
 
@@ -57,14 +60,14 @@ bool TrackBall::on_mouse_scrolled(MouseScrolledEvent& e) {
 }
 
 bool TrackBall::on_mouse_button_pressed(MouseButtonPressedEvent& e) {
-    if (e.get_mouse_button() == MouseCode::ButtonLeft) {
+    if (e.get_mouse_code() == MouseCode::ButtonLeft) {
         this->m_is_mouse_being_pressed = true;
     }
     return false;
 }
 
 bool TrackBall::on_mouse_button_released(MouseButtonReleasedEvent& e) {
-    if (e.get_mouse_button() == MouseCode::ButtonLeft) {
+    if (e.get_mouse_code() == MouseCode::ButtonLeft) {
         this->m_is_mouse_being_pressed = false;
     }
     return false;

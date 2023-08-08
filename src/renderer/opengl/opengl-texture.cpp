@@ -182,7 +182,7 @@ OpenGLTexture2D::OpenGLTexture2D(std::string const& path)
     this->m_data_type = GL_UNSIGNED_BYTE;
 
     this->resize(w, h);
-    this->set_data(image_data);
+    this->upload(image_data);
 
     // The image data is unused, free it.
     stbi_image_free(image_data);
@@ -195,7 +195,7 @@ OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height, TextureInterna
     : OpenGLTexture{ GL_TEXTURE_2D, internal_fmt, format, data_type }
     , m_width{ width }
     , m_height{ height } {
-    this->init(nullptr);
+    this->initialize(nullptr);
 }
 
 OpenGLTexture2D::~OpenGLTexture2D() {
@@ -210,7 +210,7 @@ uint32_t OpenGLTexture2D::get_width() const { return this->m_width; }
 
 uint32_t OpenGLTexture2D::get_height() const { return this->m_height; }
 
-void OpenGLTexture2D::set_data(void const* data) {
+void OpenGLTexture2D::upload(void const* data) {
     this->bind(0);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     glTexSubImage2D(
@@ -226,10 +226,10 @@ void OpenGLTexture2D::resize(uint32_t new_width, uint32_t new_height) {
     }
     this->m_width = new_width;
     this->m_height = new_height;
-    this->init(nullptr);
+    this->initialize(nullptr);
 }
 
-void OpenGLTexture2D::init(void const* data) {
+void OpenGLTexture2D::initialize(void const* data) {
     this->bind(0);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     glTexImage2D(

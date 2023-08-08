@@ -1,9 +1,7 @@
 #ifndef _DUSK_CORE_EVENT_EVENT_HPP_
 #define _DUSK_CORE_EVENT_EVENT_HPP_
 
-#include <cstddef>
-#include <iostream>
-#include <sstream>
+#include <string>
 
 #include <dusk/common.hpp>
 
@@ -36,7 +34,7 @@ enum class EventType : int32_t {
 };
 // clang-format on
 
-/// @class: Base of all the events.
+/// @brief: Base of all the events.
 class EventBase {
 public:
     bool m_handled{ false };
@@ -57,29 +55,15 @@ public:
     /// @brief Get the details of a event.
     virtual std::string to_string() const;
 
+    /// @brief Checks if the event belongs to the given `EventCategory`.
     bool is_in_category(EventCategory category) const;
-};
 
-/// @class: Dispatch the event to a given function.
-class EventDispatcher {
-private:
-    EventBase& m_event;
+    /// @brief Checks if the event is handled.
+    bool is_handled() const;
 
-public:
-    /// @param event: The event to be dispatched.
-    explicit EventDispatcher(EventBase& event);
-
-    /// @brief Dispatch the event to a given function.
-    /// @param func: The function dealing with the event.
-    /// @return: If the event is handled by the given function, then it will not be dealt by other functions.
-    template <typename Event, typename Func>
-    bool dispatch(Func const& func) {
-        if (m_event.get_event_type() == Event::get_static_type()) {
-            m_event.m_handled |= func(static_cast<Event&>(m_event));
-            return true;
-        }
-        return false;
-    }
+    /// @brief Marks the event as handled.
+    /// If the event is handled, it will not change the handled state.
+    void mark_as_handled(bool is_handled);
 };
 
 #define DUSK_EVENT_CATEGORY(EVENT_CATEGORY_NAME) \

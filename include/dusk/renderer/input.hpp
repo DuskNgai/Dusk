@@ -8,7 +8,7 @@
 
 DUSK_NAMESPACE_BEGIN
 
-/// @class: Singleton mode of encapsuled input system.
+/// @brief: Singleton mode of encapsuled input system.
 class Input {
 public:
     static bool is_key_pressed(KeyCode key);

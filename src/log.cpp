@@ -7,7 +7,7 @@ DUSK_NAMESPACE_BEGIN
 std::shared_ptr<spdlog::logger> Log::s_core_logger;
 std::shared_ptr<spdlog::logger> Log::s_client_logger;
 
-void Log::init() {
+void Log::initialize() {
     spdlog::set_pattern("%^[%T] %n: %v%$");
 
     Log::s_core_logger = spdlog::stdout_color_mt("Dusk");

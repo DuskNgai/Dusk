@@ -15,7 +15,7 @@ enum class RenderTest {
     StencilTest
 };
 
-/// @class The runtime graphics APIs.
+/// @brief The runtime graphics APIs.
 /// Usually this singleton class will not be called directly,
 /// we will use static methods in `RenderCommand` instead.
 class RendererAPI {
@@ -36,7 +36,7 @@ public:
     virtual ~RendererAPI() = default;
 
 public:
-    virtual void init() = 0;
+    virtual void initialize() = 0;
 
     virtual void clear() = 0;
 

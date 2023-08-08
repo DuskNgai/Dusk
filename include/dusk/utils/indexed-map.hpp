@@ -1,5 +1,5 @@
-#ifndef _DUSK_CORE_UTILS_INDEXED_MAP_HPP_
-#define _DUSK_CORE_UTILS_INDEXED_MAP_HPP_
+#ifndef _DUSK_UTILS_INDEXED_MAP_HPP_
+#define _DUSK_UTILS_INDEXED_MAP_HPP_
 
 #include <vector>
 #include <unordered_map>
@@ -82,4 +82,4 @@ public:
 
 DUSK_NAMESPACE_END
 
-#endif // !_DUSK_CORE_UTILS_INDEXED_MAP_HPP_
+#endif // !_DUSK_UTILS_INDEXED_MAP_HPP_
