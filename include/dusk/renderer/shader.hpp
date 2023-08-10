@@ -7,7 +7,6 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include <dusk/common.hpp>
-#include <dusk/utils/indexed-map.hpp>
 
 DUSK_NAMESPACE_BEGIN
 
@@ -35,22 +34,6 @@ public:
     virtual void set_mat4(std::string_view name, glm::mat4 const& val) const = 0;
 
     static std::shared_ptr<Shader> create(std::string const& vs, std::string const& fs);
-};
-
-class ShaderLibrary {
-public:
-    IndexedMap<std::string, std::shared_ptr<Shader>> m_shaders;
-
-public:
-    void emplace(std::string const& name, std::shared_ptr<Shader> shader);
-    bool contains(std::string const& name) const;
-    std::size_t size() const;
-
-    /// @brief A pointer to accessing the shader.
-    std::shared_ptr<Shader> get(std::string const& name) const;
-
-    /// @brief A pair of name and pointer to accessing the shader.
-    std::pair<std::string, std::shared_ptr<Shader>> get(std::size_t index) const;
 };
 
 DUSK_NAMESPACE_END

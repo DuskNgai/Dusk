@@ -22,7 +22,7 @@ void OpenGLVertexArray::unbind() const {
 }
 
 // clang-format off
-static constexpr GLenum ShaderDataType2OpenGLDataType(ShaderDataType type) {
+static constexpr GLenum shader_data_type_to_opengl_data_type(ShaderDataType type) {
     switch(type) {
         case ShaderDataType::Float:  return GL_FLOAT;
         case ShaderDataType::Vec2:   return GL_FLOAT;
@@ -59,7 +59,7 @@ void OpenGLVertexArray::add_vertex_buffer(std::shared_ptr<VertexBuffer> const& v
         glVertexAttribPointer(
             index,
             elem.get_element_count(),
-            ShaderDataType2OpenGLDataType(elem.type),
+            shader_data_type_to_opengl_data_type(elem.type),
             elem.normalized ? GL_TRUE : GL_FALSE,
             vertex_buffer->get_layout().get_stride(),
             reinterpret_cast<void const*>(static_cast<std::size_t>(elem.offset))

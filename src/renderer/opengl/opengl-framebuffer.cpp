@@ -93,6 +93,14 @@ std::shared_ptr<Texture2D> OpenGLFramebuffer::get_color_attachment(uint32_t inde
     return this->m_color_attachments[index];
 }
 
+std::shared_ptr<Texture2D> OpenGLFramebuffer::get_depth_attachment() const {
+    return this->m_depth_attachment;
+}
+
+std::shared_ptr<Texture2D> OpenGLFramebuffer::get_stencil_attachment() const {
+    return this->m_stencil_attachment;
+}
+
 AttachmentType OpenGLFramebuffer::attach_texture(std::shared_ptr<Texture2D> texture) {
     auto attachment_id{ this->get_next_color_attachment() };
     this->attach_texture(attachment_id, texture);
